@@ -68,7 +68,7 @@ public class UI {
 
 		if (Game.getCharacter() == 1) {
 
-			daanishHealthAni.drawAnimation(g, 0, 100, 0);
+			daanishHealthAni.drawAnimation(g, 8, 254, 0);
 
 		} else if (Game.getCharacter() == 2) {
 
@@ -76,7 +76,7 @@ public class UI {
 
 		} else if (Game.getCharacter() == 3) {
 
-			namelessHealthAni.drawAnimation(g, 0, 300, 0);
+			namelessHealthAni.drawAnimation(g, -27, 466, 0);
 
 		}
 
