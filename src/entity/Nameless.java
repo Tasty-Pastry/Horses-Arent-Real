@@ -345,15 +345,23 @@ public class Nameless extends PlayerObject {
 			// Block collision check
 			if (temp.getId() == ID.Block) {
 
-				// Collision logic
+				// Collision Logic
 				if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {
 
+					if (x > temp.x)
+						x += 1;
+					else
+						x -= 1;
 					velocityX = 0;
 
 				}
 
 				if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
 
+					if (y > temp.y)
+						y += 1;
+					else
+						y -= 1;
 					velocityY = 0;
 
 				}
@@ -901,7 +909,7 @@ public class Nameless extends PlayerObject {
 	// Boundaries of sprite
 	public Rectangle getBounds() {
 
-		return new Rectangle(x, y, 64, 64);
+		return new Rectangle(x, y, 63, 63);
 
 	}
 
