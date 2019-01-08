@@ -177,7 +177,7 @@ public class UI {
 
 			} else if (Game.getCharacter() == 2) {
 
-				transitionAni[1].drawAnimation(g, 0, 350, 0);
+				transitionAni[1].drawAnimation(g, 23, 390, 0);
 
 			}
 
