@@ -903,7 +903,6 @@ public class Nicc extends PlayerObject {
 
 		// Basic GUI displaying health and ammo
 		g.setColor(Color.RED);
-		g.drawString("Health: " + Game.nickHealth, (int) (100 + Camera.getX()), (int) (100 + Camera.getY()));
 
 		g.drawString("Ammo: " + Game.ammo, (int) (100 + Camera.getX()), (int) (120 + Camera.getY()));
 

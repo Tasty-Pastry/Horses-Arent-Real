@@ -48,9 +48,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	private static boolean shoot; // Keeps track of if the player is shooting
 	private static int shootDir; // Keeps track of which direction the player is shooting in
 
-	public static int daanishHealth = 200;
-	public static int nickHealth = 200;
-	public static int namelessHealth = 200;
+	public static int daanishHealth = 228;
+	public static int nickHealth = 228;
+	public static int namelessHealth = 228;
 
 	private static int character = 1;
 

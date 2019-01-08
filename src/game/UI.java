@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import animation.Animation;
+import animation.BufferedImageLoader;
 import animation.Spritesheet;
 
 public class UI {
@@ -12,19 +13,30 @@ public class UI {
 	private BufferedImage[] nickHealthBar = new BufferedImage[4];
 	private BufferedImage[] namelessHealthBar = new BufferedImage[15];
 
-	private Animation daanishHealthAni;
-	private Animation nickHealthAni;
-	private Animation namelessHealthAni;
+	private Animation[] hpBarAni;
+
+	private BufferedImage[] hpBarFill = new BufferedImage[3];
 
 	private Spritesheet sheet;
+	private Spritesheet hpBarSheet;
 
 	public UI(Spritesheet sheet) {
 
 		this.sheet = sheet;
 
+		BufferedImageLoader loader = new BufferedImageLoader();
+
+		hpBarSheet = new Spritesheet(loader.loadImage("/HealthFill.png"));
+
 		for (int i = 0; i < 30; i++) {
 
 			daanishHealthBar[i] = sheet.getImage(i + 1, 1, 340, 375, 340, 375);
+
+			if (i < 3) {
+
+				hpBarFill[i] = hpBarSheet.getImage(i + 1, 1, 228, 79, 228, 79);
+
+			}
 
 			if (i < 4) {
 
@@ -40,9 +52,8 @@ public class UI {
 
 		}
 
-		daanishHealthAni = new Animation(6, daanishHealthBar);
-		nickHealthAni = new Animation(6, nickHealthBar);
-		namelessHealthAni = new Animation(6, namelessHealthBar);
+		hpBarAni = new Animation[] { new Animation(6, daanishHealthBar), new Animation(6, nickHealthBar),
+				new Animation(6, namelessHealthBar) };
 
 	}
 
@@ -50,15 +61,15 @@ public class UI {
 
 		if (Game.getCharacter() == 1) {
 
-			daanishHealthAni.runAnimation();
+			hpBarAni[0].runAnimation();
 
 		} else if (Game.getCharacter() == 2) {
 
-			nickHealthAni.runAnimation();
+			hpBarAni[1].runAnimation();
 
 		} else if (Game.getCharacter() == 3) {
 
-			namelessHealthAni.runAnimation();
+			hpBarAni[2].runAnimation();
 
 		}
 
@@ -68,15 +79,18 @@ public class UI {
 
 		if (Game.getCharacter() == 1) {
 
-			daanishHealthAni.drawAnimation(g, 8, 254, 0);
+			hpBarAni[0].drawAnimation(g, 8, 254, 0);
+			g.drawImage(hpBarFill[0].getSubimage(0, 0, 228 - (228 - Game.daanishHealth), 79), 113, 531, null);
 
 		} else if (Game.getCharacter() == 2) {
 
-			nickHealthAni.drawAnimation(g, 15, 490, 0);
+			hpBarAni[1].drawAnimation(g, 15, 490, 0);
+			g.drawImage(hpBarFill[1].getSubimage(0, 0, 228 - (228 - Game.nickHealth), 79), 114, 531, null);
 
 		} else if (Game.getCharacter() == 3) {
 
-			namelessHealthAni.drawAnimation(g, -27, 466, 0);
+			hpBarAni[2].drawAnimation(g, -27, 466, 0);
+			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
 
 		}
 
