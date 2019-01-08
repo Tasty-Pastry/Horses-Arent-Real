@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 
 import animation.Animation;
 import animation.BufferedImageLoader;
+import animation.Camera;
 import animation.Spritesheet;
+import entity.GameObject;
 
 public class UI {
 
@@ -27,11 +29,15 @@ public class UI {
 	private Spritesheet daanishTransitionSheet;
 	private Spritesheet nickTransitionSheet;
 
+	private Handler handler;
+
 	private boolean transition;
 
-	public UI(Spritesheet sheet) {
+	public UI(Spritesheet sheet, Handler handler) {
 
 		this.sheet = sheet;
+
+		this.handler = handler;
 
 		BufferedImageLoader loader = new BufferedImageLoader();
 
@@ -169,15 +175,25 @@ public class UI {
 
 		}
 
-		if (isTransition()) {
+		for (int i = 0; i < handler.getObject().size(); i++) {
 
-			if (Game.getCharacter() == 1) {
+			GameObject temp = handler.getObject().get(i);
 
-				transitionAni[0].drawAnimation(g, -77, 385, 0);
+			if (isTransition() && temp.getId() == ID.Player) {
 
-			} else if (Game.getCharacter() == 2) {
+				if (Game.getCharacter() == 1) {
 
-				transitionAni[1].drawAnimation(g, 23, 390, 0);
+					transitionAni[0].drawAnimation(g,
+							(temp.getX() - (daanishTransition[0].getWidth() / 2) + 30) - Camera.getX(),
+							(temp.getY() - (daanishTransition[0].getHeight() / 2) + 25) - Camera.getY(), 0);
+
+				} else if (Game.getCharacter() == 2) {
+
+					transitionAni[1].drawAnimation(g,
+							(temp.getX() - (nickTransition[0].getWidth() / 2) + 32) - Camera.getX(),
+							(temp.getY() - (nickTransition[0].getHeight() / 2)) - Camera.getY(), 0);
+
+				}
 
 			}
 

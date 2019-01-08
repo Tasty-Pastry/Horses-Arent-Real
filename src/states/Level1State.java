@@ -92,7 +92,7 @@ public class Level1State extends GameState {
 		sheet2 = new Spritesheet(spriteSheet2);
 		health = new Spritesheet(healthBars);
 
-		ui = new UI(health);
+		ui = new UI(health, handler);
 
 		// Loads in Level
 		level = loader.loadImage("/TestMap.png");
@@ -126,7 +126,7 @@ public class Level1State extends GameState {
 		g.fillRect(0, 0, 1024, 640);
 
 		// Scaling for bigger rooms
-		// g2.scale(0.5, 0.5);
+		// g2.scale(0.25, 0.25);
 
 		// Updates Camera
 		g2.translate(-camera.getX(), -camera.getY());
