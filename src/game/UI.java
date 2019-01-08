@@ -13,12 +13,21 @@ public class UI {
 	private BufferedImage[] nickHealthBar = new BufferedImage[4];
 	private BufferedImage[] namelessHealthBar = new BufferedImage[15];
 
+	private BufferedImage[] daanishTransition = new BufferedImage[15];
+	private BufferedImage[] nickTransition = new BufferedImage[19];
+
 	private Animation[] hpBarAni;
+	private Animation[] transitionAni;
 
 	private BufferedImage[] hpBarFill = new BufferedImage[3];
 
 	private Spritesheet sheet;
 	private Spritesheet hpBarSheet;
+
+	private Spritesheet daanishTransitionSheet;
+	private Spritesheet nickTransitionSheet;
+
+	private boolean transition;
 
 	public UI(Spritesheet sheet) {
 
@@ -27,6 +36,9 @@ public class UI {
 		BufferedImageLoader loader = new BufferedImageLoader();
 
 		hpBarSheet = new Spritesheet(loader.loadImage("/HealthFill.png"));
+
+		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
+		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
 
 		for (int i = 0; i < 30; i++) {
 
@@ -48,16 +60,79 @@ public class UI {
 
 				namelessHealthBar[i] = sheet.getImage(i + 1, 3, 375.5, 185, 375.5, 375);
 
+				daanishTransition[i] = daanishTransitionSheet.getImage(i + 1, 1, 325, 325, 325, 325);
+
+			}
+
+			if (i < 19) {
+
+				nickTransition[i] = nickTransitionSheet.getImage(i + 1, 1, 125, 232, 125, 232);
+
 			}
 
 		}
 
-		hpBarAni = new Animation[] { new Animation(6, daanishHealthBar), new Animation(6, nickHealthBar),
-				new Animation(6, namelessHealthBar) };
+		hpBarAni = new Animation[] {
+
+				new Animation(6, daanishHealthBar), new Animation(6, nickHealthBar), new Animation(6, namelessHealthBar)
+
+		};
+
+		transitionAni = new Animation[] {
+
+				new Animation(3, daanishTransition), new Animation(3, nickTransition)
+
+		};
 
 	}
 
 	public void update() {
+
+		if (isTransition()) {
+
+			if (Game.getCharacter() == 1) {
+
+				transitionAni[0].toggleAnimation(false);
+
+				transitionAni[0].runAnimation();
+
+				if (transitionAni[0].getRanOnce()) {
+
+					setTransition(false);
+
+					transitionAni[0].toggleAnimation(true);
+
+				}
+
+			} else if (Game.getCharacter() == 2) {
+
+				transitionAni[1].toggleAnimation(false);
+
+				transitionAni[1].runAnimation();
+
+				if (transitionAni[1].getRanOnce()) {
+
+					setTransition(false);
+
+					transitionAni[1].toggleAnimation(true);
+
+				} else if (Game.getCharacter() == 3) {
+
+					// transitionAni[3].runAnimation();
+
+					// if (transitionAni[3].getRanOnce()) {
+
+					setTransition(false);
+
+					// transitionAni[3].toggleAnimation(true);
+
+					// }
+
+				}
+
+			}
+
+		}
 
 		if (Game.getCharacter() == 1) {
 
@@ -94,6 +169,28 @@ public class UI {
 
 		}
 
+		if (isTransition()) {
+
+			if (Game.getCharacter() == 1) {
+
+				transitionAni[0].drawAnimation(g, -77, 385, 0);
+
+			} else if (Game.getCharacter() == 2) {
+
+				transitionAni[1].drawAnimation(g, 0, 350, 0);
+
+			}
+
+		}
+
+	}
+
+	public boolean isTransition() {
+		return transition;
+	}
+
+	public void setTransition(boolean transition) {
+		this.transition = transition;
 	}
 
 }

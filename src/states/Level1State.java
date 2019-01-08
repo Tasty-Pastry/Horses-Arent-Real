@@ -351,6 +351,8 @@ public class Level1State extends GameState {
 
 						if (Game.getCharacter() == 1) {
 
+							ui.setTransition(true);
+
 							handler.addObject(
 									new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
 
@@ -358,12 +360,16 @@ public class Level1State extends GameState {
 
 						if (Game.getCharacter() == 2) {
 
+							ui.setTransition(true);
+
 							handler.addObject(
 									new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
 
 						}
 
 						if (Game.getCharacter() == 3) {
+
+							ui.setTransition(true);
 
 							handler.addObject(
 									new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
