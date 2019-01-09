@@ -21,6 +21,9 @@ public class UI {
 	private BufferedImage[] nickStartTransition = new BufferedImage[10];
 	private BufferedImage[] nickTransition = new BufferedImage[9];
 
+	private BufferedImage[] namelessStartTransition = new BufferedImage[13];
+	private BufferedImage[] namelessTransition = new BufferedImage[20];
+
 	private Animation[] hpBarAni;
 	private Animation[] transitionAni;
 
@@ -31,14 +34,14 @@ public class UI {
 
 	private Spritesheet daanishTransitionSheet;
 	private Spritesheet nickTransitionSheet;
+	private Spritesheet namelessTransitionSheet;
 
 	private Handler handler;
 
 	private boolean transition;
 
 	private boolean charSwitch;
-	private boolean ranOnce;
-	private boolean ranOnce2;
+
 	private boolean end;
 
 	public UI(Spritesheet sheet, Handler handler) {
@@ -53,10 +56,25 @@ public class UI {
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
+		namelessTransitionSheet = new Spritesheet(loader.loadImage("/Nameless Transition.png"));
 
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 33; i++) {
 
-			daanishHealthBar[i] = sheet.getImage(i + 1, 1, 340, 375, 340, 375);
+			if (i < 13) {
+
+				namelessStartTransition[i] = namelessTransitionSheet.getImage(i + 1, 1, 225, 225, 225, 225);
+
+			} else {
+
+				namelessTransition[i - 13] = namelessTransitionSheet.getImage(i + 1, 1, 225, 225, 225, 225);
+
+			}
+
+			if (i < 30) {
+
+				daanishHealthBar[i] = sheet.getImage(i + 1, 1, 340, 375, 340, 375);
+
+			}
 
 			if (i < 3) {
 
@@ -112,6 +130,7 @@ public class UI {
 
 				new Animation(3, daanishStartTransition), new Animation(3, daanishTransition),
 				new Animation(3, nickStartTransition), new Animation(3, nickTransition),
+				new Animation(3, namelessStartTransition), new Animation(3, namelessTransition),
 
 		};
 
@@ -185,30 +204,38 @@ public class UI {
 
 					}
 
-				} else if (Game.getCharacter() == 3) {
+				}
 
-					// transitionAni[4].toggleAnimation(false);
+			} else if (Game.getCharacter() == 3) {
 
-					// transitionAni[4].runAnimation();
+				if (end) {
 
-					// if (transitionAni[4].getRanOnce()) {
+					transitionAni[4].toggleAnimation(false);
+					transitionAni[4].reset();
 
-					// charSwitch = true;
+					end = false;
 
-					// transitionAni[4].toggleAnimation(true);
+				}
 
-					// transitionAni[5].toggleAnimation(false);
-					// transitionAni[5].runAnimation();
+				transitionAni[4].runAnimation();
 
-					// if (transitionAni[5].getRanOnce() && charSwitch) {
+				if (transitionAni[4].getRanOnce()) {
 
-					// setTransition(false);
+					setCharSwitch(true);
 
-					// charSwitch = false;
+					transitionAni[5].toggleAnimation(false);
+					transitionAni[5].runAnimation();
 
-					// transitionAni[5].toggleAnimation(true);
+					if (transitionAni[5].getRanOnce()) {
 
-					// }
+						setTransition(false);
+
+						transitionAni[4].toggleAnimation(true);
+						transitionAni[5].toggleAnimation(true);
+
+						end = true;
+
+					}
 
 				}
 
@@ -233,23 +260,6 @@ public class UI {
 	}
 
 	public void draw(Graphics g) {
-
-		if (Game.getCharacter() == 1) {
-
-			hpBarAni[0].drawAnimation(g, 8, 254, 0);
-			g.drawImage(hpBarFill[0].getSubimage(0, 0, 228 - (228 - Game.daanishHealth), 79), 113, 531, null);
-
-		} else if (Game.getCharacter() == 2) {
-
-			hpBarAni[1].drawAnimation(g, 15, 490, 0);
-			g.drawImage(hpBarFill[1].getSubimage(0, 0, 228 - (228 - Game.nickHealth), 79), 114, 531, null);
-
-		} else if (Game.getCharacter() == 3) {
-
-			hpBarAni[2].drawAnimation(g, -27, 466, 0);
-			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
-
-		}
 
 		for (int i = 0; i < handler.getObject().size(); i++) {
 
@@ -289,9 +299,42 @@ public class UI {
 
 					}
 
+				} else if (Game.getCharacter() == 3) {
+
+					if (!isCharSwitch()) {
+
+						transitionAni[4].drawAnimation(g,
+								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 26) - Camera.getX(),
+								(temp.getY() - (namelessStartTransition[0].getHeight() / 2) - 20) - Camera.getY(), 0);
+
+					} else {
+
+						transitionAni[5].drawAnimation(g,
+								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 32) - Camera.getX(),
+								(temp.getY() - (namelessTransition[0].getHeight() / 2)) - Camera.getY(), 0);
+
+					}
+
 				}
 
 			}
+
+		}
+
+		if (Game.getCharacter() == 1) {
+
+			hpBarAni[0].drawAnimation(g, 8, 254, 0);
+			g.drawImage(hpBarFill[0].getSubimage(0, 0, 228 - (228 - Game.daanishHealth), 79), 113, 531, null);
+
+		} else if (Game.getCharacter() == 2) {
+
+			hpBarAni[1].drawAnimation(g, 15, 490, 0);
+			g.drawImage(hpBarFill[1].getSubimage(0, 0, 228 - (228 - Game.nickHealth), 79), 114, 531, null);
+
+		} else if (Game.getCharacter() == 3) {
+
+			hpBarAni[2].drawAnimation(g, -27, 466, 0);
+			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
 
 		}
 

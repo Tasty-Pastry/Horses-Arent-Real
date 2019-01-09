@@ -818,6 +818,8 @@ public class Nicc extends PlayerObject {
 			// Remove player from handler if they die
 			if (Game.nickHealth <= 0) {
 
+				Game.nickHealth = 1;
+
 				handler.removeObject(this);
 
 			}

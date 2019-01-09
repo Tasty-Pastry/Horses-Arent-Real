@@ -815,6 +815,8 @@ public class Nameless extends PlayerObject {
 			// Remove player from handler if they die
 			if (Game.namelessHealth <= 0) {
 
+				Game.namelessHealth = 1;
+
 				handler.removeObject(this);
 
 			}
