@@ -24,7 +24,7 @@ public abstract class GameObject {
 	// Image Vars
 	protected Spritesheet sheet;
 	protected Spritesheet sheet2;
-	
+
 	// Item Vars
 	protected String lore;
 	protected String itemDesc;

@@ -33,6 +33,15 @@ public class Animation {
 
 	}
 
+	public void reset() {
+
+		index = 0;
+		count = 0;
+
+		ranOnce = false;
+
+	}
+
 	public void runAnimation() {
 
 		// Checks if the animation was stopped
