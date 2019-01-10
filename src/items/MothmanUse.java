@@ -76,7 +76,7 @@ public class MothmanUse extends GameObject {
 					if (temp.getId() == ID.Player) {
 
 						x = temp.getX() + circleX - 20;
-						y = temp.getY() + circleY - 70;
+						y = temp.getY() + circleY - 60;
 
 					}
 
