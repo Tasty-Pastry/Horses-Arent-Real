@@ -821,6 +821,8 @@ public class Daanish extends PlayerObject {
 			// Remove player from handler if they die
 			if (Game.daanishHealth <= 0) {
 
+				Game.daanishHealth = 1;
+
 				handler.removeObject(this);
 
 			}

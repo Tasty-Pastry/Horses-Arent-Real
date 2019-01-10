@@ -66,6 +66,8 @@ public class Level1State extends GameState {
 
 	private boolean showInv;
 
+	private boolean charSwitch;
+
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
 
@@ -110,6 +112,57 @@ public class Level1State extends GameState {
 		if (camera.getCamMove()) {
 
 			camera.update();
+
+		}
+
+		for (int i = 0; i < handler.getObject().size(); i++) {
+
+			GameObject temp = handler.getObject().get(i);
+
+			if (temp.getId() == ID.Player) {
+
+				if (ui.isCharSwitch() && Game.getCharacter() == 1) {
+
+					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+
+					handler.removeObject(temp);
+
+					if (!ui.isTransition()) {
+
+						ui.setCharSwitch(false);
+						charSwitch = false;
+
+					}
+
+				} else if (ui.isCharSwitch() && Game.getCharacter() == 2) {
+
+					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+
+					handler.removeObject(temp);
+
+					if (!ui.isTransition()) {
+
+						ui.setCharSwitch(false);
+						charSwitch = false;
+
+					}
+
+				} else if (ui.isCharSwitch() && Game.getCharacter() == 3) {
+
+					handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+
+					handler.removeObject(temp);
+
+					if (!ui.isTransition()) {
+
+						ui.setCharSwitch(false);
+						charSwitch = false;
+
+					}
+
+				}
+
+			}
 
 		}
 
@@ -321,7 +374,8 @@ public class Level1State extends GameState {
 
 				// If the object is a player, and the camera isn't moving, check if any of the
 				// WASD keys are being pressed
-				if (temp.getId() == ID.Player && !Camera.getCamMove()) {
+
+				if (temp.getId() == ID.Player && !Camera.getCamMove() && !charSwitch) {
 
 					// Set movement based on the key pressed
 					if (k == KeyEvent.VK_W)
@@ -351,32 +405,51 @@ public class Level1State extends GameState {
 
 						if (Game.getCharacter() == 1) {
 
+							temp.setVelocityX(0);
+							temp.setVelocityY(0);
+
+							handler.setDown(false);
+							handler.setUp(false);
+							handler.setLeft(false);
+							handler.setRight(false);
+
 							ui.setTransition(true);
 
-							handler.addObject(
-									new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+							charSwitch = true;
 
 						}
 
 						if (Game.getCharacter() == 2) {
 
+							temp.setVelocityX(0);
+							temp.setVelocityY(0);
+
+							handler.setDown(false);
+							handler.setUp(false);
+							handler.setLeft(false);
+							handler.setRight(false);
+
 							ui.setTransition(true);
 
-							handler.addObject(
-									new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+							charSwitch = true;
 
 						}
 
 						if (Game.getCharacter() == 3) {
 
+							temp.setVelocityX(0);
+							temp.setVelocityY(0);
+
+							handler.setDown(false);
+							handler.setUp(false);
+							handler.setLeft(false);
+							handler.setRight(false);
+
 							ui.setTransition(true);
 
-							handler.addObject(
-									new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+							charSwitch = true;
 
 						}
-
-						handler.removeObject(temp);
 
 					}
 
