@@ -304,14 +304,14 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[4].drawAnimation(g,
-								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 26) - Camera.getX(),
-								(temp.getY() - (namelessStartTransition[0].getHeight() / 2) - 20) - Camera.getY(), 0);
+								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 18) - Camera.getX(),
+								(temp.getY() - (namelessStartTransition[0].getHeight() / 2) - 19) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[5].drawAnimation(g,
-								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 32) - Camera.getX(),
-								(temp.getY() - (namelessTransition[0].getHeight() / 2)) - Camera.getY(), 0);
+								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 18) - Camera.getX(),
+								(temp.getY() - (namelessTransition[0].getHeight() / 2) - 19) - Camera.getY(), 0);
 
 					}
 

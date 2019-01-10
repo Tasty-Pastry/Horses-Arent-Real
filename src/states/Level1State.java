@@ -179,7 +179,7 @@ public class Level1State extends GameState {
 		g.fillRect(0, 0, 1024, 640);
 
 		// Scaling for bigger rooms
-		// g2.scale(0.25, 0.25);
+		// g2.scale(2, 2);
 
 		// Updates Camera
 		g2.translate(-camera.getX(), -camera.getY());
@@ -497,47 +497,44 @@ public class Level1State extends GameState {
 						}
 
 					}
-						// Character specials
-						if (k == KeyEvent.VK_SHIFT) { 
-						
-							// 1 = Daanish 	2 = Nicc	3 = Nameless
-							int character = Game.getCharacter();
-							
-							if (character == 1) {
-								
-								
-							} else if (character == 2) {
-																	
-								if (handler.isUp()) {
-									
-									System.out.println("up");
-									
-								} else if (handler.isDown()) {
-									
-									System.out.println("Down");
-									
-								} else if (handler.isRight()) {
-									
-									System.out.println("Right");
-									
-								} else if (handler.isLeft()) {
+					// Character specials
+					if (k == KeyEvent.VK_SHIFT) {
 
-									System.out.println("Left");
-									
-								} else {
-									
-									System.out.println(Nicc.getLastDir());
-									
-								}
-								
+						// 1 = Daanish 2 = Nicc 3 = Nameless
+						int character = Game.getCharacter();
+
+						if (character == 1) {
+
+						} else if (character == 2) {
+
+							if (handler.isUp()) {
+
+								System.out.println("up");
+
+							} else if (handler.isDown()) {
+
+								System.out.println("Down");
+
+							} else if (handler.isRight()) {
+
+								System.out.println("Right");
+
+							} else if (handler.isLeft()) {
+
+								System.out.println("Left");
+
 							} else {
-								
-								
-								
+
+								System.out.println(Nicc.getLastDir());
+
 							}
-						
+
+						} else {
+
 						}
-					
+
+					}
+
 				}
 
 			}
