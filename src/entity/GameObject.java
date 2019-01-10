@@ -30,6 +30,7 @@ public abstract class GameObject {
 	protected String itemDesc;
 	protected boolean keyItem;
 	protected boolean passive;
+	public boolean obtained;
 
 	protected BufferedImage sprite;
 

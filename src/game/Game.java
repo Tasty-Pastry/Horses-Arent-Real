@@ -68,6 +68,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static items.Furniture furniture;
 	public static items.EatingSugar eatingSugar;
 	public static items.DannysSoul dannysSoul;
+	public static items.MothmanUse mothmanU;
 
 	// Enemy Vars
 	private static int[][] enemyArray; // Initializes the enemyArray - keeps track of how many enemies are in each room
@@ -96,6 +97,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		furniture = new items.Furniture(64, 64, ID.Furniture);
 		eatingSugar = new items.EatingSugar(64, 64, ID.EatingSugar);
 		dannysSoul = new items.DannysSoul(64, 64, ID.DannysSoul);
+		mothmanU = new items.MothmanUse(64, 64, ID.Mothman, handler);
 
 		sh = new StateHandler(handler, camera, inv);
 

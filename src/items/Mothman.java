@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import animation.BufferedImageLoader;
 import animation.Spritesheet;
 import entity.GameObject;
+import game.Game;
 import game.ID;
 
 public class Mothman extends GameObject {
@@ -27,12 +28,14 @@ public class Mothman extends GameObject {
 
 		sprite = loader.loadImage("/Mothman.png");
 		
-		keyItem = false;
+		keyItem = true;
 		passive=true;
 
 	}
 	
 	public void update() {
+		
+		
 
 	}
 
