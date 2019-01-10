@@ -87,7 +87,7 @@ public class Daanish extends PlayerObject {
 			}
 
 			// Facing up
-			lastDir = 1;
+			setLastDir(1);
 
 		} else if (!handler.isDown()) {
 
@@ -123,7 +123,7 @@ public class Daanish extends PlayerObject {
 			}
 
 			// Sprite facing down
-			lastDir = 3;
+			setLastDir(3);
 
 		} else if (!handler.isUp()) { // Slows down y vel when not moving down
 
@@ -159,7 +159,7 @@ public class Daanish extends PlayerObject {
 			}
 
 			// Sprite facing the right
-			lastDir = 2;
+			setLastDir(2);
 
 		} else if (!handler.isLeft()) { // Decrease vel when the player is moving right but the right key isn't being
 										// pressed
@@ -196,7 +196,7 @@ public class Daanish extends PlayerObject {
 			}
 
 			// Player sprite is facing left
-			lastDir = 4;
+			setLastDir(4);
 
 		} else if (!handler.isRight()) { // Slows down
 
@@ -256,7 +256,7 @@ public class Daanish extends PlayerObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 1;
+				setLastDir(1);
 
 			}
 
@@ -272,7 +272,7 @@ public class Daanish extends PlayerObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 2;
+				setLastDir(2);
 
 			}
 
@@ -288,7 +288,7 @@ public class Daanish extends PlayerObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 3;
+				setLastDir(3);
 
 			}
 
@@ -304,7 +304,7 @@ public class Daanish extends PlayerObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 4;
+				setLastDir(4);
 
 			}
 
@@ -861,20 +861,20 @@ public class Daanish extends PlayerObject {
 		} else if (velocityX <= 1.5 && velocityX >= -1.5 && velocityY <= 1.5 && velocityY >= -1.5) {
 
 			// Checks the last direction the player was in
-			if (lastDir == 1) {
+			if (getLastDir() == 1) {
 
 				// Draws a static image of the player facing a direction
 				g.drawImage(playerUp[0], x, y, null);
 
-			} else if (lastDir == 2) {
+			} else if (getLastDir() == 2) {
 
 				g.drawImage(playerRight[0], x, y, null);
 
-			} else if (lastDir == 3) {
+			} else if (getLastDir() == 3) {
 
 				g.drawImage(playerDown[0], x, y, null);
 
-			} else if (lastDir == 4) {
+			} else if (getLastDir() == 4) {
 
 				g.drawImage(playerLeft[0], x, y, null);
 

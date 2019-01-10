@@ -543,7 +543,7 @@ public class Level1State extends GameState {
 									
 								} else {
 									
-									System.out.println(Nicc.lastDir);
+									System.out.println(Nicc.getLastDir());
 									
 								}
 								
