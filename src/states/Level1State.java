@@ -497,7 +497,7 @@ public class Level1State extends GameState {
 						}
 
 					}
-						// 
+						// Character specials
 						if (k == KeyEvent.VK_SHIFT) { 
 						
 							// 1 = Daanish 	2 = Nicc	3 = Nameless
@@ -507,25 +507,8 @@ public class Level1State extends GameState {
 								
 								
 							} else if (character == 2) {
-								
-								
-								if (handler.isDown() && handler.isLeft()) {
-									
-									System.out.println("Down	Left");
-									
-								} else if (handler.isDown() && handler.isRight()) {
-									
-									System.out.println("Down	Right");
-									
-								} else if (handler.isUp() && handler.isLeft()) {
-									
-									System.out.println("Up		Left");
-									
-								} else if (handler.isUp() && handler.isRight()) {
-									
-									System.out.println("Up		Right");
-									
-								} else if (handler.isUp()) {
+																	
+								if (handler.isUp()) {
 									
 									System.out.println("up");
 									
