@@ -193,8 +193,6 @@ public class UI {
 					transitionAni[3].toggleAnimation(false);
 					transitionAni[3].runAnimation();
 
-					// test
-
 					if (transitionAni[3].getRanOnce()) {
 
 						setTransition(false);
