@@ -30,12 +30,12 @@ public class EatingSugar extends GameObject {
 		
 		keyItem = false;
 		passive = false;
-		vored=false;
+		vored = false;
 
 	}
 	
 	public void update() {
-
+				
 	}
 
 	// Draw crate

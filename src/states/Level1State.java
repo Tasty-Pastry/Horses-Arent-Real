@@ -424,7 +424,64 @@ public class Level1State extends GameState {
 						}
 
 					}
+						// 
+						if (k == KeyEvent.VK_SHIFT) { 
+						
+							// 1 = Daanish 	2 = Nicc	3 = Nameless
+							int character = Game.getCharacter();
+							
+							if (character == 1) {
+								
+								
+							} else if (character == 2) {
+								
+								
+								if (handler.isDown() && handler.isLeft()) {
+									
+									System.out.println("Down	Left");
+									
+								} else if (handler.isDown() && handler.isRight()) {
+									
+									System.out.println("Down	Right");
+									
+								} else if (handler.isUp() && handler.isLeft()) {
+									
+									System.out.println("Up		Left");
+									
+								} else if (handler.isUp() && handler.isRight()) {
+									
+									System.out.println("Up		Right");
+									
+								} else if (handler.isUp()) {
+									
+									System.out.println("up");
+									
+								} else if (handler.isDown()) {
+									
+									System.out.println("Down");
+									
+								} else if (handler.isRight()) {
+									
+									System.out.println("Right");
+									
+								} else if (handler.isLeft()) {
 
+									System.out.println("Left");
+									
+								} else {
+									
+									System.out.println(Nicc.lastDir);
+									
+								}
+								
+							} else {
+								
+								
+								
+							}
+						
+						}
+					
 				}
 
 			}
