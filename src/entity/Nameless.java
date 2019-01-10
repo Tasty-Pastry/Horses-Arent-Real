@@ -411,12 +411,20 @@ public class Nameless extends PlayerObject {
 					// Collision logic
 					if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {
 
+						if (x > temp.x)
+							x += 1;
+						else
+							x -= 1;
 						velocityX = 0;
 
 					}
 
 					if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
 
+						if (y > temp.y)
+							y += 1;
+						else
+							y -= 1;
 						velocityY = 0;
 
 					}
@@ -464,12 +472,20 @@ public class Nameless extends PlayerObject {
 					// Collision logic
 					if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {
 
+						if (x > temp.x)
+							x += 1;
+						else
+							x -= 1;
 						velocityX = 0;
 
 					}
 
 					if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
 
+						if (y > temp.y)
+							y += 1;
+						else
+							y -= 1;
 						velocityY = 0;
 
 					}
@@ -691,8 +707,8 @@ public class Nameless extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
-						
-						handler.addObject(new MothmanUse(x+15, y, ID.MothmanUse, handler)); 
+
+						handler.addObject(new MothmanUse(x + 15, y, ID.MothmanUse, handler));
 
 					}
 
