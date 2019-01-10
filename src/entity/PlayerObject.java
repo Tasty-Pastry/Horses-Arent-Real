@@ -29,7 +29,7 @@ public abstract class PlayerObject extends GameObject {
 	protected boolean isDown;
 	protected boolean isUp;
 
-	protected int lastDir; // 1 is Up, 2 is Right, 3 is Down, 4 is Left
+	private static int lastDir; // 1 is Up, 2 is Right, 3 is Down, 4 is Left
 
 	// Sprite Vars
 	protected BufferedImage[] playerRight = new BufferedImage[3];
@@ -70,7 +70,7 @@ public abstract class PlayerObject extends GameObject {
 		// Get Enemy Array
 		enemyArray = Game.getEnemyArray();
 
-		lastDir = 2; // The player is facing right
+		setLastDir(2); // The player is facing right
 
 	}
 
@@ -102,7 +102,7 @@ public abstract class PlayerObject extends GameObject {
 			}
 
 			// Facing up
-			lastDir = 1;
+			setLastDir(1);
 
 		} else if (!handler.isDown()) {
 
@@ -138,7 +138,7 @@ public abstract class PlayerObject extends GameObject {
 			}
 
 			// Sprite facing down
-			lastDir = 3;
+			setLastDir(3);
 
 		} else if (!handler.isUp()) { // Slows down y vel when not moving down
 
@@ -174,7 +174,7 @@ public abstract class PlayerObject extends GameObject {
 			}
 
 			// Sprite facing the right
-			lastDir = 2;
+			setLastDir(2);
 
 		} else if (!handler.isLeft()) { // Decrease vel when the player is moving right but the right key isn't being
 										// pressed
@@ -211,7 +211,7 @@ public abstract class PlayerObject extends GameObject {
 			}
 
 			// Player sprite is facing left
-			lastDir = 4;
+			setLastDir(4);
 
 		} else if (!handler.isRight()) { // Slows down
 
@@ -271,7 +271,7 @@ public abstract class PlayerObject extends GameObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 1;
+				setLastDir(1);
 
 			}
 
@@ -287,7 +287,7 @@ public abstract class PlayerObject extends GameObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 2;
+				setLastDir(2);
 
 			}
 
@@ -303,7 +303,7 @@ public abstract class PlayerObject extends GameObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 3;
+				setLastDir(3);
 
 			}
 
@@ -319,7 +319,7 @@ public abstract class PlayerObject extends GameObject {
 
 				Game.setShoot(false, 0);
 
-				lastDir = 4;
+				setLastDir(4);
 
 			}
 
@@ -805,20 +805,20 @@ public abstract class PlayerObject extends GameObject {
 		} else if (velocityX <= 1.5 && velocityX >= -1.5 && velocityY <= 1.5 && velocityY >= -1.5) {
 
 			// Checks the last direction the player was in
-			if (lastDir == 1) {
+			if (getLastDir() == 1) {
 
 				// Draws a static image of the player facing a direction
 				g.drawImage(playerUp[0], x, y, null);
 
-			} else if (lastDir == 2) {
+			} else if (getLastDir() == 2) {
 
 				g.drawImage(playerRight[0], x, y, null);
 
-			} else if (lastDir == 3) {
+			} else if (getLastDir() == 3) {
 
 				g.drawImage(playerDown[0], x, y, null);
 
-			} else if (lastDir == 4) {
+			} else if (getLastDir() == 4) {
 
 				g.drawImage(playerLeft[0], x, y, null);
 
@@ -870,6 +870,14 @@ public abstract class PlayerObject extends GameObject {
 	public BufferedImage getSprite() {
 
 		return sprite;
+	}
+
+	public static int getLastDir() {
+		return lastDir;
+	}
+
+	public void setLastDir(int lastDir) {
+		this.lastDir = lastDir;
 	}
 
 }
