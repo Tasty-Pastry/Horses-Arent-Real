@@ -27,7 +27,7 @@ public class YuGiOhCard extends GameObject {
 
 		sprite = loader.loadImage("/YuGiOhCard.png");
 		
-		keyItem = false;
+		keyItem = true;
 		passive=false;
 
 	}

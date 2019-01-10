@@ -28,7 +28,7 @@ public class Furniture extends GameObject {
 
 		sprite = loader.loadImage("/Furniture.png");
 		
-		keyItem = false;
+		keyItem = true;
 		passive=false;
 		vored=false;
 

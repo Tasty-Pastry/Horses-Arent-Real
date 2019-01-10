@@ -13,6 +13,7 @@ import game.Game;
 import game.Handler;
 import game.ID;
 import game.Inventory;
+import items.MothmanUse;
 
 public class Nameless extends PlayerObject {
 
@@ -690,7 +691,8 @@ public class Nameless extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
-						// Game.mothman.obtained=true;
+						
+						handler.addObject(new MothmanUse(x+15, y, ID.MothmanUse, handler)); 
 
 					}
 
