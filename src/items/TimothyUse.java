@@ -27,11 +27,11 @@ public class TimothyUse extends GameObject {
 
 	private Handler handler;
 
-	private int circleX;
+	/*private int circleX;
 
 	private int circleY;
 
-	private double theta;
+	private double theta;*/
 
 	public TimothyUse(int x, int y, ID id, Handler handler) {
 
@@ -59,10 +59,10 @@ public class TimothyUse extends GameObject {
 
 		if (Game.getCharacter() == 3) {
 
-			theta += 0.01;
+			/*theta += 0.01;
 
 			circleX += 2.5 * Math.cos(theta * Math.PI);
-			circleY += 2.5 * Math.sin(theta * Math.PI);
+			circleY += 2.5 * Math.sin(theta * Math.PI);*/
 
 			timothyAni.runAnimation();
 
@@ -77,8 +77,8 @@ public class TimothyUse extends GameObject {
 
 					if (temp.getId() == ID.Player) {
 
-						x = temp.getX() + circleX - 20;
-						y = temp.getY() + circleY - 60;
+						x = temp.getX() - 180;
+						y = temp.getY() - 150;
 
 					}
 
