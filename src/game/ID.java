@@ -5,6 +5,6 @@ public enum ID {
 
 	Player(), Block(), Crate(), Bullet(), EnemyBullet(), Enemy(), DoorBottom(), DoorSide(), HorseEye(), MrsK(), YuGiOhCard(), TimothysSkull(),
 	TeethButter(), StarCrossedScarf(), Skates(), PatricksBinder(), Mothman(), MeguminStaff(), HumanBone(), Furniture(), EatingSugar(),
-	DannysSoul(), MothmanUse()
+	DannysSoul(), MothmanUse(), TimothyUse()
 
 }

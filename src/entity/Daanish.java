@@ -13,6 +13,7 @@ import game.Game;
 import game.Handler;
 import game.ID;
 import game.Inventory;
+import items.TimothyUse;
 
 public class Daanish extends PlayerObject {
 
@@ -808,6 +809,8 @@ public class Daanish extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
+						
+						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler));
 
 					}
 

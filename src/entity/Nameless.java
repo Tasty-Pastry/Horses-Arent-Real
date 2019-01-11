@@ -14,6 +14,7 @@ import game.Handler;
 import game.ID;
 import game.Inventory;
 import items.MothmanUse;
+import items.TimothyUse;
 
 public class Nameless extends PlayerObject {
 
@@ -804,6 +805,8 @@ public class Nameless extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
+						
+						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler));
 
 					}
 
