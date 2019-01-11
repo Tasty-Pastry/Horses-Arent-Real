@@ -13,7 +13,6 @@ import game.Game;
 import game.Handler;
 import game.ID;
 import game.Inventory;
-import items.TimothyUse;
 
 public class Nicc extends PlayerObject {
 
@@ -806,8 +805,6 @@ public class Nicc extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
-						
-						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler));
 
 					}
 

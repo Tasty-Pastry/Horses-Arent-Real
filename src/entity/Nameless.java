@@ -18,10 +18,17 @@ import items.TimothyUse;
 
 public class Nameless extends PlayerObject {
 
+	private Spritesheet mothmanSheet;
+	private Spritesheet timothySheet;
+
 	// Constructor
-	public Nameless(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv) {
+	public Nameless(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
+			Spritesheet mothmanSheet, Spritesheet timothySheet) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
+
+		this.mothmanSheet = mothmanSheet;
+		this.timothySheet = timothySheet;
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -709,7 +716,7 @@ public class Nameless extends PlayerObject {
 
 						inv.setRemove(false);
 
-						handler.addObject(new MothmanUse(x + 15, y, ID.MothmanUse, handler));
+						handler.addObject(new MothmanUse(x + 15, y, ID.MothmanUse, handler, mothmanSheet));
 
 					}
 
@@ -805,8 +812,8 @@ public class Nameless extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
-						
-						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler));
+
+						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler, timothySheet));
 
 					}
 

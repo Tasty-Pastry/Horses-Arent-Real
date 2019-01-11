@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 
+import animation.BufferedImageLoader;
 import animation.Camera;
 import animation.Spritesheet;
 import states.StateHandler;
@@ -37,6 +38,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	private Handler handler;
 	private Camera camera;
 	private Inventory inv;
+	private BufferedImageLoader loader;
 
 	// Player Vars
 	private static int killCount;
@@ -70,6 +72,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static items.DannysSoul dannysSoul;
 	public static items.MothmanUse mothmanU;
 
+	public static Spritesheet mothmanSheet;
+	public static Spritesheet timothySheet;
+
 	// Enemy Vars
 	private static int[][] enemyArray; // Initializes the enemyArray - keeps track of how many enemies are in each room
 
@@ -78,10 +83,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		// Create new window
 		Window window = new Window("Horses Aren't Real", this);
 
+		loader = new BufferedImageLoader();
+
 		// Creates a new Handler and Camera object
 		handler = new Handler();
 		camera = new Camera(0, 0);
 		inv = new Inventory();
+
+		mothmanSheet = new Spritesheet(loader.loadImage("/Mothman Ani.png"));
+		timothySheet = new Spritesheet(loader.loadImage("/Timothy Animation.png"));
 
 		horseEye = new items.HorseEye(64, 64, ID.HorseEye);
 		MrsK = new items.MrsK(64, 64, ID.MrsK);
@@ -97,7 +107,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		furniture = new items.Furniture(64, 64, ID.Furniture);
 		eatingSugar = new items.EatingSugar(64, 64, ID.EatingSugar);
 		dannysSoul = new items.DannysSoul(64, 64, ID.DannysSoul);
-		mothmanU = new items.MothmanUse(64, 64, ID.Mothman, handler);
+		mothmanU = new items.MothmanUse(64, 64, ID.Mothman, handler, mothmanSheet);
 
 		sh = new StateHandler(handler, camera, inv);
 

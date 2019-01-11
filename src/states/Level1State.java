@@ -155,7 +155,8 @@ public class Level1State extends GameState {
 
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 3) {
 
-					handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+					handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
+							Game.mothmanSheet, Game.timothySheet));
 
 					handler.removeObject(temp);
 
@@ -281,7 +282,8 @@ public class Level1State extends GameState {
 					if (Game.getCharacter() == 2)
 						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv));
 					if (Game.getCharacter() == 3)
-						handler.addObject(new Nameless(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv));
+						handler.addObject(new Nameless(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
+								Game.mothmanSheet, Game.timothySheet));
 
 					// Update player pos to the room its in
 					Game.playerXPos = x2 / 16;

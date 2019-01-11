@@ -33,13 +33,13 @@ public class MothmanUse extends GameObject {
 
 	private double theta;
 
-	public MothmanUse(int x, int y, ID id, Handler handler) {
+	public MothmanUse(int x, int y, ID id, Handler handler, Spritesheet sheet) {
 
 		super(x, y, id);
 
 		loader = new BufferedImageLoader();
 
-		sheet = new Spritesheet(loader.loadImage("/Mothman Ani.png"));
+		this.sheet = sheet;
 
 		for (int i = 0; i < 24; i++) {
 

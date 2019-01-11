@@ -27,25 +27,25 @@ public class TimothyUse extends GameObject {
 
 	private Handler handler;
 
-	/*private int circleX;
+	/*
+	 * private int circleX;
+	 * 
+	 * private int circleY;
+	 * 
+	 * private double theta;
+	 */
 
-	private int circleY;
-
-	private double theta;*/
-
-	public TimothyUse(int x, int y, ID id, Handler handler) {
+	public TimothyUse(int x, int y, ID id, Handler handler, Spritesheet sheet) {
 
 		super(x, y, id);
 
 		loader = new BufferedImageLoader();
 
-		sprite = loader.loadImage("/TimothysSkull.png");
-
-		sheet = new Spritesheet(loader.loadImage("/Timothy Animation.png"));
+		this.sheet = sheet;
 
 		for (int i = 0; i < 18; i++) {
 
-			timothy[i] = sheet.getImage(i + 1, 1, 256, 256, 256, 256);
+			timothy[i] = sheet.getImage(i + 1, 1, 128, 128, 128, 128);
 
 		}
 
@@ -59,12 +59,10 @@ public class TimothyUse extends GameObject {
 
 		if (Game.getCharacter() == 3) {
 
-			/*theta += 0.01;
-
-			circleX += 2.5 * Math.cos(theta * Math.PI);
-			circleY += 2.5 * Math.sin(theta * Math.PI);*/
-
 			timothyAni.runAnimation();
+
+			x += velocityX;
+			y += velocityY;
 
 			for (int i = 0; i < handler.getObject().size(); i++) {
 
@@ -77,8 +75,25 @@ public class TimothyUse extends GameObject {
 
 					if (temp.getId() == ID.Player) {
 
-						x = temp.getX() - 180;
-						y = temp.getY() - 150;
+						int diffX = temp.getX() - x - (timothy[0].getWidth() / 2) - 20;
+						int diffY = temp.getY() - y - (timothy[0].getHeight() / 2) - 20;
+
+						float angle = (float) Math.atan2(diffY, diffX);
+
+						velocityX = (float) (4.5 * Math.cos(angle));
+						velocityY = (float) (4.5 * Math.sin(angle));
+
+						if ((diffX <= 0) && (diffX >= -4)) {
+
+							velocityX = 0;
+
+						}
+
+						if (diffY <= 2 && diffY >= -2) {
+
+							velocityY = 0;
+
+						}
 
 					}
 
