@@ -54,6 +54,8 @@ public class Level1State extends GameState {
 	private BufferedImage spriteSheet2 = null;
 	private BufferedImage healthBars = null;
 
+	private BufferedImage dishBullet;
+
 	// Engine Vars
 	private Handler handler;
 	private Camera camera;
@@ -67,6 +69,8 @@ public class Level1State extends GameState {
 	private boolean showInv;
 
 	private boolean charSwitch;
+
+	private BufferedImage nickBullet;
 
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
@@ -89,6 +93,8 @@ public class Level1State extends GameState {
 		spriteSheet = loader.loadImage("/PlayerSprites.png");
 		spriteSheet2 = loader.loadImage("/Horse Gallop Black.png");
 		healthBars = loader.loadImage("/Health Bars.png");
+		dishBullet = loader.loadImage("/Dgen Dish Projectile.png");
+		nickBullet = loader.loadImage("/Nick the Thicc Projectile.png");
 
 		sheet = new Spritesheet(spriteSheet);
 		sheet2 = new Spritesheet(spriteSheet2);
@@ -460,8 +466,22 @@ public class Level1State extends GameState {
 						// Adds a bullet to the handler, direction depends on the arrow keypress
 						if (k == KeyEvent.VK_DOWN) {
 
-							handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
-									temp.getX(), temp.getY() + 5000, 20, Color.BLUE));
+							if (Game.getCharacter() == 1) {
+
+								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, dishBullet));
+
+							} else if (Game.getCharacter() == 2) {
+
+								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullet));
+
+							} else {
+
+								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, null));
+
+							}
 
 							baseFrame = Game.getCount(); // Sets baseFrame to the current count
 							Game.ammo--; // Subtracts ammo from the count
@@ -469,8 +489,22 @@ public class Level1State extends GameState {
 
 						} else if (k == KeyEvent.VK_UP) {
 
-							handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
-									temp.getX(), temp.getY() - 5000, 20, Color.BLUE));
+							if (Game.getCharacter() == 1) {
+
+								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, dishBullet));
+
+							} else if (Game.getCharacter() == 2) {
+
+								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullet));
+
+							} else {
+
+								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, null));
+
+							}
 
 							baseFrame = Game.getCount(); // Sets baseFrame to the current count
 							Game.ammo--; // Subtracts ammo from the count
@@ -478,8 +512,22 @@ public class Level1State extends GameState {
 
 						} else if (k == KeyEvent.VK_LEFT) {
 
-							handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
-									temp.getX() - 5000, temp.getY(), 20, Color.BLUE));
+							if (Game.getCharacter() == 1) {
+
+								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullet));
+
+							} else if (Game.getCharacter() == 2) {
+
+								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullet));
+
+							} else {
+
+								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, null));
+
+							}
 
 							baseFrame = Game.getCount(); // Sets baseFrame to the current count
 							Game.ammo--; // Subtracts ammo from the count
@@ -487,8 +535,22 @@ public class Level1State extends GameState {
 
 						} else if (k == KeyEvent.VK_RIGHT) {
 
-							handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
-									temp.getX() + 5000, temp.getY(), 20, Color.BLUE));
+							if (Game.getCharacter() == 1) {
+
+								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullet));
+
+							} else if (Game.getCharacter() == 2) {
+
+								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullet));
+
+							} else {
+
+								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, null));
+
+							}
 
 							baseFrame = Game.getCount(); // Sets baseFrame to the current count
 							Game.ammo--; // Subtracts ammo from the count

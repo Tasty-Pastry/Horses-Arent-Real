@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import animation.Spritesheet;
 import game.Handler;
 import game.ID;
 
@@ -18,11 +17,15 @@ public class Bullet extends GameObject {
 	// Bullet Vars
 	private Color color;
 
+	private BufferedImage bullet;
+
 	// Constructor
-	public Bullet(int x, int y, ID id, Handler handler, int vx, int vy, int speed, Color color) {
+	public Bullet(int x, int y, ID id, Handler handler, int vx, int vy, int speed, Color color, BufferedImage bullet) {
 
 		super(x, y, id);
 		this.handler = handler;
+
+		this.bullet = bullet;
 
 		// Calulates velocity of bullet
 
@@ -72,8 +75,15 @@ public class Bullet extends GameObject {
 	// Draw the bullet
 	public void draw(Graphics g) {
 
-		g.setColor(color);
-		g.fillOval(x, y, 10, 10);
+		if (bullet != null) {
+
+			g.drawImage(bullet, x - bullet.getWidth(), y - (bullet.getWidth() / 2), null);
+
+		} else {
+
+			g.setColor(color);
+			g.fillOval(x, y, 10, 10);
+		}
 
 	}
 
@@ -83,7 +93,7 @@ public class Bullet extends GameObject {
 		return new Rectangle(x, y, 8, 8);
 
 	}
-	
+
 	@Override
 	public String getName() {
 

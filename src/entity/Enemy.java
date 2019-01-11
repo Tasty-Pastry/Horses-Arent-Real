@@ -163,7 +163,7 @@ public class Enemy extends GameObject {
 
 							// Adds a bullet
 							handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.EnemyBullet, handler,
-									temp.getX(), temp.getY(), 10, Color.MAGENTA));
+									temp.getX(), temp.getY(), 10, Color.MAGENTA, null));
 
 						}
 
