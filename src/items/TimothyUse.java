@@ -16,10 +16,10 @@ import game.Handler;
 import game.ID;
 
 public class TimothyUse extends GameObject {
-	
+
 	private BufferedImageLoader loader;
 
-	private BufferedImage[] timothy = new BufferedImage[24];
+	private BufferedImage[] timothy = new BufferedImage[18];
 
 	private Animation timothyAni;
 
@@ -32,66 +32,70 @@ public class TimothyUse extends GameObject {
 	private int circleY;
 
 	private double theta;
-	
+
 	public TimothyUse(int x, int y, ID id, Handler handler) {
 
 		super(x, y, id);
 
 		loader = new BufferedImageLoader();
-		
+
 		sprite = loader.loadImage("/TimothysSkull.png");
 
-		/*sheet = new Spritesheet(loader.loadImage("/Mothman Ani.png"));
+		sheet = new Spritesheet(loader.loadImage("/Timothy Animation.png"));
 
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < 18; i++) {
 
-			timothy[i] = sheet.getImage(i + 1, 1, 116, 93, 116, 93);
+			timothy[i] = sheet.getImage(i + 1, 1, 256, 256, 256, 256);
 
-		}*/
+		}
 
 		this.handler = handler;
 
-		//timothyAni = new Animation(3, timothy);
+		timothyAni = new Animation(3, timothy);
 
 	}
-	
+
 	public void update() {
 
-		theta += 0.01;
+		if (Game.getCharacter() == 3) {
 
-		circleX += 2.5 * Math.cos(theta * Math.PI);
-		circleY += 2.5 * Math.sin(theta * Math.PI);
+			theta += 0.01;
 
-		//timothyAni.runAnimation();
+			circleX += 2.5 * Math.cos(theta * Math.PI);
+			circleY += 2.5 * Math.sin(theta * Math.PI);
 
-		for (int i = 0; i < handler.getObject().size(); i++) {
+			timothyAni.runAnimation();
 
-			// Creates a game object and sets it to the current handler object
-			GameObject temp = handler.getObject().get(i);
+			for (int i = 0; i < handler.getObject().size(); i++) {
 
-			// If the object isnt null, and if the object is either a block, or a door
+				// Creates a game object and sets it to the current handler object
+				GameObject temp = handler.getObject().get(i);
 
-			if (temp != null) {
+				// If the object isnt null, and if the object is either a block, or a door
 
-				if (temp.getId() == ID.Player) {
+				if (temp != null) {
 
-					x = temp.getX() + circleX - 20;
-					y = temp.getY() + circleY - 60;
+					if (temp.getId() == ID.Player) {
 
-				}
+						x = temp.getX() + circleX - 20;
+						y = temp.getY() + circleY - 60;
 
-				if (temp.getId() == ID.Enemy) {
+					}
 
-					// Checks if the player is in range
-					if (getEvenBiggerBoiBounds().intersects(temp.getBounds())) {
+					if (temp.getId() == ID.Enemy) {
 
-						// Checks if the camera isnt moving, if the enemy is allowed to move and can
-						// only shoot once every 25 frames
-						if (Game.getCount() % 50 == 0 && !Camera.getCamMove()) {
+						// Checks if the player is in range
+						if (getEvenBiggerBoiBounds().intersects(temp.getBounds())) {
 
-							// Adds a bullet
-							handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.Bullet, handler,
+							// Checks if the camera isnt moving, if the enemy is allowed to move and can
+							// only shoot once every 25 frames
+							if (Game.getCount() % 50 == 0 && !Camera.getCamMove()) {
+
+								// Adds a bullet
+								handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.Bullet, handler,
 										temp.getX(), temp.getY(), 10, Color.RED));
+
+							}
 
 						}
 
@@ -107,14 +111,12 @@ public class TimothyUse extends GameObject {
 
 	// Draw crate
 	public void draw(Graphics g) {
-		
-		g.drawImage(sprite,x,y,null);
 
-		/*if (Game.getCharacter() == 3) {
+		if (Game.getCharacter() == 3) {
 
 			timothyAni.drawAnimation(g, x, y, 0);
 
-		}*/
+		}
 
 	}
 
@@ -143,6 +145,5 @@ public class TimothyUse extends GameObject {
 
 		return sprite;
 	}
-
 
 }
