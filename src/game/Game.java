@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	private static boolean runOnce;
 	private static boolean slideIn;
 	private static boolean introDone;
+	private static boolean fade;
 
 	// Engine Vars
 	private StateHandler sh;
@@ -384,6 +385,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	public static void setCharacter(int chara) {
 		character = chara;
+	}
+
+	public static boolean isFade() {
+		return fade;
+	}
+
+	public static void setFade(boolean fade) {
+		Game.fade = fade;
 	}
 
 }

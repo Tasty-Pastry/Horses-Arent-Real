@@ -66,6 +66,11 @@ public class MenuState extends GameState {
 	private Spritesheet charSheet;
 	private BufferedImage charSpriteSheet = null;
 
+	private Spritesheet loadingSheet;
+	private BufferedImage[] loading = new BufferedImage[24];
+	private BufferedImage[] loadingEnter = new BufferedImage[24];
+	private BufferedImage[] loadingExit = new BufferedImage[25];
+
 	private BufferedImage[] startSheet = new BufferedImage[6];
 	private BufferedImage[] hellpSheet = new BufferedImage[6];
 
@@ -88,9 +93,20 @@ public class MenuState extends GameState {
 	private Animation nickCheerAni;
 	private Animation namelessCheerAni;
 
+	private Animation loadingScreen;
+	private Animation loadingEnterScreen;
+
 	private Typewriter type;
 
 	private FontLoader fl;
+	private boolean loadingCheck;
+	private boolean fadeCheck;
+	private boolean runCheck;
+	private Color color2;
+	private float alpha2;
+
+	private Animation loadingExitScreen;
+	private boolean runCheck2;
 
 	public MenuState(StateHandler sh, Handler h) {
 
@@ -115,10 +131,20 @@ public class MenuState extends GameState {
 		buttonSheet = new Spritesheet(buttonSpriteSheet);
 		charSheet = new Spritesheet(charSpriteSheet);
 
-		for (int k = 0; k < 6; k++) {
+		loadingSheet = new Spritesheet(loader.loadImage("/Loading Screen.png"));
 
-			startSheet[k] = buttonSheet.getImage(k + 1, 1, 178, 130, 178, 130);
-			hellpSheet[k] = buttonSheet.getImage(k + 1, 2, 178, 130, 178, 130);
+		for (int k = 0; k < 24; k++) {
+
+			loading[k] = loadingSheet.getImage(k + 1, 1, 1024, 680, 1024, 680);
+			loadingEnter[k] = loadingSheet.getImage(k + 1, 2, 1024, 680, 1024, 680);
+			loadingExit[k] = loadingSheet.getImage(k + 1, 3, 1024, 680, 1024, 680);
+
+			if (k < 6) {
+
+				startSheet[k] = buttonSheet.getImage(k + 1, 1, 178, 130, 178, 130);
+				hellpSheet[k] = buttonSheet.getImage(k + 1, 2, 178, 130, 178, 130);
+
+			}
 
 			if (k == 0 || k == 1 || k == 2) {
 
@@ -148,6 +174,12 @@ public class MenuState extends GameState {
 		daanishCheerAni = new Animation(10, daanishCheer);
 		nickCheerAni = new Animation(10, nickCheer);
 		namelessCheerAni = new Animation(10, namelessCheer);
+
+		loadingScreen = new Animation(2, loading);
+		loadingEnterScreen = new Animation(2, loadingEnter);
+		loadingExitScreen = new Animation(2, loadingExit);
+
+		color2 = new Color(0, 0, 0, 0f);
 
 		fl = new FontLoader();
 
@@ -179,7 +211,7 @@ public class MenuState extends GameState {
 
 			intro();
 
-		} else if (!Game.isSlideIn() && Game.getIntroDone() && !Game.isRunOnce()) {
+		} else if (!Game.isSlideIn() && Game.getIntroDone() && !Game.isRunOnce() && !Game.isFade()) {
 
 			if (typeNext) {
 
@@ -187,6 +219,10 @@ public class MenuState extends GameState {
 				typeNext = false;
 
 			}
+
+		} else if (!Game.isSlideIn() && Game.getIntroDone() && Game.isRunOnce() && Game.isFade()) {
+
+			fade(true);
 
 		} else if (Game.isSlideIn()) {
 
@@ -216,6 +252,63 @@ public class MenuState extends GameState {
 					startBox.y = hellpBox.y = 366;
 
 					Game.setSlideIn(false);
+
+				}
+
+			}
+
+		} else if (loadingCheck) {
+
+			if (!fadeCheck) {
+
+				fade(false);
+
+			} else {
+
+				if (!runCheck) {
+
+					loadingEnterScreen.runAnimation();
+
+				}
+
+				if (loadingEnterScreen.getRanOnce() || runCheck) {
+
+					runCheck = true;
+
+					loadingEnterScreen.toggleAnimation(true);
+					loadingScreen.runAnimation();
+
+					if (loadingScreen.getRanOnce() || runCheck2) {
+
+						runCheck2 = true;
+
+						loadingScreen.toggleAnimation(true);
+						loadingExitScreen.runAnimation();
+
+						if (loadingExitScreen.getRanOnce()) {
+
+							loadingExitScreen.toggleAnimation(true);
+
+							if (characterSelect == 1) {
+
+								Game.setCharacter(1);
+								sh.setState(1);
+
+							} else if (characterSelect == 2) {
+
+								Game.setCharacter(2);
+								sh.setState(1);
+
+							} else if (characterSelect == 3) {
+
+								Game.setCharacter(3);
+								sh.setState(1);
+
+							}
+
+						}
+
+					}
 
 				}
 
@@ -372,6 +465,55 @@ public class MenuState extends GameState {
 
 	}
 
+	public void fade(boolean check) {
+
+		if (alpha2 < 1 && !countDown) {
+
+			color2 = new Color(0, 0, 0, alpha2);
+			alpha2 += 0.01f;
+
+			if (alpha2 >= 1) {
+
+				alpha2 = 1f;
+				countDown = true;
+
+			}
+
+		} else if (countDown && alpha2 > 0) {
+
+			if (check) {
+
+				bg.update();
+
+			}
+
+			color2 = new Color(0, 0, 0, alpha2);
+			alpha2 -= 0.01f;
+
+			if (alpha2 <= 0) {
+
+				if (check) {
+
+					Game.setFade(false);
+					Game.setSlideIn(true);
+
+				} else {
+
+					fadeCheck = true;
+
+				}
+
+				alpha2 = 0f;
+				color2 = new Color(0, 0, 0, alpha2);
+
+				countDown = false;
+
+			}
+
+		}
+
+	}
+
 	public void intro() {
 
 		if (alpha < 1 && !countDown) {
@@ -402,8 +544,8 @@ public class MenuState extends GameState {
 				} else {
 
 					Game.setIntroDone(true);
-					alpha = 1f;
-					color = new Color(1, 0, 0, alpha);
+					alpha = 0f;
+					color = new Color(0, 0, 0, alpha);
 
 				}
 
@@ -426,10 +568,33 @@ public class MenuState extends GameState {
 
 			g.drawString(strArray[i], 512 - ((g.getFontMetrics(introFont).stringWidth(strArray[i])) / 2), 320);
 
-		} else if (Game.getIntroDone() && !Game.isSlideIn() && !Game.isRunOnce()) {
+		} else if (Game.getIntroDone() && !Game.isSlideIn() && !Game.isRunOnce() && !Game.isFade()) {
 
 			g.setColor(color.WHITE);
 			g.setFont(dialogueFont);
+
+		} else if (Game.getIntroDone() && !Game.isSlideIn() && Game.isRunOnce() && Game.isFade()) {
+
+			if (!countDown) {
+
+				g.setColor(color.WHITE);
+				g.setFont(dialogueFont);
+
+				g.drawString(type.getArrayContent(type.getArray().size() - 2), 512
+						- ((g.getFontMetrics(dialogueFont).stringWidth(type.getArrayContent(type.getArray().size() - 2))
+								/ 2)),
+						500);
+
+				g.drawString("(Press Space)", 700, 600);
+
+			} else {
+
+				bg.draw((Graphics2D) g);
+
+			}
+
+			g.setColor(color2);
+			g.fillRect(0, 0, 1024, 640);
 
 		} else {
 
@@ -522,6 +687,43 @@ public class MenuState extends GameState {
 			// Title
 			g.drawImage(title, titleBox.x, titleBox.y, null);
 
+			if (loadingCheck) {
+
+				if (!fadeCheck) {
+
+					g.setColor(color2);
+					g.fillRect(0, 0, 1024, 640);
+
+					if (countDown) {
+
+						g.setColor(color.BLACK);
+						g.fillRect(0, 0, 1024, 640);
+
+					}
+
+				} else {
+
+					g.setColor(color.BLACK);
+					g.fillRect(0, 0, 1024, 640);
+
+					if (!runCheck) {
+
+						loadingEnterScreen.drawAnimation(g, 0, 0, 0);
+
+					} else if (!runCheck2) {
+
+						loadingScreen.drawAnimation(g, 0, 0, 0);
+
+					} else {
+
+						loadingExitScreen.drawAnimation(g, 0, 0, 0);
+
+					}
+
+				}
+
+			}
+
 		}
 
 		type.draw(g);
@@ -531,26 +733,6 @@ public class MenuState extends GameState {
 	public void keyPressed(int k) {
 
 		if (sh.getState() == 0) {
-
-			if (k == KeyEvent.VK_ENTER) {
-
-				if (characterSelect == 1) {
-
-					Game.setCharacter(1);
-					sh.setState(1);
-
-				} else if (characterSelect == 2) {
-
-					Game.setCharacter(2);
-					sh.setState(1);
-
-				} else if (characterSelect == 3) {
-
-					Game.setCharacter(3);
-					sh.setState(1);
-
-				}
-			}
 
 			if (k == KeyEvent.VK_SPACE) {
 
@@ -563,6 +745,9 @@ public class MenuState extends GameState {
 				Game.setIntroDone(true);
 				Game.setSlideIn(true);
 				Game.setRunOnce(true);
+				Game.setFade(false);
+				alpha = 0f;
+				countDown = false;
 
 			}
 
@@ -577,6 +762,10 @@ public class MenuState extends GameState {
 					&& !Game.isSlideIn()) {
 
 				charUp = !charUp;
+
+			} else if (k == KeyEvent.VK_ENTER && !Game.isSlideIn()) {
+
+				loadingCheck = true;
 
 			}
 

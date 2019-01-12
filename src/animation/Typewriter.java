@@ -115,7 +115,8 @@ public class Typewriter implements ActionListener {
 
 				Game.setRunOnce(true);
 				Game.setIntroDone(true);
-				Game.setSlideIn(true);
+				Game.setSlideIn(false);
+				Game.setFade(true);
 
 				stringCount = 0;
 				timerStart = false;
@@ -139,6 +140,18 @@ public class Typewriter implements ActionListener {
 
 			}
 		}
+	}
+
+	public String getArrayContent(int s) {
+
+		return stringArray.get(s);
+
+	}
+
+	public List<String> getArray() {
+
+		return stringArray;
+
 	}
 
 }
