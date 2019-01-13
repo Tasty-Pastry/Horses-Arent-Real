@@ -46,6 +46,7 @@ public class Inventory {
 	private Rectangle[] rectArray = new Rectangle[12];
 	private int row2;
 	private int col2;
+	private boolean clicked;
 
 	public Inventory() {
 
@@ -239,9 +240,13 @@ public class Inventory {
 
 	public void mouseClicked(MouseEvent arg0) {
 
+		clicked = true;
+
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
+
+		clicked = false;
 
 	}
 
@@ -262,6 +267,9 @@ public class Inventory {
 	}
 
 	public void mouseDragged(MouseEvent e) {
+
+		mouseX = e.getX();
+		mouseY = e.getY();
 
 	}
 
