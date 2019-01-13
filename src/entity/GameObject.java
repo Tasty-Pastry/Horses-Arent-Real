@@ -28,15 +28,12 @@ public abstract class GameObject {
 	// Item Vars
 	protected String lore;
 	protected String itemDesc;
+	protected String name;
 	protected boolean keyItem;
 	protected boolean passive;
 	public boolean obtained;
 
 	protected BufferedImage sprite;
-
-	protected String name;
-
-	public abstract String getName();
 
 	public abstract BufferedImage getSprite();
 
@@ -70,6 +67,25 @@ public abstract class GameObject {
 	}
 
 	// Getters and Setters
+
+	public String getName() {
+
+		return name;
+
+	}
+
+	public String getLore() {
+
+		return lore;
+
+	}
+
+	public String getDesc() {
+
+		return itemDesc;
+
+	}
+
 	public int getX() {
 
 		return x;

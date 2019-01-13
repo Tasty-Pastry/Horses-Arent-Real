@@ -207,19 +207,23 @@ public class Inventory {
 
 					if (mainArray.get(i) != null) {
 
-						System.out.println(mainArray.get(i).getId());
+						g.setColor(Color.red);
+
+						g.drawString("Name: " + mainArray.get(i).getName(), 570, 439);
+						g.drawString("Lore: " + mainArray.get(i).getLore(), 570, 469);
+						g.drawString("Item Desc: " + mainArray.get(i).getDesc(), 570, 499);
 
 					}
 
 				} else {
 
-					System.out.println("Nothing is there!");
+					g.setColor(Color.red);
+
+					g.drawString("Nothing is there!", 500, 500);
 
 				}
 
 			}
-
-			g.drawRect(rectArray[i].x, rectArray[i].y, rectArray[i].width, rectArray[i].height);
 
 		}
 
