@@ -3,6 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -42,6 +43,10 @@ public class Inventory {
 	private int mouseY;
 	private boolean full;
 
+	private Rectangle[] rectArray = new Rectangle[12];
+	private int row2;
+	private int col2;
+
 	public Inventory() {
 
 		mainArray = new ArrayList<GameObject>();
@@ -64,6 +69,22 @@ public class Inventory {
 		for (int i = 0; i < 12; i++) {
 
 			itemCheck[i] = 0;
+
+			row2++;
+
+			if (i % 4 == 0 && i != 0) {
+
+				col2++;
+
+			}
+
+			if (i % 4 == 0) {
+
+				row2 = 0;
+
+			}
+
+			rectArray[i] = new Rectangle(64 + (row2 * 106), 64 + (col2 * 105), 94, 93);
 
 		}
 
@@ -157,6 +178,8 @@ public class Inventory {
 
 			g.drawImage(spriteArray.get(i), 79 + (row * 106), 78 + (col * 105), null);
 
+			g.setColor(Color.red);
+
 			g.setFont(countFont);
 			g.setColor(Color.RED);
 			g.drawString(String.valueOf(itemCount.get(i)),
@@ -176,6 +199,30 @@ public class Inventory {
 
 		}
 
+		for (int i = 0; i < 12; i++) {
+
+			if (rectArray[i].intersects(new Rectangle(mouseX, mouseY, 10, 10))) {
+
+				if (mainArray.size() > i) {
+
+					if (mainArray.get(i) != null) {
+
+						System.out.println(mainArray.get(i).getId());
+
+					}
+
+				} else {
+
+					System.out.println("Nothing is there!");
+
+				}
+
+			}
+
+			g.drawRect(rectArray[i].x, rectArray[i].y, rectArray[i].width, rectArray[i].height);
+
+		}
+
 	}
 
 	public boolean isRemove() {
@@ -187,12 +234,6 @@ public class Inventory {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-
-		if (arg0.getX() == 540) {
-
-			System.out.println();
-
-		}
 
 	}
 
