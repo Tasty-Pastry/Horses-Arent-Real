@@ -17,15 +17,20 @@ public class Bullet extends GameObject {
 	// Bullet Vars
 	private Color color;
 
-	private BufferedImage bullet;
+	private BufferedImage[] bullet;
+
+	private int dir;
 
 	// Constructor
-	public Bullet(int x, int y, ID id, Handler handler, int vx, int vy, int speed, Color color, BufferedImage bullet) {
+	public Bullet(int x, int y, ID id, Handler handler, int vx, int vy, int speed, Color color, BufferedImage[] bullet,
+			int dir) {
 
 		super(x, y, id);
 		this.handler = handler;
 
 		this.bullet = bullet;
+
+		this.dir = dir;
 
 		// Calulates velocity of bullet
 
@@ -77,7 +82,7 @@ public class Bullet extends GameObject {
 
 		if (bullet != null) {
 
-			g.drawImage(bullet, x - bullet.getWidth(), y - (bullet.getWidth() / 2), null);
+			g.drawImage(bullet[dir - 1], x - bullet[dir - 1].getWidth(), y - (bullet[dir - 1].getWidth() / 2), null);
 
 		} else {
 
