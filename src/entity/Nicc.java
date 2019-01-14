@@ -13,13 +13,21 @@ import game.Game;
 import game.Handler;
 import game.ID;
 import game.Inventory;
+import items.MothmanUse;
+import items.TimothyUse;
 
 public class Nicc extends PlayerObject {
+	
+	private Spritesheet mothmanSheet;
+	private Spritesheet timothySheet;
 
 	// Constructor
-	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv) {
+	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv, Spritesheet mothmanSheet, Spritesheet timothySheet) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
+		
+		this.mothmanSheet = mothmanSheet;
+		this.timothySheet = timothySheet;
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -710,6 +718,8 @@ public class Nicc extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
+						
+						handler.addObject(new MothmanUse(x + 15, y, ID.MothmanUse, handler, mothmanSheet));
 
 					}
 
@@ -805,6 +815,8 @@ public class Nicc extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
+						
+						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler, timothySheet));
 
 					}
 

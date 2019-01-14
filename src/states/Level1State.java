@@ -129,7 +129,7 @@ public class Level1State extends GameState {
 
 				if (ui.isCharSwitch() && Game.getCharacter() == 1) {
 
-					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
 
 					handler.removeObject(temp);
 
@@ -142,7 +142,7 @@ public class Level1State extends GameState {
 
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 2) {
 
-					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv));
+					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
 
 					handler.removeObject(temp);
 
@@ -278,9 +278,9 @@ public class Level1State extends GameState {
 				if (blue == 255 && red == 0 && green == 0) {
 
 					if (Game.getCharacter() == 1)
-						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv));
+						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
 					if (Game.getCharacter() == 2)
-						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv));
+						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
 					if (Game.getCharacter() == 3)
 						handler.addObject(new Nameless(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
 								Game.mothmanSheet, Game.timothySheet));
