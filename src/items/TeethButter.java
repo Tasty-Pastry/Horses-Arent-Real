@@ -8,6 +8,7 @@ import animation.BufferedImageLoader;
 import animation.Spritesheet;
 import entity.GameObject;
 import game.ID;
+import game.Game;
 
 public class TeethButter extends GameObject {
 
@@ -36,6 +37,37 @@ public class TeethButter extends GameObject {
 	
 	public void update() {
 
+	}
+	
+	public void use() {
+		
+		if (Game.getCharacter()==1) {
+			
+			if (Game.daanishHealth>193)
+				Game.daanishHealth=228;
+			else
+				Game.daanishHealth+=(int)(228*0.15);
+			
+		}
+			
+		else if (Game.getCharacter()==2) {
+			
+			if (Game.nickHealth>193)
+				Game.nickHealth=228;
+			else
+				Game.nickHealth+=(int)(228*0.15);
+			
+		}
+		
+		else {
+			
+			if (Game.namelessHealth>193)
+				Game.namelessHealth=228;
+			else
+				Game.namelessHealth+=(int)(228*0.15);
+			
+		}
+		
 	}
 
 	// Draw crate

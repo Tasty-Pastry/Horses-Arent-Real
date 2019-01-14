@@ -5,8 +5,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
+import game.Game;
 import game.ID;
 
 public class HumanBone extends GameObject {
@@ -35,6 +35,37 @@ public class HumanBone extends GameObject {
 	}
 	
 	public void update() {
+
+	}
+	
+	public void use() {
+		
+		if (Game.getCharacter()==1) {
+			
+			if (Game.daanishHealth>205)
+				Game.daanishHealth=228;
+			else
+				Game.daanishHealth+=(int)(228*0.1);
+			
+		}
+			
+		else if (Game.getCharacter()==2) {
+			
+			if (Game.nickHealth>205)
+				Game.nickHealth=228;
+			else
+				Game.nickHealth+=(int)(228*0.1);
+			
+		}
+		
+		else {
+			
+			if (Game.namelessHealth>205)
+				Game.namelessHealth=228;
+			else
+				Game.namelessHealth+=(int)(228*0.1);
+			
+		}
 
 	}
 
