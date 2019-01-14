@@ -211,38 +211,38 @@ public class Inventory {
 						g.setColor(Color.red);
 
 						g.drawString("Name: " + mainArray.get(i).getName(), 570, 439);
-						
-						if (mainArray.get(i).getLore().length()<44) {
-							
+
+						if (mainArray.get(i).getLore().length() < 44) {
+
 							g.drawString("Lore: " + mainArray.get(i).getLore(), 570, 459);
-							
-							if (mainArray.get(i).getDesc().length()<39) 
+
+							if (mainArray.get(i).getDesc().length() < 39)
 								g.drawString("Item Desc: " + mainArray.get(i).getDesc(), 570, 479);
-							
+
 							else {
-								
-								g.drawString("Item Desc: " + mainArray.get(i).getDesc().substring(0,39), 570, 479);
+
+								g.drawString("Item Desc: " + mainArray.get(i).getDesc().substring(0, 39), 570, 479);
 								g.drawString(mainArray.get(i).getDesc().substring(39), 570, 499);
-								
+
 							}
-						
+
 						}
-						
+
 						else {
-							
-							g.drawString("Lore: " + mainArray.get(i).getLore().substring(0,44), 570, 459);
+
+							g.drawString("Lore: " + mainArray.get(i).getLore().substring(0, 44), 570, 459);
 							g.drawString(mainArray.get(i).getLore().substring(44), 570, 479);
-							
-							if (mainArray.get(i).getDesc().length()<37) 
+
+							if (mainArray.get(i).getDesc().length() < 37)
 								g.drawString("Item Desc: " + mainArray.get(i).getDesc(), 570, 499);
-							
+
 							else {
-								
-								g.drawString("Item Desc: " + mainArray.get(i).getDesc().substring(0,39), 570, 499);
+
+								g.drawString("Item Desc: " + mainArray.get(i).getDesc().substring(0, 39), 570, 499);
 								g.drawString(mainArray.get(i).getDesc().substring(39), 570, 519);
-								
+
 							}
-							
+
 						}
 
 					}
