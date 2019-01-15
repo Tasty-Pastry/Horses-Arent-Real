@@ -5,14 +5,12 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
 import game.ID;
 
 public class EatingSugar extends GameObject {
 
 	private BufferedImageLoader loader;
-	private boolean vored;
 
 	public EatingSugar(int x, int y, ID id) {
 

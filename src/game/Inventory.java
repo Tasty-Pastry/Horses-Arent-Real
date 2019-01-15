@@ -244,6 +244,16 @@ public class Inventory {
 							}
 
 						}
+						
+						if (clicked==true) {
+							
+							mainArray.get(i).use();
+							if (mainArray.get(i).vored==true) {
+								System.out.println("Hopefully someday I'll find out how to remove items from inventory");
+								clicked=false;
+							}
+							
+						}
 
 					}
 

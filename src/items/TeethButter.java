@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
 import game.ID;
 import game.Game;
@@ -13,7 +12,6 @@ import game.Game;
 public class TeethButter extends GameObject {
 
 	private BufferedImageLoader loader;
-	private boolean vored;
 
 	public TeethButter(int x, int y, ID id) {
 
