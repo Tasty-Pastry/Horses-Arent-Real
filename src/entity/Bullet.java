@@ -23,7 +23,7 @@ public class Bullet extends GameObject {
 
 	// Constructor
 	public Bullet(int x, int y, ID id, Handler handler, int vx, int vy, int speed, Color color, BufferedImage[] bullet,
-			int dir) {
+			int dir, int damage) {
 
 		super(x, y, id);
 		this.handler = handler;
@@ -46,6 +46,8 @@ public class Bullet extends GameObject {
 
 		// Sets color of the bullet
 		this.color = color;
+		
+		this.damage=damage;
 
 	}
 

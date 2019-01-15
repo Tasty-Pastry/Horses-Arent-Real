@@ -34,6 +34,8 @@ public abstract class GameObject {
 	public boolean obtained;
 
 	protected BufferedImage sprite;
+	
+	public int damage;
 
 	public abstract BufferedImage getSprite();
 

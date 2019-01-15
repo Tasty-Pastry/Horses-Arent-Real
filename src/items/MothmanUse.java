@@ -91,7 +91,7 @@ public class MothmanUse extends GameObject {
 
 								// Adds a bullet
 								handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.Bullet, handler,
-										temp.getX(), temp.getY(), 10, Color.RED, null, 0));
+										temp.getX(), temp.getY(), 10, Color.RED, null, 0, 10));
 
 							}
 
