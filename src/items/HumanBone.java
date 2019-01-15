@@ -66,6 +66,8 @@ public class HumanBone extends GameObject {
 				Game.namelessHealth+=(int)(228*0.1);
 			
 		}
+		
+		vored=true;
 
 	}
 
