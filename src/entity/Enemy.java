@@ -144,7 +144,7 @@ public class Enemy extends GameObject {
 
 						}
 
-						hp -= 25; // Remove 50 hp
+						hp -= temp.damage; // Remove 25 hp
 						handler.removeObject(temp); // Remove the bullet
 						hit = true; // Sets hit to true
 
@@ -163,7 +163,7 @@ public class Enemy extends GameObject {
 
 							// Adds a bullet
 							handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.EnemyBullet, handler,
-									temp.getX(), temp.getY(), 10, Color.MAGENTA, null, 0));
+									temp.getX(), temp.getY(), 10, Color.MAGENTA, null, 0, 5));
 
 						}
 

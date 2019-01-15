@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import animation.BufferedImageLoader;
 import animation.Spritesheet;
 import entity.GameObject;
+import game.Game;
 import game.ID;
 
 public class MrsK extends GameObject {
@@ -24,7 +25,7 @@ public class MrsK extends GameObject {
 		
 		lore="A being that has reached perfect Adult.";
 		
-		itemDesc="Use this to increase your damage for 30 seconds.";
+		itemDesc="Use this to increase your damage by some amount.";
 
 		loader = new BufferedImageLoader();
 
@@ -38,6 +39,21 @@ public class MrsK extends GameObject {
 
 	public void update() {
 
+	}
+	
+	public void use() {
+		
+		if (Game.getCharacter()==1)
+			Game.daanishDmg=50;
+			
+		else if (Game.getCharacter()==2)
+			Game.nickDmg=100;
+		
+		else 
+			Game.namelessDmg=50;
+
+		vored=true;
+		
 	}
 
 	// Draw crate

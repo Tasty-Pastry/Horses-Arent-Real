@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import animation.BufferedImageLoader;
 import animation.Spritesheet;
 import entity.GameObject;
+import game.Game;
 import game.ID;
 
 public class DannysSoul extends GameObject {
@@ -23,7 +24,7 @@ public class DannysSoul extends GameObject {
 		
 		lore = "The horses may have killed his body, but his soul is immortal…";
 				
-		itemDesc = "Eat this to gain 10 damage.";
+		itemDesc = "Eat this to gain some damage.";
 
 		loader = new BufferedImageLoader();
 
@@ -37,6 +38,21 @@ public class DannysSoul extends GameObject {
 	
 	public void update() {
 
+	}
+	
+	public void use() {
+		
+		if (Game.getCharacter()==1)
+			Game.daanishDmg+=0;
+			
+		else if (Game.getCharacter()==2)
+			Game.nickDmg+=15;
+		
+		else 
+			Game.namelessDmg+=15;
+
+		vored=true;
+		
 	}
 
 	// Draw crate

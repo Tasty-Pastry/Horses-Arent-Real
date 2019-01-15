@@ -138,7 +138,8 @@ public class Level1State extends GameState {
 
 				if (ui.isCharSwitch() && Game.getCharacter() == 1) {
 
-					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
+					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
+							Game.mothmanSheet, Game.timothySheet));
 
 					handler.removeObject(temp);
 
@@ -151,7 +152,8 @@ public class Level1State extends GameState {
 
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 2) {
 
-					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
+					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
+							Game.mothmanSheet, Game.timothySheet));
 
 					handler.removeObject(temp);
 
@@ -287,9 +289,11 @@ public class Level1State extends GameState {
 				if (blue == 255 && red == 0 && green == 0) {
 
 					if (Game.getCharacter() == 1)
-						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
+						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
+								Game.mothmanSheet, Game.timothySheet));
 					if (Game.getCharacter() == 2)
-						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv, Game.mothmanSheet, Game.timothySheet));
+						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
+								Game.mothmanSheet, Game.timothySheet));
 					if (Game.getCharacter() == 3)
 						handler.addObject(new Nameless(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
 								Game.mothmanSheet, Game.timothySheet));
@@ -479,18 +483,18 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
-										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4));
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler,
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, 0));
 
 							} else if (Game.getCharacter() == 2) {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
-										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullets, 4));
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler,
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullets, 4, 0));
 
 							} else {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
-										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, null, 4));
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler,
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, null, 4, 0));
 
 							}
 
@@ -502,18 +506,18 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
-										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3));
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3, 0));
 
 							} else if (Game.getCharacter() == 2) {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
-										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3));
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, 0));
 
 							} else {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
-										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, null, 3));
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, null, 3, 0));
 
 							}
 
@@ -526,17 +530,17 @@ public class Level1State extends GameState {
 							if (Game.getCharacter() == 1) {
 
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
-										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2));
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2, 0));
 
 							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
-										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2));
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2, 0));
 
 							} else {
 
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
-										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, null, 2));
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, null, 2, 0));
 
 							}
 
@@ -549,17 +553,17 @@ public class Level1State extends GameState {
 							if (Game.getCharacter() == 1) {
 
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
-										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1));
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1, 0));
 
 							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
-										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1));
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1, 0));
 
 							} else {
 
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
-										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, null, 1));
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, null, 1, 0));
 
 							}
 
