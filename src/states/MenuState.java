@@ -8,6 +8,14 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import animation.Animation;
 import animation.Background;
@@ -107,6 +115,7 @@ public class MenuState extends GameState {
 
 	private Animation loadingExitScreen;
 	private boolean runCheck2;
+	private boolean check = true;
 
 	public MenuState(StateHandler sh, Handler h) {
 
@@ -222,7 +231,15 @@ public class MenuState extends GameState {
 
 		} else if (!Game.isSlideIn() && Game.getIntroDone() && Game.isRunOnce() && Game.isFade()) {
 
-			fade(true);
+			fade(true, 0.01f);
+
+			if (check) {
+
+				music("res/Intro Music.wav");
+
+				check = false;
+
+			}
 
 		} else if (Game.isSlideIn()) {
 
@@ -261,7 +278,7 @@ public class MenuState extends GameState {
 
 			if (!fadeCheck) {
 
-				fade(false);
+				fade(false, 0.05f);
 
 			} else {
 
@@ -465,12 +482,12 @@ public class MenuState extends GameState {
 
 	}
 
-	public void fade(boolean check) {
+	public void fade(boolean check, float speed) {
 
 		if (alpha2 < 1 && !countDown) {
 
 			color2 = new Color(0, 0, 0, alpha2);
-			alpha2 += 0.01f;
+			alpha2 += speed;
 
 			if (alpha2 >= 1) {
 
@@ -488,7 +505,7 @@ public class MenuState extends GameState {
 			}
 
 			color2 = new Color(0, 0, 0, alpha2);
-			alpha2 -= 0.01f;
+			alpha2 -= speed;
 
 			if (alpha2 <= 0) {
 
@@ -742,10 +759,12 @@ public class MenuState extends GameState {
 
 			if (k == KeyEvent.VK_ESCAPE && !Game.getIntroDone() && !Game.isSlideIn()) {
 
-				Game.setIntroDone(true);
-				Game.setSlideIn(true);
 				Game.setRunOnce(true);
-				Game.setFade(false);
+				Game.setIntroDone(true);
+				Game.setSlideIn(false);
+				Game.setFade(true);
+
+				music("res/Intro Music.wav");
 				alpha = 0f;
 				countDown = false;
 
@@ -810,6 +829,32 @@ public class MenuState extends GameState {
 				}
 
 			}
+
+		}
+
+	}
+
+	private void music(String file) {
+
+		try {
+
+			AudioInputStream audio = AudioSystem.getAudioInputStream(new File(file));
+
+			Clip clip = AudioSystem.getClip();
+			clip.open(audio);
+			clip.start();
+
+		} catch (UnsupportedAudioFileException uae) {
+
+			System.out.println(uae);
+
+		} catch (IOException ioe) {
+
+			System.out.println(ioe);
+
+		} catch (LineUnavailableException lua) {
+
+			System.out.println(lua);
 
 		}
 
