@@ -12,7 +12,6 @@ import game.ID;
 public class HumanBone extends GameObject {
 	
 	private BufferedImageLoader loader;
-	private boolean vored;
 
 	public HumanBone(int x, int y, ID id) {
 

@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
 import game.Game;
 import game.ID;
@@ -14,8 +13,7 @@ import game.ID;
 public class MrsK extends GameObject {
 	
 	private BufferedImageLoader loader;
-	private boolean vored;
-
+	
 	// Constructor
 	public MrsK(int x, int y, ID id) {
 

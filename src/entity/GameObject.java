@@ -32,6 +32,7 @@ public abstract class GameObject {
 	protected boolean keyItem;
 	protected boolean passive;
 	public boolean obtained;
+	public boolean vored;
 
 	protected BufferedImage sprite;
 	
@@ -66,6 +67,10 @@ public abstract class GameObject {
 
 		return (getBounds().y + getBounds().getHeight()) / 2;
 
+	}
+	
+	public void use() {
+		
 	}
 
 	// Getters and Setters

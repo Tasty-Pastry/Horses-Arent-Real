@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
 import game.Handler;
 import game.ID;
@@ -13,7 +12,6 @@ import game.ID;
 public class Furniture extends GameObject {
 
 	private BufferedImageLoader loader;
-	private boolean vored;
 	private Handler handler;
 
 	public Furniture(int x, int y, ID id) {
