@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
 import entity.GameObject;
+import game.Game;
 import game.Handler;
 import game.ID;
 
@@ -40,7 +41,16 @@ public class Furniture extends GameObject {
 	
 	public void use() {
 		
-		handler.addObject(new HumanBone(300, 300, ID.HumanBone));
+		if (Game.getCharacter()==1)
+			Game.daanishHealth=228;
+
+		else if (Game.getCharacter()==2) 
+			Game.nickHealth=228;
+
+		
+		else
+			Game.namelessHealth=228;
+
 		vored=true;
 		
 	}
