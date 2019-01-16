@@ -39,7 +39,7 @@ public class EatingSugar extends GameObject {
 	
 	public void use() {
 		
-		PlayerObject.vel+=2.5;
+		PlayerObject.vel+=4.5;
 		vored=true;
 		
 	}
