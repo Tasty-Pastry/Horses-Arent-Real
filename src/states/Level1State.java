@@ -483,8 +483,9 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler,
-										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, 0));
+								handler.addObject(
+										new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler, temp.getX(),
+												temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, Game.daanishDmg));
 
 							} else if (Game.getCharacter() == 2) {
 
@@ -506,114 +507,118 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
+								handler.addObject(
+										new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler, temp.getX(),
+												temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3, Game.daanishDmg));
+
+							} else if (Game.getCharacter() == 2) {
+
 								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
-										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3, 0));
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, Game.nickDmg));
+
+							} else {
+
+								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, null, 3, Game.namelessDmg));
 
 							}
-						} else if (Game.getCharacter() == 2) {
 
-							handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
-									temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, Game.nickDmg));
+							baseFrame = Game.getCount(); // Sets baseFrame to the current count
+							Game.ammo--; // Subtracts ammo from the count
+							Game.setShoot(true, 1); // Sets direction of shoot sprite
 
-						} else {
+						} else if (k == KeyEvent.VK_LEFT) {
 
-							handler.addObject(new Bullet(temp.getX() + 27, temp.getY() - 12, ID.Bullet, handler,
-									temp.getX(), temp.getY() - 5000, 20, Color.BLUE, null, 3, Game.namelessDmg));
+							if (Game.getCharacter() == 1) {
 
-						}
+								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
-						baseFrame = Game.getCount(); // Sets baseFrame to the current count
-						Game.ammo--; // Subtracts ammo from the count
-						Game.setShoot(true, 1); // Sets direction of shoot sprite
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2,
+										Game.daanishDmg));
 
-					} else if (k == KeyEvent.VK_LEFT) {
+							} else if (Game.getCharacter() == 2) {
 
-						if (Game.getCharacter() == 1) {
+								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
-							handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2, Game.nickDmg));
 
-									temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2, Game.daanishDmg));
+							} else {
 
-						} else if (Game.getCharacter() == 2) {
+								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
-							handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, null, 2, Game.namelessDmg));
 
-									temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2, Game.nickDmg));
+							}
 
-						} else {
+							baseFrame = Game.getCount(); // Sets baseFrame to the current count
+							Game.ammo--; // Subtracts ammo from the count
+							Game.setShoot(true, 4); // Sets direction of shoot sprite
 
-							handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+						} else if (k == KeyEvent.VK_RIGHT) {
 
-									temp.getX() - 5000, temp.getY(), 20, Color.BLUE, null, 2, Game.namelessDmg));
+							if (Game.getCharacter() == 1) {
 
-						}
+								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
-						baseFrame = Game.getCount(); // Sets baseFrame to the current count
-						Game.ammo--; // Subtracts ammo from the count
-						Game.setShoot(true, 4); // Sets direction of shoot sprite
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1,
+										Game.daanishDmg));
 
-					} else if (k == KeyEvent.VK_RIGHT) {
+							} else if (Game.getCharacter() == 2) {
 
-						if (Game.getCharacter() == 1) {
+								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
-							handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1, Game.nickDmg));
 
-									temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1, Game.daanishDmg));
+							} else {
 
-						} else if (Game.getCharacter() == 2) {
+								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
-							handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, null, 1, Game.namelessDmg));
 
-									temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1, Game.nickDmg));
+							}
 
-						} else {
-
-							handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
-
-									temp.getX() + 5000, temp.getY(), 20, Color.BLUE, null, 1, Game.namelessDmg));
+							baseFrame = Game.getCount(); // Sets baseFrame to the current count
+							Game.ammo--; // Subtracts ammo from the count
+							Game.setShoot(true, 2); // Sets direction of shoot sprite
 
 						}
-
-						baseFrame = Game.getCount(); // Sets baseFrame to the current count
-						Game.ammo--; // Subtracts ammo from the count
-						Game.setShoot(true, 2); // Sets direction of shoot sprite
 
 					}
+					// Character specials
+					if (k == KeyEvent.VK_SHIFT) {
 
-				}
-				// Character specials
-				if (k == KeyEvent.VK_SHIFT) {
+						// 1 = Daanish 2 = Nicc 3 = Nameless
+						int character = Game.getCharacter();
 
-					// 1 = Daanish 2 = Nicc 3 = Nameless
-					int character = Game.getCharacter();
+						if (character == 1) {
 
-					if (character == 1) {
+						} else if (character == 2) {
 
-					} else if (character == 2) {
+							if (handler.isUp()) {
 
-						if (handler.isUp()) {
+								System.out.println("up");
 
-							System.out.println("up");
+							} else if (handler.isDown()) {
 
-						} else if (handler.isDown()) {
+								System.out.println("Down");
 
-							System.out.println("Down");
+							} else if (handler.isRight()) {
 
-						} else if (handler.isRight()) {
+								System.out.println("Right");
 
-							System.out.println("Right");
+							} else if (handler.isLeft()) {
 
-						} else if (handler.isLeft()) {
+								System.out.println("Left");
 
-							System.out.println("Left");
+							} else {
+
+								System.out.println(Nicc.getLastDir());
+
+							}
 
 						} else {
 
-							System.out.println(Nicc.getLastDir());
-
 						}
-
-					} else {
 
 					}
 

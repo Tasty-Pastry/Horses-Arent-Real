@@ -782,7 +782,7 @@ public class MenuState extends GameState {
 
 				charUp = !charUp;
 
-			} else if (k == KeyEvent.VK_ENTER && !Game.isSlideIn()) {
+			} else if (k == KeyEvent.VK_ENTER && !Game.isSlideIn() && !select) {
 
 				loadingCheck = true;
 
