@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
 import entity.GameObject;
+import entity.PlayerObject;
 import game.ID;
 
 public class EatingSugar extends GameObject {
@@ -20,7 +21,7 @@ public class EatingSugar extends GameObject {
 		
 		lore="Killing horses? No, papa!";
 		
-		itemDesc="Eat this to gain 2 speed.";
+		itemDesc="Eat this and all characters will gain speed.";
 
 		loader = new BufferedImageLoader();
 
@@ -34,6 +35,13 @@ public class EatingSugar extends GameObject {
 	
 	public void update() {
 				
+	}
+	
+	public void use() {
+		
+		PlayerObject.vel+=2.5;
+		vored=true;
+		
 	}
 
 	// Draw crate

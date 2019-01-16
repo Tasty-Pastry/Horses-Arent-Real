@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
 import game.ID;
 
@@ -34,6 +33,12 @@ public class YuGiOhCard extends GameObject {
 	
 	public void update() {
 
+	}
+	
+	public void use() {
+		
+		
+		
 	}
 
 	// Draw crate

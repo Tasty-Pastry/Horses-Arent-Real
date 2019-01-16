@@ -79,6 +79,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	public static Spritesheet mothmanSheet;
 	public static Spritesheet timothySheet;
+	public static Spritesheet horseEyeAni;
 
 	// Enemy Vars
 	private static int[][] enemyArray; // Initializes the enemyArray - keeps track of how many enemies are in each room
@@ -97,8 +98,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 		mothmanSheet = new Spritesheet(loader.loadImage("/Mothman Ani.png"));
 		timothySheet = new Spritesheet(loader.loadImage("/Timothy Animation.png"));
+		horseEyeAni = new Spritesheet(loader.loadImage("/OhNo.png"));
 
-		horseEye = new items.HorseEye(64, 64, ID.HorseEye);
+		horseEye = new items.HorseEye(64, 64, ID.HorseEye, horseEyeAni);
 		MrsK = new items.MrsK(64, 64, ID.MrsK);
 		yugiohCard = new items.YuGiOhCard(64, 64, ID.YuGiOhCard);
 		timothysSkull = new items.TimothysSkull(64, 64, ID.TimothysSkull);

@@ -31,7 +31,6 @@ public abstract class GameObject {
 	protected String name;
 	protected boolean keyItem;
 	protected boolean passive;
-	public boolean obtained;
 	public boolean vored;
 
 	protected BufferedImage sprite;
