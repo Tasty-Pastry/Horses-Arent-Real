@@ -75,8 +75,8 @@ public class Typewriter implements ActionListener {
 
 		if (!Game.isRunOnce() && endString) {
 
-			stringCount = 0;
-			stringTraverse++;
+			setStringCount(0);
+			setStringTraverse(getStringTraverse() + 1);
 			string = "";
 			timerStart = true;
 			endString = false;
@@ -84,7 +84,7 @@ public class Typewriter implements ActionListener {
 
 		} else if (!endString) {
 
-			stringCount = stringArray.get(stringTraverse).length();
+			setStringCount(stringArray.get(getStringTraverse()).length());
 
 		}
 
@@ -94,20 +94,20 @@ public class Typewriter implements ActionListener {
 
 		if (timerStart) {
 
-			if (stringTraverse < stringArray.size() - 1) {
+			if (getStringTraverse() < stringArray.size() - 1) {
 
-				if (stringCount > stringArray.get(stringTraverse).length()) {
+				if (getStringCount() > stringArray.get(getStringTraverse()).length()) {
 
-					stringCount = 0;
+					setStringCount(0);
 					timerStart = false;
 					endString = true;
 					t.stop();
 
 				} else {
 
-					string = stringArray.get(stringTraverse).substring(0, stringCount);
+					string = stringArray.get(getStringTraverse()).substring(0, getStringCount());
 
-					stringCount++;
+					setStringCount(getStringCount() + 1);
 
 				}
 
@@ -118,7 +118,7 @@ public class Typewriter implements ActionListener {
 				Game.setSlideIn(false);
 				Game.setFade(true);
 
-				stringCount = 0;
+				setStringCount(0);
 				timerStart = false;
 				t.stop();
 
@@ -132,7 +132,7 @@ public class Typewriter implements ActionListener {
 
 		if (!Game.isRunOnce()) {
 
-			g.drawString(string, 512 - ((g.getFontMetrics(font).stringWidth(stringArray.get(stringTraverse)) / 2)), y);
+			g.drawString(string, 512 - ((g.getFontMetrics(font).stringWidth(stringArray.get(getStringTraverse())) / 2)), y);
 
 			if (Game.getIntroDone()) {
 
@@ -152,6 +152,22 @@ public class Typewriter implements ActionListener {
 
 		return stringArray;
 
+	}
+
+	public int getStringCount() {
+		return stringCount;
+	}
+
+	public void setStringCount(int stringCount) {
+		this.stringCount = stringCount;
+	}
+
+	public int getStringTraverse() {
+		return stringTraverse;
+	}
+
+	public void setStringTraverse(int stringTraverse) {
+		this.stringTraverse = stringTraverse;
 	}
 
 }
