@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
 import entity.GameObject;
+import game.Game;
 import game.ID;
 
 public class PatricksBinder extends GameObject {
@@ -34,6 +35,22 @@ public class PatricksBinder extends GameObject {
 	
 	public void update() {
 
+	}
+	
+	public void use() {
+		
+		if (Game.getCharacter()==1)
+			Game.daanishHealth=228;
+
+		else if (Game.getCharacter()==2) 
+			Game.nickHealth=228;
+
+		
+		else
+			Game.namelessHealth=228;
+
+		vored=true;
+		
 	}
 
 	// Draw crate
