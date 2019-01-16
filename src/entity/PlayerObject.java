@@ -18,7 +18,7 @@ public abstract class PlayerObject extends GameObject {
 	Handler handler;
 
 	// Physics Vars
-	protected double vel = 0.56;
+	public static double vel = 0.56;
 	public static float maxVel = (float) 6.2;
 	protected float minVel = 0;
 
@@ -39,7 +39,7 @@ public abstract class PlayerObject extends GameObject {
 
 	public static BufferedImage[] playerRightAttack = new BufferedImage[2];
 	public static BufferedImage[] playerLeftAttack = new BufferedImage[2];
-	public static  BufferedImage[] playerDownAttack = new BufferedImage[2];
+	public static BufferedImage[] playerDownAttack = new BufferedImage[2];
 	public static BufferedImage[] playerUpAttack = new BufferedImage[2];
 
 	// Animation Vars
