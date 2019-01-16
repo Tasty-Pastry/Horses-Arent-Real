@@ -235,7 +235,7 @@ public class MenuState extends GameState {
 
 			if (check) {
 
-				music("res/Intro Music.wav");
+				//music("res/Intro Music.wav");
 
 				check = false;
 
@@ -764,7 +764,7 @@ public class MenuState extends GameState {
 				Game.setSlideIn(false);
 				Game.setFade(true);
 
-				music("res/Intro Music.wav");
+				//music("res/Intro Music.wav");
 				alpha = 0f;
 				countDown = false;
 

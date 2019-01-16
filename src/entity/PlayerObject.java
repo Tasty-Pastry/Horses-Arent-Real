@@ -18,7 +18,7 @@ public abstract class PlayerObject extends GameObject {
 	Handler handler;
 
 	// Physics Vars
-	protected double vel = 0.56;
+	public static double vel = 0.56;
 	protected float maxVel = (float) 6.2;
 	protected float minVel = 0;
 

@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
-import animation.Spritesheet;
 import entity.GameObject;
 import game.ID;
 
@@ -31,11 +30,18 @@ public class HorseEye extends GameObject {
 		
 		keyItem = false;
 		passive=false;
+		vored=false;
 
 	}
 
 	public void update() {
 
+	}
+	
+	public void use() {
+		
+		
+		
 	}
 
 	// Draw crate
