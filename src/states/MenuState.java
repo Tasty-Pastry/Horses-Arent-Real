@@ -112,6 +112,9 @@ public class MenuState extends GameState {
 	private Animation loadingExitScreen;
 	private boolean runCheck2;
 
+	//help menu
+	private BufferedImage hellpMenu; 
+	
 	public MenuState(StateHandler sh, Handler h) {
 
 		this.sh = sh;
@@ -804,6 +807,9 @@ public class MenuState extends GameState {
 
 				loadingCheck = true;
 
+			} else if (k == KeyEvent.VK_ENTER && Game.getIntroDone() && !Game.isSlideIn() && select) {
+
+				
 			}
 
 			if (k == KeyEvent.VK_DOWN && charUp && (characterSelect < 1 || characterSelect > 3)) {

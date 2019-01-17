@@ -342,15 +342,11 @@ public class Level1State extends GameState {
 				// If cyan, add an item to the handler
 				if (green == 255 && red == 0 && blue == 255) {
 
-					//boolean inGame = false;
-					//do {
+					boolean inGame = false;
 						
-						//inGame = false;
-						//System.out.println("Going through switch!");
+						System.out.println("Going through switch!");
 									
 					switch ((int) (Math.random() * 14) + 1) {
-					
-					 
 					
 					case 1:
 						handler.addObject(new MrsK(x2 * 64, y2 * 64, ID.MrsK));
@@ -371,41 +367,40 @@ public class Level1State extends GameState {
 						handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 7:
-						//if (added[7] == 7) inGame = true; 
-						//added[7] = 7;
-						
-					//	if (!inGame)
-						handler.addObject(new MeguminStaff(x2 * 64, y2 * 64, ID.MeguminStaff));						
+						if (added[7] == 7) inGame = true; 
+						added[7] = 7;
+						if (!inGame) handler.addObject(new MeguminStaff(x2 * 64, y2 * 64, ID.MeguminStaff));
+						else handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 8:
-						//if (added[8] == 8) inGame = true; 
-						//added[8] = 8;						
-						//if (!inGame)
-						handler.addObject(new Mothman(x2 * 64, y2 * 64, ID.Mothman));
+						if (added[8] == 8) inGame = true; 
+						added[8] = 8;						
+						if (!inGame) handler.addObject(new Mothman(x2 * 64, y2 * 64, ID.Mothman));
+						else handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 9:
 						handler.addObject(new PatricksBinder(x2 * 64, y2 * 64, ID.PatricksBinder));
 						break;
 					case 10:
-						//if (added[10] == 10) inGame = true; 
-						//added[10] = 10;
-						//if (!inGame)
-						handler.addObject(new Skates(x2 * 64, y2 * 64, ID.Skates));
+						if (added[10] == 10) inGame = true; 
+						added[10] = 10;
+						if (!inGame) handler.addObject(new Skates(x2 * 64, y2 * 64, ID.Skates));
+						else handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 11:
-						//if (added[11] == 11) inGame = true; 
-						//added[11] = 11;
-						//if (!inGame)
-						handler.addObject(new StarCrossedScarf(x2 * 64, y2 * 64, ID.StarCrossedScarf));
+						if (added[11] == 11) inGame = true; 
+						added[11] = 11;
+						if (!inGame) handler.addObject(new StarCrossedScarf(x2 * 64, y2 * 64, ID.StarCrossedScarf));
+						else handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 12:
 						handler.addObject(new TeethButter(x2 * 64, y2 * 64, ID.TeethButter));
 						break;
 					case 13:
-						//if (added[13] == 13) inGame = true; 
-						//added[13] = 13;
-						//if (!inGame)
-						handler.addObject(new TimothysSkull(x2 * 64, y2 * 64, ID.TimothysSkull));
+						if (added[13] == 13) inGame = true; 
+						added[13] = 13;
+						if (!inGame) handler.addObject(new TimothysSkull(x2 * 64, y2 * 64, ID.TimothysSkull));
+						else handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 14:
 						handler.addObject(new YuGiOhCard(x2 * 64, y2 * 64, ID.YuGiOhCard));
@@ -416,7 +411,6 @@ public class Level1State extends GameState {
 
 					}
 
-					//} while(inGame);
 				}
 
 			}
