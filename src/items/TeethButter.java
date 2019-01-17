@@ -12,7 +12,6 @@ import game.ID;
 public class TeethButter extends GameObject {
 
 	private BufferedImageLoader loader;
-	private boolean vored;
 
 	public TeethButter(int x, int y, ID id) {
 

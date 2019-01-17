@@ -254,7 +254,7 @@ public class MenuState extends GameState {
 
 			if (!introMusic.clip.isRunning()) {
 
-				introMusic.play();
+				//introMusic.play();
 
 			}
 
@@ -781,7 +781,7 @@ public class MenuState extends GameState {
 				Game.setSlideIn(false);
 				Game.setFade(true);
 
-				introMusic.play();
+				//introMusic.play();
 
 				alpha = 0f;
 				countDown = false;
