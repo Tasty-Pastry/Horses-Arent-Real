@@ -7,11 +7,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.Timer;
 
+import game.AudioPlayer;
 import game.Game;
 
 public class Typewriter implements ActionListener {
@@ -35,6 +37,8 @@ public class Typewriter implements ActionListener {
 	private int stringCount;
 	private int stringTraverse;
 
+	private HashMap<String, AudioPlayer> SFX;
+
 	public Typewriter(String file, int y, Font font) {
 
 		stringArray = new ArrayList<String>();
@@ -48,6 +52,9 @@ public class Typewriter implements ActionListener {
 		timerStart = true;
 
 		endString = true;
+
+		SFX = new HashMap<String, AudioPlayer>();
+		SFX.put("Blip", new AudioPlayer("/Blip.wav", 10));
 
 		try {
 
@@ -105,6 +112,7 @@ public class Typewriter implements ActionListener {
 
 				} else {
 
+					SFX.get("Blip").play(true);
 					string = stringArray.get(getStringTraverse()).substring(0, getStringCount());
 
 					setStringCount(getStringCount() + 1);
@@ -132,7 +140,8 @@ public class Typewriter implements ActionListener {
 
 		if (!Game.isRunOnce()) {
 
-			g.drawString(string, 512 - ((g.getFontMetrics(font).stringWidth(stringArray.get(getStringTraverse())) / 2)), y);
+			g.drawString(string, 512 - ((g.getFontMetrics(font).stringWidth(stringArray.get(getStringTraverse())) / 2)),
+					y);
 
 			if (Game.getIntroDone()) {
 

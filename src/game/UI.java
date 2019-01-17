@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import animation.Animation;
 import animation.BufferedImageLoader;
@@ -38,11 +39,15 @@ public class UI {
 
 	private Handler handler;
 
+	private HashMap<String, AudioPlayer> SFX;
+
 	private boolean transition;
 
 	private boolean charSwitch;
 
 	private boolean end;
+	private boolean check;
+	private boolean check2;
 
 	public UI(Spritesheet sheet, Handler handler) {
 
@@ -53,6 +58,11 @@ public class UI {
 		BufferedImageLoader loader = new BufferedImageLoader();
 
 		hpBarSheet = new Spritesheet(loader.loadImage("/HealthFill.png"));
+
+		SFX = new HashMap<String, AudioPlayer>();
+
+		SFX.put("DishStartTransition", new AudioPlayer("/Dish Transition Start Explosion.wav", 1));
+		SFX.put("DishTransition", new AudioPlayer("/Dish Transition Explosion.wav", 1));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
@@ -153,12 +163,28 @@ public class UI {
 
 				transitionAni[0].runAnimation();
 
+				if (!check) {
+
+					SFX.get("DishStartTransition").play(false);
+
+					check = true;
+
+				}
+
 				if (transitionAni[0].getRanOnce()) {
 
 					setCharSwitch(true);
 
 					transitionAni[1].toggleAnimation(false);
 					transitionAni[1].runAnimation();
+
+					if (!check2) {
+
+						SFX.get("DishTransition").play(false);
+
+						check2 = true;
+
+					}
 
 					if (transitionAni[1].getRanOnce()) {
 
@@ -168,6 +194,9 @@ public class UI {
 						transitionAni[1].toggleAnimation(true);
 
 						end = true;
+
+						check = false;
+						check2 = false;
 
 					}
 

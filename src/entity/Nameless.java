@@ -5,10 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import animation.Animation;
 import animation.Camera;
 import animation.Spritesheet;
+import game.AudioPlayer;
 import game.Game;
 import game.Handler;
 import game.ID;
@@ -21,14 +23,18 @@ public class Nameless extends PlayerObject {
 	private Spritesheet mothmanSheet;
 	private Spritesheet timothySheet;
 
+	private HashMap<String, AudioPlayer> SFX;
+
 	// Constructor
 	public Nameless(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
-			Spritesheet mothmanSheet, Spritesheet timothySheet) {
+			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
 
 		this.mothmanSheet = mothmanSheet;
 		this.timothySheet = timothySheet;
+
+		this.SFX = SFX;
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -541,6 +547,9 @@ public class Nameless extends PlayerObject {
 						velocityY = 0;
 
 					}
+
+					SFX.get("Hit").play(false);
+
 					// Remove the bullet from the handler
 					handler.removeObject(temp);
 

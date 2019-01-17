@@ -123,6 +123,7 @@ public class Level1State extends GameState {
 
 		SFX.put("Dish Shoot", new AudioPlayer("/Dish Shoot.wav", 5));
 		SFX.put("Nick Shoot", new AudioPlayer("/Nicc Shoot.wav", 5));
+		SFX.put("Hit", new AudioPlayer("/Hit.wav", 10));
 
 		// Loads in Level
 		level = loader.loadImage("/TestMap.png");
@@ -152,7 +153,7 @@ public class Level1State extends GameState {
 				if (ui.isCharSwitch() && Game.getCharacter() == 1) {
 
 					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet));
+							Game.mothmanSheet, Game.timothySheet, SFX));
 
 					handler.removeObject(temp);
 
@@ -166,7 +167,7 @@ public class Level1State extends GameState {
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 2) {
 
 					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet));
+							Game.mothmanSheet, Game.timothySheet, SFX));
 
 					handler.removeObject(temp);
 
@@ -180,7 +181,7 @@ public class Level1State extends GameState {
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 3) {
 
 					handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet));
+							Game.mothmanSheet, Game.timothySheet, SFX));
 
 					handler.removeObject(temp);
 
@@ -237,7 +238,7 @@ public class Level1State extends GameState {
 		int w = image.getWidth();
 		int h = image.getHeight();
 		int[] added = new int[15];
-		
+
 		// Double for loop that traverses through each pixel in the map
 		for (int x2 = 0; x2 < w; x2++) {
 
@@ -304,13 +305,13 @@ public class Level1State extends GameState {
 
 					if (Game.getCharacter() == 1)
 						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet));
+								Game.mothmanSheet, Game.timothySheet, SFX));
 					if (Game.getCharacter() == 2)
 						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet));
+								Game.mothmanSheet, Game.timothySheet, SFX));
 					if (Game.getCharacter() == 3)
 						handler.addObject(new Nameless(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet));
+								Game.mothmanSheet, Game.timothySheet, SFX));
 
 					// Update player pos to the room its in
 					Game.playerXPos = x2 / 16;
@@ -342,16 +343,14 @@ public class Level1State extends GameState {
 				// If cyan, add an item to the handler
 				if (green == 255 && red == 0 && blue == 255) {
 
-					//boolean inGame = false;
-					//do {
-						
-						//inGame = false;
-						//System.out.println("Going through switch!");
-									
+					// boolean inGame = false;
+					// do {
+
+					// inGame = false;
+					// System.out.println("Going through switch!");
+
 					switch ((int) (Math.random() * 14) + 1) {
-					
-					 
-					
+
 					case 1:
 						handler.addObject(new MrsK(x2 * 64, y2 * 64, ID.MrsK));
 						break;
@@ -371,52 +370,52 @@ public class Level1State extends GameState {
 						handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
 					case 7:
-						//if (added[7] == 7) inGame = true; 
-						//added[7] = 7;
-						
-					//	if (!inGame)
-						handler.addObject(new MeguminStaff(x2 * 64, y2 * 64, ID.MeguminStaff));						
+						// if (added[7] == 7) inGame = true;
+						// added[7] = 7;
+
+						// if (!inGame)
+						handler.addObject(new MeguminStaff(x2 * 64, y2 * 64, ID.MeguminStaff));
 						break;
 					case 8:
-						//if (added[8] == 8) inGame = true; 
-						//added[8] = 8;						
-						//if (!inGame)
+						// if (added[8] == 8) inGame = true;
+						// added[8] = 8;
+						// if (!inGame)
 						handler.addObject(new Mothman(x2 * 64, y2 * 64, ID.Mothman));
 						break;
 					case 9:
 						handler.addObject(new PatricksBinder(x2 * 64, y2 * 64, ID.PatricksBinder));
 						break;
 					case 10:
-						//if (added[10] == 10) inGame = true; 
-						//added[10] = 10;
-						//if (!inGame)
+						// if (added[10] == 10) inGame = true;
+						// added[10] = 10;
+						// if (!inGame)
 						handler.addObject(new Skates(x2 * 64, y2 * 64, ID.Skates));
 						break;
 					case 11:
-						//if (added[11] == 11) inGame = true; 
-						//added[11] = 11;
-						//if (!inGame)
+						// if (added[11] == 11) inGame = true;
+						// added[11] = 11;
+						// if (!inGame)
 						handler.addObject(new StarCrossedScarf(x2 * 64, y2 * 64, ID.StarCrossedScarf));
 						break;
 					case 12:
 						handler.addObject(new TeethButter(x2 * 64, y2 * 64, ID.TeethButter));
 						break;
 					case 13:
-						//if (added[13] == 13) inGame = true; 
-						//added[13] = 13;
-						//if (!inGame)
+						// if (added[13] == 13) inGame = true;
+						// added[13] = 13;
+						// if (!inGame)
 						handler.addObject(new TimothysSkull(x2 * 64, y2 * 64, ID.TimothysSkull));
 						break;
 					case 14:
 						handler.addObject(new YuGiOhCard(x2 * 64, y2 * 64, ID.YuGiOhCard));
 						break;
-						
+
 					default:
 						break;
 
 					}
 
-					//} while(inGame);
+					// } while(inGame);
 				}
 
 			}
@@ -518,25 +517,25 @@ public class Level1State extends GameState {
 
 					// If the current count is 25 frames more than the baseFrame, and the player
 					// still has ammo left, add a bullet to the handler
-					if (baseFrame <= Game.getCount() - 25 && Game.ammo >= 1) {
+					if (baseFrame <= Game.getCount() - 15 && Game.ammo >= 1) {
 
 						// Adds a bullet to the handler, direction depends on the arrow keypress
 						if (k == KeyEvent.VK_DOWN) {
 
 							if (Game.getCharacter() == 1) {
 
-								SFX.get("Dish Shoot").play(true);
-
 								handler.addObject(
 										new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler, temp.getX(),
 												temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, Game.daanishDmg));
 
-							} else if (Game.getCharacter() == 2) {
+								SFX.get("Dish Shoot").play(true);
 
-								SFX.get("Nick Shoot").play(true);
+							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
 										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullets, 4, Game.nickDmg));
+
+								SFX.get("Nick Shoot").play(true);
 
 							} else {
 
@@ -553,18 +552,18 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								SFX.get("Dish Shoot").play(true);
-
 								handler.addObject(
 										new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler, temp.getX(),
 												temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3, Game.daanishDmg));
 
-							} else if (Game.getCharacter() == 2) {
+								SFX.get("Dish Shoot").play(true);
 
-								SFX.get("Nick Shoot").play(true);
+							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
 										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, Game.nickDmg));
+
+								SFX.get("Nick Shoot").play(true);
 
 							} else {
 
@@ -581,20 +580,20 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								SFX.get("Dish Shoot").play(true);
-
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2,
 										Game.daanishDmg));
 
-							} else if (Game.getCharacter() == 2) {
+								SFX.get("Dish Shoot").play(true);
 
-								SFX.get("Nick Shoot").play(true);
+							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2, Game.nickDmg));
+
+								SFX.get("Nick Shoot").play(true);
 
 							} else {
 
@@ -612,20 +611,20 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								SFX.get("Dish Shoot").play(true);
-
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1,
 										Game.daanishDmg));
 
-							} else if (Game.getCharacter() == 2) {
+								SFX.get("Dish Shoot").play(true);
 
-								SFX.get("Nick Shoot").play(true);
+							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1, Game.nickDmg));
+
+								SFX.get("Nick Shoot").play(true);
 
 							} else {
 

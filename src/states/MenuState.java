@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import animation.Animation;
 import animation.Background;
@@ -109,6 +110,8 @@ public class MenuState extends GameState {
 	private AudioPlayer introMusic;
 	private AudioPlayer typeTextMusic;
 
+	private HashMap<String, AudioPlayer> SFX;
+
 	private Animation loadingExitScreen;
 	private boolean runCheck2;
 
@@ -199,6 +202,10 @@ public class MenuState extends GameState {
 		introMusic = new AudioPlayer("/Intro Music.wav", 1);
 		typeTextMusic = new AudioPlayer("/TypeText Music.wav", 1);
 
+		SFX = new HashMap<String, AudioPlayer>();
+		SFX.put("Select", new AudioPlayer("/Select.wav", 5));
+		SFX.put("Character Select", new AudioPlayer("/Character Select.wav", 1));
+
 		line = new Rectangle(0, 470 + j, 1024, 14); // y is 470
 		charBox = new Rectangle(300, 484 + j, 424, 156); // y is 484
 		daanishBox = new Rectangle(332, 534 + j, 56, 64); // y is 534
@@ -255,6 +262,7 @@ public class MenuState extends GameState {
 			if (!introMusic.clip[0].isRunning()) {
 
 				introMusic.play(false);
+				introMusic.setVolume(0.8);
 
 			}
 
@@ -782,6 +790,7 @@ public class MenuState extends GameState {
 				Game.setFade(true);
 
 				introMusic.play(false);
+				introMusic.setVolume(0.8);
 
 				alpha = 0f;
 				countDown = false;
@@ -793,6 +802,8 @@ public class MenuState extends GameState {
 
 				select = !select;
 
+				SFX.get("Select").play(false);
+
 			}
 
 			if (k == KeyEvent.VK_ENTER && Game.getIntroDone() && !select && (characterSelect < 1 || characterSelect > 3)
@@ -800,9 +811,15 @@ public class MenuState extends GameState {
 
 				charUp = !charUp;
 
+				SFX.get("Select").play(false);
+
 			} else if (k == KeyEvent.VK_ENTER && !Game.isSlideIn() && !select) {
 
 				loadingCheck = true;
+
+				introMusic.shiftVolumeTo(0.5);
+
+				SFX.get("Character Select").play(false);
 
 			}
 
@@ -811,12 +828,16 @@ public class MenuState extends GameState {
 				characterSelect = 1;
 				characterSelectBool = true;
 
+				SFX.get("Select").play(false);
+
 			}
 
 			if (k == KeyEvent.VK_UP && charUp) {
 
 				characterSelect = 5;
 				characterSelectBool = false;
+
+				SFX.get("Select").play(false);
 
 			}
 
@@ -832,6 +853,8 @@ public class MenuState extends GameState {
 
 				}
 
+				SFX.get("Select").play(false);
+
 			}
 
 			if (k == KeyEvent.VK_RIGHT && charUp && characterSelectBool) {
@@ -845,6 +868,8 @@ public class MenuState extends GameState {
 					characterSelect++;
 
 				}
+
+				SFX.get("Select").play(false);
 
 			}
 

@@ -5,10 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import animation.Animation;
 import animation.Camera;
 import animation.Spritesheet;
+import game.AudioPlayer;
 import game.Game;
 import game.Handler;
 import game.ID;
@@ -17,17 +19,22 @@ import items.MothmanUse;
 import items.TimothyUse;
 
 public class Nicc extends PlayerObject {
-	
+
 	private Spritesheet mothmanSheet;
 	private Spritesheet timothySheet;
 
+	private HashMap<String, AudioPlayer> SFX;
+
 	// Constructor
-	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv, Spritesheet mothmanSheet, Spritesheet timothySheet) {
+	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
+			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
-		
+
 		this.mothmanSheet = mothmanSheet;
 		this.timothySheet = timothySheet;
+
+		this.SFX = SFX;
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -544,6 +551,8 @@ public class Nicc extends PlayerObject {
 
 					}
 
+					SFX.get("Hit").play(false);
+
 					// Remove the bullet from the handler
 					handler.removeObject(temp);
 
@@ -718,7 +727,7 @@ public class Nicc extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
-						
+
 						handler.addObject(new MothmanUse(x + 15, y, ID.MothmanUse, handler, mothmanSheet));
 
 					}
@@ -815,7 +824,7 @@ public class Nicc extends PlayerObject {
 						handler.removeObject(temp);
 
 						inv.setRemove(false);
-						
+
 						handler.addObject(new TimothyUse(x, y, ID.TimothyUse, handler, timothySheet));
 
 					}
