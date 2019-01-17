@@ -10,7 +10,7 @@ import javax.sound.sampled.FloatControl;
 public class AudioPlayer implements Runnable {
 
 	// Variables
-	public Clip clip;
+	public Clip[] clip;
 
 	private FloatControl gainControl;
 
@@ -18,40 +18,50 @@ public class AudioPlayer implements Runnable {
 	float targetDB = 0F;
 	float fadePerStep = 0.1F; // .1 works for applets, 1 is okay for apps
 	boolean fading = false;
+	int count = 0;
+	int max;
 	Thread t;
 
 	// Constructor
-	public AudioPlayer(String s) {
+	public AudioPlayer(String s, int max) {
+
+		this.max = max;
 
 		try {
 
-			// Loads the audio in
-			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(s));
+			clip = new Clip[max];
 
-			AudioFormat baseFormat = ais
-					.getFormat(); /* Obtains the audio format of the sound data in this audio input stream. */
+			for (int i = 0; i < max; i++) {
 
-			AudioFormat decodeFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, baseFormat.getSampleRate(), 16,
-					baseFormat.getChannels(), baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
-					false); /* Creates a new AudioPlayer with the decoded audio */
+				clip[i] = AudioSystem.getClip(); /*
+													 * Obtains a clip that can be used for playing back an audio file or
+													 * an audio stream.
+													 */
 
-			AudioInputStream dais = AudioSystem.getAudioInputStream(decodeFormat,
-					ais); /*
-							 * Obtains an audio input stream of the indicated format, by converting the
-							 * provided audio input stream.
-							 */
+				// Loads the audio in
+				AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(s));
 
-			clip = AudioSystem.getClip(); /*
-											 * Obtains a clip that can be used for playing back an audio file or an
-											 * audio stream.
-											 */
+				AudioFormat baseFormat = ais
+						.getFormat(); /* Obtains the audio format of the sound data in this audio input stream. */
 
-			clip.open(dais); /*
-								 * Opens the clip with the format and audio data present in the provided audio
-								 * input stream.
+				AudioFormat decodeFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, baseFormat.getSampleRate(),
+						16, baseFormat.getChannels(), baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
+						false); /* Creates a new AudioPlayer with the decoded audio */
+
+				AudioInputStream dais = AudioSystem.getAudioInputStream(decodeFormat,
+						ais); /*
+								 * Obtains an audio input stream of the indicated format, by converting the
+								 * provided audio input stream.
 								 */
 
-			gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				clip[i].open(dais); /*
+									 * Opens the clip with the format and audio data present in the provided audio
+									 * input stream.
+									 */
+
+				gainControl = (FloatControl) clip[i].getControl(FloatControl.Type.MASTER_GAIN);
+
+			}
 
 		} catch (Exception e) {
 
@@ -61,28 +71,52 @@ public class AudioPlayer implements Runnable {
 
 	}
 
-	public void play() {
+	public void play(boolean playOver) {
 
 		// Returns if there is no clip
-		if (clip == null) {
+		if (clip == null && !playOver) {
 
 			return;
 
 		}
 
+		if (count == max) {
+
+			count = 0;
+
+		}
+
 		// Plays clip
-		stop();
-		clip.setFramePosition(0);
-		clip.start();
+
+		clip[count].stop();
+
+		clip[count].setFramePosition(0);
+		clip[count].start();
+
+		count++;
 
 	}
 
-	public void stop() {
+	public void stop(int count) {
 
 		// Stops the clip
-		if (clip.isRunning()) {
+		if (clip[count].isRunning()) {
 
-			clip.stop();
+			clip[count].stop();
+
+		}
+
+	}
+
+	public void stopAll() {
+
+		for (int i = 0; i < max; i++) {
+
+			if (clip[i].isRunning()) {
+
+				clip[i].stop();
+
+			}
 
 		}
 
@@ -91,8 +125,14 @@ public class AudioPlayer implements Runnable {
 	public void close() {
 
 		// Frees system memory
-		stop();
-		clip.close();
+
+		stopAll();
+
+		for (int i = 0; i < max; i++) {
+
+			clip[i].close();
+
+		}
 
 	}
 
