@@ -249,7 +249,19 @@ public class Inventory {
 							
 							mainArray.get(i).use();
 							if (mainArray.get(i).vored==true) {
-								System.out.println("yeet");
+								
+								if (itemCount.get(i)>1)
+									itemCount.set(i, itemCount.get(i) - 1);
+								else {
+									
+									int owo=itemCount.get(i+1);
+									itemCount.set(i, 0);						
+									spriteArray.remove(mainArray.get(i).getSprite());
+									mainArray.remove(mainArray.get(i));
+									itemCount.set(i, owo);
+									
+								}
+								
 							}
 							clicked=false;
 							
