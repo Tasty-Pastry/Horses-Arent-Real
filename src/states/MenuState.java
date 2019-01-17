@@ -115,6 +115,9 @@ public class MenuState extends GameState {
 	private Animation loadingExitScreen;
 	private boolean runCheck2;
 
+	// help menu
+	private BufferedImage hellpMenu;
+
 	public MenuState(StateHandler sh, Handler h) {
 
 		this.sh = sh;
@@ -820,6 +823,8 @@ public class MenuState extends GameState {
 				introMusic.shiftVolumeTo(0.5);
 
 				SFX.get("Character Select").play(false);
+
+			} else if (k == KeyEvent.VK_ENTER && Game.getIntroDone() && !Game.isSlideIn() && select) {
 
 			}
 
