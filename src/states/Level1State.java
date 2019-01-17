@@ -58,6 +58,10 @@ public class Level1State extends GameState {
 	private BufferedImage spriteSheet3 = null;
 	private BufferedImage healthBars = null;
 
+	private BufferedImage[] walls = new BufferedImage[4];
+
+	private Spritesheet wallSheet;
+
 	// Engine Vars
 	private Handler handler;
 	private Camera camera;
@@ -79,6 +83,8 @@ public class Level1State extends GameState {
 	private BufferedImage[] nickBullets = new BufferedImage[4];
 
 	private HashMap<String, AudioPlayer> SFX;
+
+	private Color floor;
 
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
@@ -105,10 +111,14 @@ public class Level1State extends GameState {
 		dishBullet = new Spritesheet(loader.loadImage("/Fire Projectile.png"));
 		nickBullet = new Spritesheet(loader.loadImage("/Ice Projectile.png"));
 
+		wallSheet = new Spritesheet(loader.loadImage("/Walls.png"));
+
 		for (int i = 0; i < 4; i++) {
 
 			dishBullets[i] = dishBullet.getImage(i + 1, 1, 52, 52, 52, 52);
 			nickBullets[i] = nickBullet.getImage(i + 1, 1, 41, 41, 41, 41);
+
+			walls[i] = wallSheet.getImage(i + 1, 1, 64, 64, 64, 64);
 
 		}
 
@@ -124,6 +134,8 @@ public class Level1State extends GameState {
 		SFX.put("Dish Shoot", new AudioPlayer("/Dish Shoot.wav", 5));
 		SFX.put("Nick Shoot", new AudioPlayer("/Nicc Shoot.wav", 5));
 		SFX.put("Hit", new AudioPlayer("/Hit.wav", 10));
+
+		floor = new Color(145, 176, 154);
 
 		// Loads in Level
 		level = loader.loadImage("/TestMap.png");
@@ -207,7 +219,7 @@ public class Level1State extends GameState {
 		Graphics2D g2 = (Graphics2D) g;
 
 		// Background
-		g.setColor(Color.CYAN);
+		g.setColor(floor);
 		g.fillRect(0, 0, 1024, 640);
 
 		// Scaling for bigger rooms
@@ -252,10 +264,52 @@ public class Level1State extends GameState {
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) & 0xff;
 
-				// Adds a block if the color is blue
+				// Adds a block if the color is red
 				if (red == 255 && blue == 0 && green == 0) {
 
-					handler.addObject(new Block(x2 * 64, y2 * 64, ID.Block));
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.Block, walls));
+
+				}
+
+				if (red == 255 && blue == 0 && green == 106) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.TopRightCornerBlock, walls));
+
+				}
+
+				if (red == 255 && blue == 110 && green == 0) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.BottomLeftCornerBlock, walls));
+
+				}
+
+				if (red == 255 && blue == 220 && green == 0) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.BottomRightCornerBlock, walls));
+
+				}
+
+				if (red == 160 && blue == 160 && green == 160) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.TopBlock, walls));
+
+				}
+
+				if (red == 255 && blue == 255 && green == 255) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.BottomBlock, walls));
+
+				}
+
+				if (red == 255 && blue == 127 && green == 127) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.LeftBlock, walls));
+
+				}
+
+				if (red == 0 && blue == 255 && green == 148) {
+
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.RightBlock, walls));
 
 				}
 
@@ -263,7 +317,7 @@ public class Level1State extends GameState {
 				// if found add it to the enemyArray
 				if (red == 76 && blue == 0 && green == 0) {
 
-					handler.addObject(new Block(x2 * 64, y2 * 64, ID.Block));
+					handler.addObject(new Block(x2 * 64, y2 * 64, ID.TopLeftCornerBlock, walls));
 
 					int count = 0;
 

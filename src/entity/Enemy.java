@@ -116,7 +116,12 @@ public class Enemy extends GameObject {
 
 				}
 
-				if (temp.getId() == ID.Block || temp.getId() == ID.DoorBottom || temp.getId() == ID.DoorSide) {
+				if (temp.getId() == ID.Block || temp.getId() == ID.BottomBlock
+						|| temp.getId() == ID.BottomLeftCornerBlock || temp.getId() == ID.BottomRightCornerBlock
+						|| temp.getId() == ID.TopBlock || temp.getId() == ID.TopLeftCornerBlock
+						|| temp.getId() == ID.TopRightCornerBlock || temp.getId() == ID.LeftBlock
+						|| temp.getId() == ID.RightBlock || temp.getId() == ID.DoorBottom
+						|| temp.getId() == ID.DoorSide) {
 
 					// Self explanatory, really
 					if (goingToCrashIntoEachOther(temp.getBounds()) && !Camera.getCamMove()) {

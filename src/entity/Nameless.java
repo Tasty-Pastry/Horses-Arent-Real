@@ -358,7 +358,10 @@ public class Nameless extends PlayerObject {
 			GameObject temp = handler.getObject().get(i);
 
 			// Block collision check
-			if (temp.getId() == ID.Block) {
+			if (temp.getId() == ID.Block || temp.getId() == ID.BottomBlock || temp.getId() == ID.BottomLeftCornerBlock
+					|| temp.getId() == ID.BottomRightCornerBlock || temp.getId() == ID.TopBlock
+					|| temp.getId() == ID.TopLeftCornerBlock || temp.getId() == ID.TopRightCornerBlock
+					|| temp.getId() == ID.LeftBlock || temp.getId() == ID.RightBlock) {
 
 				// Collision Logic
 				if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {

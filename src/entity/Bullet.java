@@ -46,8 +46,8 @@ public class Bullet extends GameObject {
 
 		// Sets color of the bullet
 		this.color = color;
-		
-		this.damage=damage;
+
+		this.damage = damage;
 
 	}
 
@@ -64,7 +64,11 @@ public class Bullet extends GameObject {
 			GameObject temp = handler.getObject().get(i);
 
 			// Check if the current object is a door or block
-			if (temp.getId() == ID.Block || temp.getId() == ID.DoorBottom || temp.getId() == ID.DoorSide) {
+			if (temp.getId() == ID.Block || temp.getId() == ID.BottomBlock || temp.getId() == ID.BottomLeftCornerBlock
+					|| temp.getId() == ID.BottomRightCornerBlock || temp.getId() == ID.TopBlock
+					|| temp.getId() == ID.TopLeftCornerBlock || temp.getId() == ID.TopRightCornerBlock
+					|| temp.getId() == ID.LeftBlock || temp.getId() == ID.RightBlock || temp.getId() == ID.DoorBottom
+					|| temp.getId() == ID.DoorSide) {
 
 				// If a bullet collides with it, remove it
 				if (getBounds().intersects(temp.getBounds())) {
