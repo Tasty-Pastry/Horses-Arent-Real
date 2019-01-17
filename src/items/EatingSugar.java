@@ -21,7 +21,7 @@ public class EatingSugar extends GameObject {
 		
 		lore="Killing horses? No, papa!";
 		
-		itemDesc="Eat this and all characters will gain speed.";
+		itemDesc="Eat this and the speed of all characters will increase.";
 
 		loader = new BufferedImageLoader();
 
@@ -39,7 +39,7 @@ public class EatingSugar extends GameObject {
 	
 	public void use() {
 		
-		PlayerObject.vel+=2.5;
+		PlayerObject.vel+=1.5;
 		vored=true;
 		
 	}

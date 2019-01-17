@@ -23,7 +23,7 @@ public class MrsK extends GameObject {
 		
 		lore="A being that has reached perfect Adult.";
 		
-		itemDesc="Use this to increase your damage by some amount.";
+		itemDesc="Increased projectile damage.";
 
 		loader = new BufferedImageLoader();
 

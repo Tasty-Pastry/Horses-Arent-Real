@@ -18,9 +18,9 @@ public class PatricksBinder extends GameObject {
 
 		name = "Patrick's Binder";
 		
-		lore="The pages are faded and hard to make out, but it seems to hold invaluable knowledge. It feels as if you give it power, it will give something in return…";
+		lore="The pages are faded and hard to make out, but it seems to hold invaluable knowledge. It feels as if you give it power, it will give something in return...";
 		
-		itemDesc="Use this to refill your EP.";
+		itemDesc="Refills your EP.";
 
 		loader = new BufferedImageLoader();
 

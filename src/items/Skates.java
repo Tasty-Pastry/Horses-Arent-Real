@@ -19,7 +19,7 @@ public class Skates extends GameObject {
 
 		name = "Skates";
 		
-		lore="A sharp piece of metal glued onto to some large boots. Perhaps you could kick something with it on?";
+		lore="A sharp piece of metal glued onto to some large boots. Perhaps... you could kick something with them on?";
 		
 		itemDesc="Grants Nicc the Thicc the ability to use his Nick Kick.";
 

@@ -20,7 +20,7 @@ public class HorseEye extends GameObject {
 		
 		name = "Horse Eye";
 		
-		lore="This eye gives off an ominous aura… like a horse… aura? I wonder what would happen if you licked it.";
+		lore="This eye gives off an ominous aura... like a...a... horse aura??? I... wonder what would happen if you licked it.";
 		
 		itemDesc="...";
 
