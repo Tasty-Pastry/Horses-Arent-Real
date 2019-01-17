@@ -196,8 +196,8 @@ public class MenuState extends GameState {
 		charFont2 = new Font("Alkhemikal", Font.PLAIN, 80);
 		dialogueFont = new Font("Determination Mono", Font.PLAIN, 30);
 
-		introMusic = new AudioPlayer("/Intro Music.wav");
-		typeTextMusic = new AudioPlayer("/TypeText Music.wav");
+		introMusic = new AudioPlayer("/Intro Music.wav", 1);
+		typeTextMusic = new AudioPlayer("/TypeText Music.wav", 1);
 
 		line = new Rectangle(0, 470 + j, 1024, 14); // y is 470
 		charBox = new Rectangle(300, 484 + j, 424, 156); // y is 484
@@ -220,9 +220,9 @@ public class MenuState extends GameState {
 
 		} else if (!Game.isSlideIn() && Game.getIntroDone() && !Game.isRunOnce() && !Game.isFade()) {
 
-			if (!typeTextMusic.clip.isRunning()) {
+			if (!typeTextMusic.clip[0].isRunning()) {
 
-				typeTextMusic.play();
+				typeTextMusic.play(false);
 				typeTextMusic.setVolume(0.1);
 				typeTextMusic.shiftVolumeTo(0.8);
 
@@ -245,16 +245,16 @@ public class MenuState extends GameState {
 
 			fade(true, 0.01f);
 
-			if (typeTextMusic.clip.isRunning()) {
+			if (typeTextMusic.clip[0].isRunning()) {
 
-				typeTextMusic.stop();
+				typeTextMusic.stop(0);
 				typeTextMusic.close();
 
 			}
 
-			if (!introMusic.clip.isRunning()) {
+			if (!introMusic.clip[0].isRunning()) {
 
-				introMusic.play();
+				introMusic.play(false);
 
 			}
 
@@ -781,7 +781,7 @@ public class MenuState extends GameState {
 				Game.setSlideIn(false);
 				Game.setFade(true);
 
-				introMusic.play();
+				introMusic.play(false);
 
 				alpha = 0f;
 				countDown = false;
