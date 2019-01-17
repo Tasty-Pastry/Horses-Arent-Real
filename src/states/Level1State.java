@@ -47,11 +47,13 @@ public class Level1State extends GameState {
 	// Animation Vars
 	protected Spritesheet sheet;
 	protected Spritesheet sheet2;
+	protected Spritesheet sheet3;
 	protected Spritesheet health;
 
 	private BufferedImage level = null;
 	private BufferedImage spriteSheet = null;
 	private BufferedImage spriteSheet2 = null;
+	private BufferedImage spriteSheet3 = null;
 	private BufferedImage healthBars = null;
 
 	// Engine Vars
@@ -94,6 +96,7 @@ public class Level1State extends GameState {
 		// Loads in Sprite
 		spriteSheet = loader.loadImage("/PlayerSprites.png");
 		spriteSheet2 = loader.loadImage("/Horse Gallop Black.png");
+		spriteSheet3 = loader.loadImage("/OhNo.png");
 		healthBars = loader.loadImage("/Health Bars.png");
 		dishBullet = new Spritesheet(loader.loadImage("/Fire Projectile.png"));
 		nickBullet = new Spritesheet(loader.loadImage("/Ice Projectile.png"));
@@ -107,6 +110,7 @@ public class Level1State extends GameState {
 
 		sheet = new Spritesheet(spriteSheet);
 		sheet2 = new Spritesheet(spriteSheet2);
+		sheet3 = new Spritesheet(spriteSheet3);
 		health = new Spritesheet(healthBars);
 
 		ui = new UI(health, handler);
@@ -343,7 +347,7 @@ public class Level1State extends GameState {
 						handler.addObject(new MrsK(x2 * 64, y2 * 64, ID.MrsK));
 						break;
 					case 2:
-						handler.addObject(new HorseEye(x2 * 64, y2 * 64, ID.HorseEye));
+						handler.addObject(new HorseEye(x2 * 64, y2 * 64, ID.HorseEye, sheet3));
 						break;
 					case 3:
 						handler.addObject(new DannysSoul(x2 * 64, y2 * 64, ID.DannysSoul));

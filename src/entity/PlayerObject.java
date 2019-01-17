@@ -19,7 +19,7 @@ public abstract class PlayerObject extends GameObject {
 
 	// Physics Vars
 	public static double vel = 0.56;
-	protected float maxVel = (float) 6.2;
+	public static float maxVel = (float) 6.2;
 	protected float minVel = 0;
 
 	// Player Vars
@@ -32,26 +32,26 @@ public abstract class PlayerObject extends GameObject {
 	private static int lastDir; // 1 is Up, 2 is Right, 3 is Down, 4 is Left
 
 	// Sprite Vars
-	protected BufferedImage[] playerRight = new BufferedImage[3];
-	protected BufferedImage[] playerLeft = new BufferedImage[3];
-	protected BufferedImage[] playerDown = new BufferedImage[3];
-	protected BufferedImage[] playerUp = new BufferedImage[3];
+	public static BufferedImage[] playerRight = new BufferedImage[3];
+	public static BufferedImage[] playerLeft = new BufferedImage[3];
+	public static BufferedImage[] playerDown = new BufferedImage[3];
+	public static BufferedImage[] playerUp = new BufferedImage[3];
 
-	protected BufferedImage[] playerRightAttack = new BufferedImage[2];
-	protected BufferedImage[] playerLeftAttack = new BufferedImage[2];
-	protected BufferedImage[] playerDownAttack = new BufferedImage[2];
-	protected BufferedImage[] playerUpAttack = new BufferedImage[2];
+	public static BufferedImage[] playerRightAttack = new BufferedImage[2];
+	public static BufferedImage[] playerLeftAttack = new BufferedImage[2];
+	public static BufferedImage[] playerDownAttack = new BufferedImage[2];
+	public static BufferedImage[] playerUpAttack = new BufferedImage[2];
 
 	// Animation Vars
-	protected Animation playerRightAni;
-	protected Animation playerLeftAni;
-	protected Animation playerDownAni;
-	protected Animation playerUpAni;
+	public static Animation playerRightAni;
+	public static Animation playerLeftAni;
+	public static Animation playerDownAni;
+	public static Animation playerUpAni;
 
-	protected Animation playerRightAttackAni;
-	protected Animation playerLeftAttackAni;
-	protected Animation playerDownAttackAni;
-	protected Animation playerUpAttackAni;
+	public static Animation playerRightAttackAni;
+	public static Animation playerLeftAttackAni;
+	public static Animation playerDownAttackAni;
+	public static Animation playerUpAttackAni;
 
 	protected Inventory inv;
 
