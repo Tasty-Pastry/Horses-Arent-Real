@@ -21,7 +21,7 @@ public class HumanBone extends GameObject {
 		
 		lore="Crunch.";
 		
-		itemDesc="Eat this to regain 10% of your HP.";
+		itemDesc="Consuming a bone will cause you to gain back 10% of your hp.";
 
 		loader = new BufferedImageLoader();
 

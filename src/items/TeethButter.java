@@ -22,7 +22,7 @@ public class TeethButter extends GameObject {
 
 		lore = "...Yikes.";
 
-		itemDesc = "Eat this to regain 15% of your HP.";
+		itemDesc = "Increases HP by 15%.";
 
 		loader = new BufferedImageLoader();
 

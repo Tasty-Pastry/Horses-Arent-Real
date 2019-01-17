@@ -19,9 +19,9 @@ public class DannysSoul extends GameObject {
 
 		name = "Daniel's Soul";
 		
-		lore = "The horses may have killed his body, but his soul is immortal…";
+		lore = "The horses may have killed his body, but his soul is immortal...";
 				
-		itemDesc = "Eat this to gain some damage.";
+		itemDesc = "Increases player damage";
 
 		loader = new BufferedImageLoader();
 

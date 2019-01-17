@@ -19,7 +19,7 @@ public class MeguminStaff extends GameObject {
 
 		name = "The Megumin Staff";
 		
-		lore="A weird looking staff that has seen some use. A destructive aura lures you to it…";
+		lore="A weird looking staff that has seen some use. A destructive aura lures you to it...";
 		
 		itemDesc="Grants Daanish the ability to use EKUSPROSION!";
 

@@ -19,7 +19,7 @@ public class StarCrossedScarf extends GameObject {
 
 		name = "Star-Crossed Scarf";
 		
-		lore="Is… that a scarf? As you get close to it, your mind is flooded with images of a man biting down on a horse tongue. Putting it on certainly wouldn’t be a good idea.";
+		lore="Is... that a scarf? As you get close to it, your mind is flooded with images of a man biting down on a horse tongue. Putting it on certainly wouldn't be a good idea.";
 		
 		itemDesc="Grants Nameless Chaos the ability to use Edgy Darkness.";
 

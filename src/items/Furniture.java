@@ -23,7 +23,7 @@ public class Furniture extends GameObject {
 		
 		lore="This furniture seems strangely alive...";
 		
-		itemDesc="Break it open for a surprise.";
+		itemDesc="Break it open for a surprise!";
 
 		loader = new BufferedImageLoader();
 
