@@ -19,35 +19,35 @@ public class EatingSugar extends GameObject {
 
 		name = "Eating Sugar?";
 		
-		lore="Killing horses? No, papa!";
-		
 		itemDesc="Eat this and the speed of all characters will increase.";
+		lore = "Killing horses? No, papa!";
 
 		loader = new BufferedImageLoader();
 
 		sprite = loader.loadImage("/EatingSugar.png");
-		
+
 		keyItem = false;
 		passive = false;
 		vored = false;
 
 	}
-	
+
 	public void update() {
-				
+
 	}
-	
+
 	public void use() {
-		
-		PlayerObject.vel+=1.5;
-		vored=true;
-		
+
+		PlayerObject.maxVel += 1.5;
+		PlayerObject.vel += 4.5;
+		vored = true;
+
 	}
 
 	// Draw crate
 	public void draw(Graphics g) {
 
-		g.drawImage(sprite,x,y,null);
+		g.drawImage(sprite, x, y, null);
 
 	}
 
@@ -57,7 +57,6 @@ public class EatingSugar extends GameObject {
 		return new Rectangle(x, y, 32, 32);
 
 	}
-
 
 	@Override
 	public String getName() {
@@ -71,5 +70,5 @@ public class EatingSugar extends GameObject {
 
 		return sprite;
 	}
-	
+
 }
