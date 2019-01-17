@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import animation.BufferedImageLoader;
 import animation.Camera;
@@ -19,6 +20,7 @@ import entity.Enemy;
 import entity.GameObject;
 import entity.Nameless;
 import entity.Nicc;
+import game.AudioPlayer;
 import game.Game;
 import game.Handler;
 import game.ID;
@@ -76,6 +78,8 @@ public class Level1State extends GameState {
 	private BufferedImage[] dishBullets = new BufferedImage[4];
 	private BufferedImage[] nickBullets = new BufferedImage[4];
 
+	private HashMap<String, AudioPlayer> SFX;
+
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
 
@@ -114,6 +118,11 @@ public class Level1State extends GameState {
 		health = new Spritesheet(healthBars);
 
 		ui = new UI(health, handler);
+
+		SFX = new HashMap<String, AudioPlayer>();
+
+		SFX.put("Dish Shoot", new AudioPlayer("/Dish Shoot.wav", 5));
+		SFX.put("Nick Shoot", new AudioPlayer("/Nicc Shoot.wav", 5));
 
 		// Loads in Level
 		level = loader.loadImage("/TestMap.png");
@@ -487,11 +496,15 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
+								SFX.get("Dish Shoot").play(true);
+
 								handler.addObject(
 										new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler, temp.getX(),
 												temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, Game.daanishDmg));
 
 							} else if (Game.getCharacter() == 2) {
+
+								SFX.get("Nick Shoot").play(true);
 
 								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
 										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullets, 4, Game.nickDmg));
@@ -511,11 +524,15 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
+								SFX.get("Dish Shoot").play(true);
+
 								handler.addObject(
 										new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler, temp.getX(),
 												temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3, Game.daanishDmg));
 
 							} else if (Game.getCharacter() == 2) {
+
+								SFX.get("Nick Shoot").play(true);
 
 								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
 										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, Game.nickDmg));
@@ -535,12 +552,16 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
+								SFX.get("Dish Shoot").play(true);
+
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2,
 										Game.daanishDmg));
 
 							} else if (Game.getCharacter() == 2) {
+
+								SFX.get("Nick Shoot").play(true);
 
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
@@ -562,12 +583,16 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
+								SFX.get("Dish Shoot").play(true);
+
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1,
 										Game.daanishDmg));
 
 							} else if (Game.getCharacter() == 2) {
+
+								SFX.get("Nick Shoot").play(true);
 
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
