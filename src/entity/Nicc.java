@@ -75,8 +75,8 @@ public class Nicc extends PlayerObject {
 
 		// Updates movement
 		x += velocityX;
-		y += velocityY;
-
+		y += velocityY;		
+		
 		// Movement of Player Character
 		if (handler.isUp()) {
 
@@ -328,7 +328,7 @@ public class Nicc extends PlayerObject {
 			Game.setShoot(false, 0);
 
 		}
-
+		
 		// ------------------------------------------------------------------------------------------------------------
 
 	}

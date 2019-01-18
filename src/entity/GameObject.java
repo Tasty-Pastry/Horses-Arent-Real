@@ -152,4 +152,13 @@ public abstract class GameObject {
 
 	}
 
+	public boolean getVored() {
+		
+		return vored;
+	}
+	public void setVored(boolean vored) {
+		
+		this.vored = vored;
+	}
+	
 }
