@@ -597,21 +597,21 @@ public class Level1State extends GameState {
 							if (Game.getCharacter() == 1) {
 
 								handler.addObject(
-										new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler, temp.getX(),
+										new Bullet(temp.getX() + 100, temp.getY() + 64, ID.Bullet, handler, temp.getX(),
 												temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, Game.daanishDmg));
 
 								SFX.get("Dish Shoot").play(true);
 
 							} else if (Game.getCharacter() == 2) {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 100, temp.getY() + 64, ID.Bullet, handler,
 										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullets, 4, Game.nickDmg));
 
 								SFX.get("Nick Shoot").play(true);
 
 							} else {
 
-								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 100, temp.getY() + 64, ID.Bullet, handler,
 										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, null, 4, Game.namelessDmg));
 
 							}
