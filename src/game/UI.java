@@ -8,7 +8,6 @@ import animation.Animation;
 import animation.BufferedImageLoader;
 import animation.Camera;
 import animation.Spritesheet;
-import entity.Daanish;
 import entity.GameObject;
 
 public class UI {
@@ -52,15 +51,11 @@ public class UI {
 	private boolean check;
 	private boolean check2;
 
-	private Animation dishCutIn;
-
-	public UI(Spritesheet sheet, Handler handler, Animation dishCutIn) {
+	public UI(Spritesheet sheet, Handler handler) {
 
 		this.sheet = sheet;
 
 		this.handler = handler;
-
-		this.dishCutIn = dishCutIn;
 
 		BufferedImageLoader loader = new BufferedImageLoader();
 
@@ -337,20 +332,6 @@ public class UI {
 
 		}
 
-		if (Daanish.isSpecial()) {
-
-			dishCutIn.runAnimation();
-
-			if (dishCutIn.getRanOnce()) {
-
-				Daanish.setSpecial(false);
-
-				dishCutIn.reset();
-
-			}
-
-		}
-
 	}
 
 	public void draw(Graphics g) {
@@ -435,12 +416,6 @@ public class UI {
 			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
 
 			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.namelessEP), 15), 103, 596, null);
-
-		}
-
-		if (Daanish.isSpecial()) {
-
-			dishCutIn.drawAnimation(g, 0, 0, 0);
 
 		}
 

@@ -46,16 +46,16 @@ public class Daanish extends PlayerObject {
 				playerRight[i] = sheet.getImage(i + 1, 1, 100, 64, 100, 64);
 				playerDown[i] = sheet.getImage(i + 1, 2, 100, 64, 100, 64);
 				playerUp[i] = sheet.getImage(i + 1, 3, 100, 64, 100, 64);
-				playerLeft[i] = sheet.getImage(i + 1, 4, 100, 64, 100, 64);
+				playerLeft[i] = sheet.getImage(i + 1, 4,  100, 64, 100, 64);
 
 			}
 
 			if (i == 0 || i == 1) {
 
-				playerRightAttack[i] = sheet.getImage(i + 5, 1, 100, 64, 100, 64);
+				playerRightAttack[i] = sheet.getImage(i + 5, 1,100, 64, 100, 64);
 				playerLeftAttack[i] = sheet.getImage(i + 5, 4, 100, 64, 100, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 2, 100, 64, 100, 64);
-				playerUpAttack[i] = sheet.getImage(i + 5, 3, 100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 2,  100, 64, 100, 64);
+				playerUpAttack[i] = sheet.getImage(i + 5, 3,  100, 64, 100, 64);
 
 			}
 
@@ -975,16 +975,8 @@ public class Daanish extends PlayerObject {
 
 	public static void setSpecialMove(boolean specials) {
 
-		setSpecial(specials);
+		special = specials;
 
-	}
-
-	public static boolean isSpecial() {
-		return special;
-	}
-
-	public static void setSpecial(boolean special) {
-		Daanish.special = special;
 	}
 
 }
