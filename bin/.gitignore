@@ -1,5 +1,5 @@
-/states/
+/animation/
+/entity/
 /game/
 /items/
-/entity/
-/animation/
+/states/

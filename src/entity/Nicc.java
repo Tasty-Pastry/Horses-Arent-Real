@@ -39,17 +39,17 @@ public class Nicc extends PlayerObject {
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
 
-			playerRight[i] = sheet.getImage(i + 1, 5, 64, 64, 64, 64);
-			playerDown[i] = sheet.getImage(i + 1, 6, 64, 64, 64, 64);
-			playerUp[i] = sheet.getImage(i + 1, 7, 64, 64, 64, 64);
-			playerLeft[i] = sheet.getImage(i + 1, 8, 64, 64, 64, 64);
+			playerRight[i] = sheet.getImage(i + 1, 5, 100, 64, 100, 64);
+			playerDown[i] = sheet.getImage(i + 1, 6, 100, 64, 100, 64);
+			playerUp[i] = sheet.getImage(i + 1, 7,  100, 64, 100, 64);
+			playerLeft[i] = sheet.getImage(i + 1, 8,  100, 64, 100, 64);
 
 			if (i == 0 || i == 1) {
 
-				playerRightAttack[i] = sheet.getImage(i + 5, 5, 64, 64, 64, 64);
-				playerLeftAttack[i] = sheet.getImage(i + 5, 8, 64, 64, 64, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 6, 64, 64, 64, 64);
-				playerUpAttack[i] = sheet.getImage(i + 5, 7, 64, 64, 64, 64);
+				playerRightAttack[i] = sheet.getImage(i + 5, 5, 100, 64, 100, 64);
+				playerLeftAttack[i] = sheet.getImage(i + 5, 8,  100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 6,  100, 64, 100, 64);
+				playerUpAttack[i] = sheet.getImage(i + 5, 7, 100, 64, 100, 64);
 
 			}
 
