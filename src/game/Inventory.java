@@ -194,7 +194,7 @@ public class Inventory {
 		if (Game.getCharacter()==1) {
 			
 			g.drawString("Health: "+Game.daanishHealth, 687, 108);
-			g.drawString("EP: ", 807, 108);
+			g.drawString("EP: "+Game.daanishEP, 807, 108);
 			g.drawString("Speed: "+PlayerObject.maxVel, 687, 148);
 			g.drawString("Damage: "+Game.daanishDmg, 807, 148);
 			
@@ -203,7 +203,7 @@ public class Inventory {
 		else if (Game.getCharacter()==2) {
 			
 			g.drawString("Health: "+Game.nickHealth, 687, 108);
-			g.drawString("EP: ", 807, 108);
+			g.drawString("EP: "+Game.nickEP, 807, 108);
 			g.drawString("Speed: "+PlayerObject.maxVel, 687, 148);
 			g.drawString("Damage: "+Game.nickDmg, 807, 148);
 			
@@ -212,7 +212,7 @@ public class Inventory {
 		else {
 			
 			g.drawString("Health: "+Game.namelessHealth, 687, 108);
-			g.drawString("EP: ", 807, 108);
+			g.drawString("EP: "+Game.namelessEP, 807, 108);
 			g.drawString("Speed: "+PlayerObject.maxVel, 687, 148);
 			g.drawString("Damage: "+Game.namelessDmg, 807, 148);
 			
@@ -235,6 +235,9 @@ public class Inventory {
 				if (mainArray.size() > i) {
 
 					if (mainArray.get(i) != null) {
+						
+						g.setColor(new Color(49, 76, 182, 80));
+						g.fillRect(rectArray[i].x+14, rectArray[i].y+13, 67, 67); //AAAAAAA
 
 						g.setColor(Color.red);
 
