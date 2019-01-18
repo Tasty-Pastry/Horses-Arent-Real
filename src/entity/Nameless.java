@@ -39,17 +39,17 @@ public class Nameless extends PlayerObject {
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
 
-			playerRight[i] = sheet.getImage(i + 1, 9, 64, 64, 64, 64);
-			playerDown[i] = sheet.getImage(i + 1, 10, 64, 64, 64, 64);
-			playerUp[i] = sheet.getImage(i + 1, 11, 64, 64, 64, 64);
-			playerLeft[i] = sheet.getImage(i + 1, 12, 64, 64, 64, 64);
+			playerRight[i] = sheet.getImage(i + 1, 9, 100, 64, 100, 64);
+			playerDown[i] = sheet.getImage(i + 1, 10,  100, 64, 100, 64);
+			playerUp[i] = sheet.getImage(i + 1, 11,  100, 64, 100, 64);
+			playerLeft[i] = sheet.getImage(i + 1, 12,  100, 64, 100, 64);
 
 			if (i == 0 || i == 1) {
 
-				playerRightAttack[i] = sheet.getImage(i + 5, 9, 64, 64, 64, 64);
-				playerLeftAttack[i] = sheet.getImage(i + 5, 12, 64, 64, 64, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 10, 64, 64, 64, 64);
-				playerUpAttack[i] = sheet.getImage(i + 5, 11, 64, 64, 64, 64);
+				playerRightAttack[i] = sheet.getImage(i + 5, 9, 100, 64, 100, 64);
+				playerLeftAttack[i] = sheet.getImage(i + 5, 12,  100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 10,  100, 64, 100, 64);
+				playerUpAttack[i] = sheet.getImage(i + 5, 11,  100, 64, 100, 64);
 
 			}
 

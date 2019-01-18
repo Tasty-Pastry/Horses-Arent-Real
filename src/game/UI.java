@@ -326,13 +326,13 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[0].drawAnimation(g,
-								(temp.getX() - (daanishStartTransition[0].getWidth() / 2) + 30) - Camera.getX(),
+								(temp.getX() - (daanishStartTransition[0].getWidth() / 2) + 30) - Camera.getX() + 13,
 								(temp.getY() - (daanishStartTransition[0].getHeight() / 2) + 25) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[1].drawAnimation(g,
-								(temp.getX() - (daanishTransition[0].getWidth() / 2) + 30) - Camera.getX(),
+								(temp.getX() - (daanishTransition[0].getWidth() / 2) + 30) - Camera.getX() + 13,
 								(temp.getY() - (daanishTransition[0].getHeight() / 2) + 25) - Camera.getY(), 0);
 
 					}
@@ -342,13 +342,13 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[2].drawAnimation(g,
-								(temp.getX() - (nickStartTransition[0].getWidth() / 2) + 32) - Camera.getX(),
+								(temp.getX() - (nickStartTransition[0].getWidth() / 2) + 32) - Camera.getX() + 13,
 								(temp.getY() - (nickStartTransition[0].getHeight() / 2)) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[3].drawAnimation(g,
-								(temp.getX() - (nickTransition[0].getWidth() / 2) + 32) - Camera.getX(),
+								(temp.getX() - (nickTransition[0].getWidth() / 2) + 32) - Camera.getX() + 13,
 								(temp.getY() - (nickTransition[0].getHeight() / 2)) - Camera.getY(), 0);
 
 					}
@@ -358,13 +358,13 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[4].drawAnimation(g,
-								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 18) - Camera.getX(),
+								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 18) - Camera.getX() + 13,
 								(temp.getY() - (namelessStartTransition[0].getHeight() / 2) - 19) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[5].drawAnimation(g,
-								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 18) - Camera.getX(),
+								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 18) - Camera.getX() + 13,
 								(temp.getY() - (namelessTransition[0].getHeight() / 2) - 19) - Camera.getY(), 0);
 
 					}

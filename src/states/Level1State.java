@@ -104,7 +104,7 @@ public class Level1State extends GameState {
 		BufferedImageLoader loader = new BufferedImageLoader();
 
 		// Loads in Sprite
-		spriteSheet = loader.loadImage("/PlayerSprites.png");
+		spriteSheet = loader.loadImage("/PlayerSprites100X100.png");
 		spriteSheet2 = loader.loadImage("/Horse Gallop Black.png");
 		spriteSheet3 = loader.loadImage("/OhNo.png");
 		healthBars = loader.loadImage("/Health Bars.png");
@@ -461,14 +461,6 @@ public class Level1State extends GameState {
 						added[11] = 11;
 						if (!inGame)
 							handler.addObject(new StarCrossedScarf(x2 * 64, y2 * 64, ID.StarCrossedScarf));
-						else
-							handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
-
-						if (added[10] == 10)
-							inGame = true;
-						added[10] = 10;
-						if (!inGame)
-							handler.addObject(new Skates(x2 * 64, y2 * 64, ID.Skates));
 						else
 							handler.addObject(new HumanBone(x2 * 64, y2 * 64, ID.HumanBone));
 						break;
