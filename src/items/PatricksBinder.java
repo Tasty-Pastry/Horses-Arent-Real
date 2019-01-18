@@ -40,14 +40,13 @@ public class PatricksBinder extends GameObject {
 	public void use() {
 		
 		if (Game.getCharacter()==1)
-			Game.daanishHealth=228;
+			Game.daanishEP=234;
 
 		else if (Game.getCharacter()==2) 
-			Game.nickHealth=228;
+			Game.nickEP=234;
 
-		
 		else
-			Game.namelessHealth=228;
+			Game.namelessEP=234;
 
 		vored=true;
 		
