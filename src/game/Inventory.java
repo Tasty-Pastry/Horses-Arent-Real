@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 import animation.BufferedImageLoader;
 import animation.FontLoader;
 import entity.GameObject;
+import entity.PlayerObject;
 
 public class Inventory {
 
@@ -188,6 +189,33 @@ public class Inventory {
 							- ((g.getFontMetrics(countFont).stringWidth(String.valueOf(itemCount.get(i)))) / 2),
 					140 + (col * 105));
 
+		}
+		
+		if (Game.getCharacter()==1) {
+			
+			g.drawString("Health: "+Game.daanishHealth, 687, 108);
+			g.drawString("EP: ", 807, 108);
+			g.drawString("Speed: "+PlayerObject.maxVel, 687, 148);
+			g.drawString("Damage: "+Game.daanishDmg, 807, 148);
+			
+		}
+			
+		else if (Game.getCharacter()==2) {
+			
+			g.drawString("Health: "+Game.nickHealth, 687, 108);
+			g.drawString("EP: ", 807, 108);
+			g.drawString("Speed: "+PlayerObject.maxVel, 687, 148);
+			g.drawString("Damage: "+Game.nickDmg, 807, 148);
+			
+		}
+		
+		else {
+			
+			g.drawString("Health: "+Game.namelessHealth, 687, 108);
+			g.drawString("EP: ", 807, 108);
+			g.drawString("Speed: "+PlayerObject.maxVel, 687, 148);
+			g.drawString("Damage: "+Game.namelessDmg, 807, 148);
+			
 		}
 
 		if (drawCursor) {
