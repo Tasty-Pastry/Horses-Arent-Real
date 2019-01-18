@@ -25,6 +25,7 @@ public class Daanish extends PlayerObject {
 	private Spritesheet timothySheet;
 
 	private HashMap<String, AudioPlayer> SFX;
+	private static boolean special;
 
 	// Constructor
 	public Daanish(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
@@ -42,19 +43,19 @@ public class Daanish extends PlayerObject {
 
 			if (i == 0 || i == 1 || i == 2) {
 
-				playerRight[i] = sheet.getImage(i + 1, 1, 64, 64, 64, 64);
-				playerDown[i] = sheet.getImage(i + 1, 2, 64, 64, 64, 64);
-				playerUp[i] = sheet.getImage(i + 1, 3, 64, 64, 64, 64);
-				playerLeft[i] = sheet.getImage(i + 1, 4, 64, 64, 64, 64);
+				playerRight[i] = sheet.getImage(i + 1, 1, 100, 64, 100, 64);
+				playerDown[i] = sheet.getImage(i + 1, 2, 100, 64, 100, 64);
+				playerUp[i] = sheet.getImage(i + 1, 3, 100, 64, 100, 64);
+				playerLeft[i] = sheet.getImage(i + 1, 4,  100, 64, 100, 64);
 
 			}
 
 			if (i == 0 || i == 1) {
 
-				playerRightAttack[i] = sheet.getImage(i + 5, 1, 64, 64, 64, 64);
-				playerLeftAttack[i] = sheet.getImage(i + 5, 4, 64, 64, 64, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 2, 64, 64, 64, 64);
-				playerUpAttack[i] = sheet.getImage(i + 5, 3, 64, 64, 64, 64);
+				playerRightAttack[i] = sheet.getImage(i + 5, 1,100, 64, 100, 64);
+				playerLeftAttack[i] = sheet.getImage(i + 5, 4, 100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 2,  100, 64, 100, 64);
+				playerUpAttack[i] = sheet.getImage(i + 5, 3,  100, 64, 100, 64);
 
 			}
 
@@ -970,6 +971,12 @@ public class Daanish extends PlayerObject {
 	public BufferedImage getSprite() {
 
 		return sprite;
+	}
+
+	public static void setSpecialMove(boolean specials) {
+
+		special = specials;
+
 	}
 
 }

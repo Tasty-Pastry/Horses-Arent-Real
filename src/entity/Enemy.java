@@ -247,6 +247,10 @@ public class Enemy extends GameObject {
 
 			}
 
+			g.setColor(Color.red);
+
+			g.drawString("HP: " + hp, x, y);
+
 		}
 
 	}

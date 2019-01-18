@@ -69,6 +69,8 @@ public class UI {
 		SFX.put("DishTransition", new AudioPlayer("/Dish Transition Explosion.wav", 1));
 		SFX.put("NickStartTransition", new AudioPlayer("/Nick Start Transition.wav", 1));
 		SFX.put("NickTransition", new AudioPlayer("/Nick Transition.wav", 1));
+		SFX.put("MasonStartTransition", new AudioPlayer("/Mason Start Transition.wav", 1));
+		SFX.put("MasonTransition", new AudioPlayer("/Mason Transition.wav", 1));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
@@ -273,12 +275,28 @@ public class UI {
 
 				transitionAni[4].runAnimation();
 
+				if (!check) {
+
+					SFX.get("MasonStartTransition").play(false);
+
+					check = true;
+
+				}
+
 				if (transitionAni[4].getRanOnce()) {
 
 					setCharSwitch(true);
 
 					transitionAni[5].toggleAnimation(false);
 					transitionAni[5].runAnimation();
+
+					if (!check2) {
+
+						SFX.get("MasonTransition").play(false);
+
+						check2 = true;
+
+					}
 
 					if (transitionAni[5].getRanOnce()) {
 
@@ -288,6 +306,9 @@ public class UI {
 						transitionAni[5].toggleAnimation(true);
 
 						end = true;
+
+						check = false;
+						check2 = false;
 
 					}
 
@@ -326,13 +347,13 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[0].drawAnimation(g,
-								(temp.getX() - (daanishStartTransition[0].getWidth() / 2) + 30) - Camera.getX(),
+								(temp.getX() - (daanishStartTransition[0].getWidth() / 2) + 30) - Camera.getX() + 13,
 								(temp.getY() - (daanishStartTransition[0].getHeight() / 2) + 25) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[1].drawAnimation(g,
-								(temp.getX() - (daanishTransition[0].getWidth() / 2) + 30) - Camera.getX(),
+								(temp.getX() - (daanishTransition[0].getWidth() / 2) + 30) - Camera.getX() + 13,
 								(temp.getY() - (daanishTransition[0].getHeight() / 2) + 25) - Camera.getY(), 0);
 
 					}
@@ -342,13 +363,13 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[2].drawAnimation(g,
-								(temp.getX() - (nickStartTransition[0].getWidth() / 2) + 32) - Camera.getX(),
+								(temp.getX() - (nickStartTransition[0].getWidth() / 2) + 32) - Camera.getX() + 13,
 								(temp.getY() - (nickStartTransition[0].getHeight() / 2)) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[3].drawAnimation(g,
-								(temp.getX() - (nickTransition[0].getWidth() / 2) + 32) - Camera.getX(),
+								(temp.getX() - (nickTransition[0].getWidth() / 2) + 32) - Camera.getX() + 13,
 								(temp.getY() - (nickTransition[0].getHeight() / 2)) - Camera.getY(), 0);
 
 					}
@@ -358,13 +379,13 @@ public class UI {
 					if (!isCharSwitch()) {
 
 						transitionAni[4].drawAnimation(g,
-								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 18) - Camera.getX(),
+								(temp.getX() - (namelessStartTransition[0].getWidth() / 2) + 18) - Camera.getX() + 13,
 								(temp.getY() - (namelessStartTransition[0].getHeight() / 2) - 19) - Camera.getY(), 0);
 
 					} else {
 
 						transitionAni[5].drawAnimation(g,
-								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 18) - Camera.getX(),
+								(temp.getX() - (namelessTransition[0].getWidth() / 2) + 18) - Camera.getX() + 13,
 								(temp.getY() - (namelessTransition[0].getHeight() / 2) - 19) - Camera.getY(), 0);
 
 					}
