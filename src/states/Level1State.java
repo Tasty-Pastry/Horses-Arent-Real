@@ -753,6 +753,8 @@ public class Level1State extends GameState {
 
 							}
 
+							Game.nickEP -= 20;
+
 						} else {
 
 						}
