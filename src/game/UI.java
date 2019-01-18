@@ -37,6 +37,8 @@ public class UI {
 	private Spritesheet nickTransitionSheet;
 	private Spritesheet namelessTransitionSheet;
 
+	private BufferedImage EPBar;
+
 	private Handler handler;
 
 	private HashMap<String, AudioPlayer> SFX;
@@ -59,10 +61,14 @@ public class UI {
 
 		hpBarSheet = new Spritesheet(loader.loadImage("/HealthFill.png"));
 
+		EPBar = loader.loadImage("/EP Fill.png");
+
 		SFX = new HashMap<String, AudioPlayer>();
 
 		SFX.put("DishStartTransition", new AudioPlayer("/Dish Transition Start Explosion.wav", 1));
 		SFX.put("DishTransition", new AudioPlayer("/Dish Transition Explosion.wav", 1));
+		SFX.put("NickStartTransition", new AudioPlayer("/Nick Start Transition.wav", 1));
+		SFX.put("NickTransition", new AudioPlayer("/Nick Transition.wav", 1));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
@@ -163,6 +169,8 @@ public class UI {
 
 				transitionAni[0].runAnimation();
 
+				System.out.println(!check);
+
 				if (!check) {
 
 					SFX.get("DishStartTransition").play(false);
@@ -215,6 +223,22 @@ public class UI {
 
 				transitionAni[2].runAnimation();
 
+				if (!check) {
+
+					SFX.get("NickStartTransition").play(false);
+
+					check = true;
+
+				}
+
+				if (transitionAni[2].getCount() == 9 && !check2) {
+
+					SFX.get("NickTransition").play(false);
+
+					check2 = true;
+
+				}
+
 				if (transitionAni[2].getRanOnce()) {
 
 					setCharSwitch(true);
@@ -230,6 +254,9 @@ public class UI {
 						transitionAni[3].toggleAnimation(true);
 
 						end = true;
+
+						check = false;
+						check2 = false;
 
 					}
 
@@ -355,15 +382,21 @@ public class UI {
 			hpBarAni[0].drawAnimation(g, 8, 254, 0);
 			g.drawImage(hpBarFill[0].getSubimage(0, 0, 228 - (228 - Game.daanishHealth), 79), 113, 531, null);
 
+			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.daanishEP), 15), 103, 596, null);
+
 		} else if (Game.getCharacter() == 2) {
 
 			hpBarAni[1].drawAnimation(g, 15, 490, 0);
 			g.drawImage(hpBarFill[1].getSubimage(0, 0, 228 - (228 - Game.nickHealth), 79), 114, 531, null);
 
+			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.nickEP), 15), 103, 596, null);
+
 		} else if (Game.getCharacter() == 3) {
 
 			hpBarAni[2].drawAnimation(g, -27, 466, 0);
 			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
+
+			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.namelessEP), 15), 103, 596, null);
 
 		}
 

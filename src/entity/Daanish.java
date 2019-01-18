@@ -955,7 +955,7 @@ public class Daanish extends PlayerObject {
 	// Boundaries of sprite
 	public Rectangle getBounds() {
 
-		return new Rectangle(x, y, 63, 63);
+		return new Rectangle(x, y, 62, 62);
 
 	}
 
