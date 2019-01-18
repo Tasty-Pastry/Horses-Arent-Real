@@ -24,6 +24,8 @@ public class Nicc extends PlayerObject {
 	private Spritesheet timothySheet;
 
 	private HashMap<String, AudioPlayer> SFX;
+	private static boolean special;
+	private static int direction;
 
 	// Constructor
 	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
@@ -968,6 +970,13 @@ public class Nicc extends PlayerObject {
 	public BufferedImage getSprite() {
 
 		return sprite;
+	}
+
+	public static void setSpecialMove(boolean specials, int dir) {
+
+		special = specials;
+		direction = dir;
+
 	}
 
 }

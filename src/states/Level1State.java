@@ -599,14 +599,14 @@ public class Level1State extends GameState {
 								handler.addObject(
 										new Bullet(temp.getX() + 60, temp.getY() + 64, ID.Bullet, handler, temp.getX(),
 												temp.getY() + 5000, 20, Color.BLUE, dishBullets, 4, Game.daanishDmg));
-								
+
 								SFX.get("Dish Shoot").play(true);
 
 							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() + 27, temp.getY() + 64, ID.Bullet, handler,
 										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, nickBullets, 4, Game.nickDmg));
-								
+
 								SFX.get("Nick Shoot").play(true);
 
 							} else {
@@ -627,14 +627,14 @@ public class Level1State extends GameState {
 								handler.addObject(
 										new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler, temp.getX(),
 												temp.getY() - 5000, 20, Color.BLUE, dishBullets, 3, Game.daanishDmg));
-								
+
 								SFX.get("Dish Shoot").play(true);
 
 							} else if (Game.getCharacter() == 2) {
 
 								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
 										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, Game.nickDmg));
-								
+
 								SFX.get("Nick Shoot").play(true);
 
 							} else {
@@ -656,7 +656,7 @@ public class Level1State extends GameState {
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2,
 										Game.daanishDmg));
-								
+
 								SFX.get("Dish Shoot").play(true);
 
 							} else if (Game.getCharacter() == 2) {
@@ -664,7 +664,7 @@ public class Level1State extends GameState {
 								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2, Game.nickDmg));
-								
+
 								SFX.get("Nick Shoot").play(true);
 
 							} else {
@@ -695,8 +695,8 @@ public class Level1State extends GameState {
 								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1, Game.nickDmg));
-								
-								SFX.get("Nick Shoot").play(true);								
+
+								SFX.get("Nick Shoot").play(true);
 
 							} else {
 
@@ -721,31 +721,47 @@ public class Level1State extends GameState {
 
 						if (character == 1) {
 
+							Daanish.setSpecialMove(true);
+
+							Game.daanishEP -= 20;
+
+							if (Game.daanishEP <= 0) {
+
+								Game.daanishEP = 1;
+
+							}
+
 						} else if (character == 2) {
 
 							if (handler.isUp()) {
 
-								System.out.println("up");
+								Nicc.setSpecialMove(true, 1);
 
 							} else if (handler.isDown()) {
 
-								System.out.println("Down");
+								Nicc.setSpecialMove(true, 3);
 
 							} else if (handler.isRight()) {
 
-								System.out.println("Right");
+								Nicc.setSpecialMove(true, 2);
 
 							} else if (handler.isLeft()) {
 
-								System.out.println("Left");
+								Nicc.setSpecialMove(true, 4);
 
 							} else {
 
-								System.out.println(Nicc.getLastDir());
+								Nicc.setSpecialMove(true, Nicc.getLastDir());
 
 							}
 
 							Game.nickEP -= 20;
+
+							if (Game.nickEP <= 0) {
+
+								Game.nickEP = 1;
+
+							}
 
 						} else {
 

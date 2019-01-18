@@ -25,6 +25,7 @@ public class Daanish extends PlayerObject {
 	private Spritesheet timothySheet;
 
 	private HashMap<String, AudioPlayer> SFX;
+	private static boolean special;
 
 	// Constructor
 	public Daanish(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
@@ -970,6 +971,12 @@ public class Daanish extends PlayerObject {
 	public BufferedImage getSprite() {
 
 		return sprite;
+	}
+
+	public static void setSpecialMove(boolean specials) {
+
+		special = specials;
+
 	}
 
 }

@@ -24,6 +24,7 @@ public class Nameless extends PlayerObject {
 	private Spritesheet timothySheet;
 
 	private HashMap<String, AudioPlayer> SFX;
+	private boolean special;
 
 	// Constructor
 	public Nameless(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
@@ -965,6 +966,12 @@ public class Nameless extends PlayerObject {
 	public BufferedImage getSprite() {
 
 		return sprite;
+	}
+
+	public void setSpecialMove(boolean special) {
+
+		this.special = special;
+
 	}
 
 }
