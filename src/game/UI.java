@@ -169,8 +169,6 @@ public class UI {
 
 				transitionAni[0].runAnimation();
 
-				System.out.println(!check);
-
 				if (!check) {
 
 					SFX.get("DishStartTransition").play(false);

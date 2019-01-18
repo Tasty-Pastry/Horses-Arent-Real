@@ -43,6 +43,26 @@ public class Block extends GameObject {
 
 			g.drawImage(walls[1], x, y, null);
 
+		} else if (getId() == ID.LeftBlock) {
+
+			g.drawImage(walls[6], x, y, null);
+
+		} else if (getId() == ID.RightBlock) {
+
+			g.drawImage(walls[5], x, y, null);
+
+		} else if (getId() == ID.BottomBlock) {
+
+			g.drawImage(walls[7], x, y, null);
+
+		} else if (getId() == ID.BottomLeftCornerBlock) {
+
+			g.drawImage(walls[8], x, y, null);
+
+		} else if (getId() == ID.BottomRightCornerBlock) {
+
+			g.drawImage(walls[4], x, y, null);
+
 		} else {
 
 			g.setColor(Color.BLACK);
