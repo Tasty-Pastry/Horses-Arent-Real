@@ -58,7 +58,7 @@ public class Level1State extends GameState {
 	private BufferedImage spriteSheet3 = null;
 	private BufferedImage healthBars = null;
 
-	private BufferedImage[] walls = new BufferedImage[4];
+	private BufferedImage[] walls = new BufferedImage[9];
 
 	private Spritesheet wallSheet;
 
@@ -113,10 +113,14 @@ public class Level1State extends GameState {
 
 		wallSheet = new Spritesheet(loader.loadImage("/Walls.png"));
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 9; i++) {
 
-			dishBullets[i] = dishBullet.getImage(i + 1, 1, 52, 52, 52, 52);
-			nickBullets[i] = nickBullet.getImage(i + 1, 1, 41, 41, 41, 41);
+			if (i < 4) {
+
+				dishBullets[i] = dishBullet.getImage(i + 1, 1, 52, 52, 52, 52);
+				nickBullets[i] = nickBullet.getImage(i + 1, 1, 41, 41, 41, 41);
+
+			}
 
 			walls[i] = wallSheet.getImage(i + 1, 1, 64, 64, 64, 64);
 
@@ -398,8 +402,6 @@ public class Level1State extends GameState {
 				if (green == 255 && red == 0 && blue == 255) {
 
 					boolean inGame = false;
-
-					System.out.println("Going through switch!");
 
 					switch ((int) (Math.random() * 14) + 1) {
 
