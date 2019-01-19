@@ -5,7 +5,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import animation.BufferedImageLoader;
+import entity.Daanish;
 import entity.GameObject;
+import game.Game;
 import game.ID;
 
 public class YuGiOhCard extends GameObject {
@@ -37,7 +39,8 @@ public class YuGiOhCard extends GameObject {
 	
 	public void use() {
 		
-		
+		Game.yuggo();
+		vored=true;
 		
 	}
 
