@@ -212,7 +212,35 @@ public class Enemy extends GameObject {
 							|| getBounds().intersects(Daanish.getMiddleBox())
 							|| getBounds().intersects(Daanish.getRightBox())
 							|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
-							&& UI.getDishCutIn().getRanOnce()) {
+							&& UI.getDishCutIn().getRanOnce()) {	
+						
+						if ((getBounds().intersects(Daanish.getBottomBox())|| getBounds().intersects(Daanish.getMiddleBox()))&& !hitOnce && Daanish.isSpecial()
+								&& UI.getDishCutIn().getRanOnce()) {
+							
+							velocityY+=25;
+							
+						}
+						
+						if (getBounds().intersects(Daanish.getLeftBox()) && !hitOnce && Daanish.isSpecial()
+								&& UI.getDishCutIn().getRanOnce()) {
+							
+							velocityX-=25;
+							
+						}
+						
+						if (getBounds().intersects(Daanish.getRightBox()) && !hitOnce && Daanish.isSpecial()
+								&& UI.getDishCutIn().getRanOnce()) {
+							
+							velocityX+=25;
+							
+						}
+						
+						if (getBounds().intersects(Daanish.getTopBox()) && !hitOnce && Daanish.isSpecial()
+								&& UI.getDishCutIn().getRanOnce()) {
+							
+							velocityY-=25;
+							
+						}
 
 						hitOnce = true;
 
