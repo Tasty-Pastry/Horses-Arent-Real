@@ -39,6 +39,7 @@ public class Daanish extends PlayerObject {
 	private static int numberOfBoxes;
 
 	private Animation dishMiddleAni;
+	private static boolean initFinish;
 
 	// Constructor
 	public Daanish(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
@@ -95,6 +96,8 @@ public class Daanish extends PlayerObject {
 		playerLeftAttackAni = new Animation(4, playerLeftAttack);
 		playerUpAttackAni = new Animation(4, playerUpAttack);
 		playerDownAttackAni = new Animation(4, playerDownAttack);
+
+		setInitFinish(true);
 
 	}
 
@@ -1157,6 +1160,14 @@ public class Daanish extends PlayerObject {
 
 	public void setMiddleBox(Rectangle middleBox) {
 		this.middleBox = middleBox;
+	}
+
+	public static boolean isInitFinish() {
+		return initFinish;
+	}
+
+	public void setInitFinish(boolean initFinish) {
+		this.initFinish = initFinish;
 	}
 
 }
