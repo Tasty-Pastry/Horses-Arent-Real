@@ -60,8 +60,10 @@ public class Level1State extends GameState {
 	private BufferedImage healthBars = null;
 
 	private BufferedImage[] walls = new BufferedImage[9];
-
+	private BufferedImage[] crates = new BufferedImage[1];
+	
 	private Spritesheet wallSheet;
+	private Spritesheet crateSheet;
 
 	// Engine Vars
 	private Handler handler;
@@ -143,6 +145,7 @@ public class Level1State extends GameState {
 		namelessBullet = new Spritesheet(loader.loadImage("/Dark Projectile (48 X 48).png"));
 
 		wallSheet = new Spritesheet(loader.loadImage("/Walls.png"));
+		crateSheet = new Spritesheet(loader.loadImage("/Ammo.png"));
 
 		for (int i = 0; i < 21; i++) {
 
@@ -161,6 +164,7 @@ public class Level1State extends GameState {
 				walls[i] = wallSheet.getImage(i + 1, 1, 64, 64, 64, 64);
 
 			}
+			if (i == 0) crates[i] = crateSheet.getImage(1, 1, 29, 32, 29, 32);
 
 			if (i < 10) {
 
@@ -453,7 +457,7 @@ public class Level1State extends GameState {
 				// If yellow, add a crate to the handler
 				if (green == 255 && red == 255 && blue == 0) {
 
-					handler.addObject(new Crate(x2 * 64, y2 * 64, ID.Crate));
+					handler.addObject(new Crate(x2 * 64, y2 * 64, ID.Crate, crates));
 
 				}
 

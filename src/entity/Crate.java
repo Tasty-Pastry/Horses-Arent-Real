@@ -11,11 +11,14 @@ import game.ID;
 
 public class Crate extends GameObject {
 
+	private BufferedImage[] crates;
+	
 	// Constructor
-	public Crate(int x, int y, ID id) {
+	public Crate(int x, int y, ID id, BufferedImage[] crates) {
 
 		super(x, y, id);
 
+		this.crates = crates;
 	}
 
 	public void update() {
@@ -25,16 +28,14 @@ public class Crate extends GameObject {
 	// Draw crate
 	public void draw(Graphics g) {
 
-		g.setColor(Color.yellow);
-
-		g.fillRect(x, y, 32, 32);
+		g.drawImage(crates[0], x, y,  null);
 
 	}
 
 	// Get boundaries of crate
 	public Rectangle getBounds() {
 
-		return new Rectangle(x, y, 32, 32);
+		return new Rectangle(x-16, y, 29, 32);
 
 	}
 	

@@ -77,7 +77,7 @@ public class Block extends GameObject {
 		
 		if (getId() == ID.Block) {
 			
-			return new Rectangle(x-8, y+22, 50, 42);
+			return new Rectangle(x-8, y, 50, 64);
 		}
 		
 		return new Rectangle(x-4, y+22, 32, 42);
