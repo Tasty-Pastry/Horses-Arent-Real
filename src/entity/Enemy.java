@@ -27,6 +27,7 @@ public class Enemy extends GameObject {
 
 	// Enemy Vars
 	private int hp = 100;
+	private int oldhp = hp;
 	private boolean hit;
 
 	private int enemyXPos;
@@ -95,15 +96,13 @@ public class Enemy extends GameObject {
 			// Creates a game object and sets it to the current handler object
 			GameObject temp = handler.getObject().get(i);
 
-			// If the object isnt null, and if the object is either a block, or a door
-			// collision check
-
+			// If the object isnt null
 			if (temp != null) {
 
 				if (temp.getId() == ID.Player) {
 
 					if (hp > 50) {
-
+					
 						int diffX = temp.getX() - x;
 						int diffY = temp.getY() - y;
 
@@ -112,8 +111,27 @@ public class Enemy extends GameObject {
 						velocityX = 4 * (float) Math.cos(angle);
 						velocityY = 4 * (float) Math.sin(angle);
 
+					} else {
+						
+						if (velocityX > 4) {
+							
+							velocityX -= 0.1;
+						}	
+					    if (velocityX < -4) {
+							
+							velocityX += 0.1;
+						}
+						if (velocityY > 4) {
+							
+							velocityY -= 0.1;
+						}
+						if (velocityY < -4) {
+							
+							velocityY += 0.1;
+						}
+						
+						
 					}
-
 				}
 
 				if (temp.getId() == ID.Block || temp.getId() == ID.BottomBlock
@@ -139,16 +157,22 @@ public class Enemy extends GameObject {
 
 						if (hp > 50) {
 
-							velocityX += temp.getVelocityX();
-							velocityY += temp.getVelocityY();
+							velocityX += temp.getVelocityX() * temp.damage / 40;
+							velocityY += temp.getVelocityY() * temp.damage / 40;
+
+						} else if (hp < 50 && oldhp > 50) {
+
+							velocityX += temp.getVelocityX() * temp.damage / 40;
+							velocityY += temp.getVelocityY() * temp.damage / 40;
 
 						} else {
-
-							velocityX += temp.getVelocityX() / 2;
-							velocityY += temp.getVelocityY() / 2;
-
+							
+							velocityX += temp.getVelocityX() * temp.damage / 25;
+							velocityY += temp.getVelocityY() * temp.damage / 25;
+							
 						}
-
+						
+						oldhp = hp;
 						hp -= temp.damage; // Removes hp
 
 						handler.removeObject(temp); // Remove the bullet
@@ -190,11 +214,18 @@ public class Enemy extends GameObject {
 
 		}
 
+		// Removes enemy if it is outside of the player room and moving
+		if (move == true && (enemyXPos != Game.playerXPos || enemyYPos != Game.playerYPos )) {
+			
+			Game.addKillCount();
+			handler.removeObject(this);
+			
+		}
+		
 		// Removes the enemy from the handler if it dies
 		if (hp <= 0) {
 
 			Game.addKillCount();
-
 			handler.removeObject(this);
 
 		}
@@ -267,16 +298,16 @@ public class Enemy extends GameObject {
 		// Change the velocity if it's going to intersect with a block
 		if (!slide((int) (x + velocityY), y, getBounds(), temp.getBounds())) {
 
-			x += velocityX * -1;
-			velocityX *= -1;
+			x += velocityX * -0.7;
+			velocityX *= -0.7;
 
 		}
 
 		// Change the velocity if it's going to intersect with a block
 		if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
 
-			y += velocityY * -1;
-			velocityY *= -1;
+			y += velocityY * -0.7;
+			velocityY *= -0.7;
 
 		}
 

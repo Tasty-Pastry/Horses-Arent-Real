@@ -75,7 +75,7 @@ public class Block extends GameObject {
 	// Hitbox
 	public Rectangle getBounds() {
 
-		return new Rectangle(x, y, 48, 64);
+		return new Rectangle(x, y+22, 42, 42);
 
 	}
 

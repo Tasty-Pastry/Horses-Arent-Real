@@ -267,6 +267,11 @@ public class MenuState extends GameState {
 				introMusic.play(false);
 				introMusic.setVolume(0.8);
 
+			} else {
+				
+				introMusic.play(true);
+				introMusic.setVolume(0.8);
+				
 			}
 
 		} else if (Game.isSlideIn()) {
