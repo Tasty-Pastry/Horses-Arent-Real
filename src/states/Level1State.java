@@ -568,7 +568,7 @@ public class Level1State extends GameState {
 				// If the object is a player, and the camera isn't moving, check if any of the
 				// WASD keys are being pressed
 
-				if (temp.getId() == ID.Player && !Camera.getCamMove() && !charSwitch) {
+				if (temp.getId() == ID.Player && !Camera.getCamMove() && !charSwitch && !Daanish.isSpecial()) {
 
 					// Set movement based on the key pressed
 					if (k == KeyEvent.VK_W)

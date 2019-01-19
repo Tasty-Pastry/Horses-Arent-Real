@@ -208,12 +208,15 @@ public class Enemy extends GameObject {
 
 					}
 
-					if ((getBounds().intersects(Daanish.getBottomBox()) || getBounds().intersects(Daanish.getLeftBox())
-							|| getBounds().intersects(Daanish.getMiddleBox())
-							|| getBounds().intersects(Daanish.getRightBox())
-							|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
-							&& UI.getDishCutIn().getRanOnce()) {	
-						
+					if (Game.getCharacter() == 1 && Daanish.isInitFinish()) {
+
+						if ((getBounds().intersects(Daanish.getBottomBox())
+								|| getBounds().intersects(Daanish.getLeftBox())
+								|| getBounds().intersects(Daanish.getMiddleBox())
+								|| getBounds().intersects(Daanish.getRightBox())
+								|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
+								&& UI.getDishCutIn().getRanOnce()) {
+
 						if ((getBounds().intersects(Daanish.getBottomBox())|| getBounds().intersects(Daanish.getMiddleBox()))&& !hitOnce && Daanish.isSpecial()
 								&& UI.getDishCutIn().getRanOnce()) {
 							
@@ -242,9 +245,11 @@ public class Enemy extends GameObject {
 							
 						}
 
-						hitOnce = true;
+							hitOnce = true;
 
-						hp -= 50;
+							hp -= 50;
+
+						}
 
 					}
 
