@@ -81,6 +81,12 @@ public class Enemy extends GameObject {
 	// Updates the Enemy
 	public void update() {
 
+		if (!Daanish.isSpecial()) {
+
+			hitOnce = false;
+
+		}
+
 		// Update velocity only when the camera isn't moving and the enemy is in the
 		// same room as the player
 		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos
