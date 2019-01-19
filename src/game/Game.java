@@ -13,6 +13,7 @@ import java.awt.image.BufferStrategy;
 import animation.BufferedImageLoader;
 import animation.Camera;
 import animation.Spritesheet;
+import items.YGOUse;
 import states.StateHandler;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseMotionListener, MouseListener {
@@ -36,7 +37,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	// Engine Vars
 	private StateHandler sh;
-	private Handler handler;
+	private static Handler handler;
 	private Camera camera;
 	private Inventory inv;
 	private BufferedImageLoader loader;
@@ -240,6 +241,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		sh.draw(g);
 		bs.show();
 
+	}
+	
+	public static void yuggo() {
+		
+		handler.addObject(new YGOUse(100, 100, ID.YGOUse, handler));
+		
 	}
 
 	// Getters and setters

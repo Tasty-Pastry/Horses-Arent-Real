@@ -22,6 +22,8 @@ public class YGOUse extends GameObject {
 	public YGOUse(int x, int y, ID id, Handler handler) {
 
 		super(x, y, id);
+		
+		this.handler=handler;
 
 		loader = new BufferedImageLoader();
 
@@ -31,7 +33,7 @@ public class YGOUse extends GameObject {
 
 	public void update() {
 
-		if (Game.getCharacter() == 3) {
+		if (Game.getCharacter() == 1) {
 
 			x += velocityX;
 			y += velocityY;

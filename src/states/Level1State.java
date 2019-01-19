@@ -79,11 +79,13 @@ public class Level1State extends GameState {
 
 	private Spritesheet dishBullet;
 	private Spritesheet nickBullet;
+	private Spritesheet namelessBullet;
 
 	private Spritesheet dishSpecialAttackSheet;
 
 	private BufferedImage[] dishBullets = new BufferedImage[4];
 	private BufferedImage[] nickBullets = new BufferedImage[4];
+	private BufferedImage[] namelessBullets = new BufferedImage[4];
 
 	private HashMap<String, AudioPlayer> SFX;
 
@@ -135,8 +137,10 @@ public class Level1State extends GameState {
 		healthBars = loader.loadImage("/Health Bars.png");
 		dishBullet = new Spritesheet(loader.loadImage("/Fire Projectile.png"));
 		nickBullet = new Spritesheet(loader.loadImage("/Ice Projectile.png"));
+
 		dishCutInSheet = new Spritesheet(loader.loadImage("/Daanish Special.png"));
 		dishSpecialAttackSheet = new Spritesheet(loader.loadImage("/Daanish Special Attack Animation.png"));
+		namelessBullet = new Spritesheet(loader.loadImage("/Dark Projectile (48 X 48).png"));
 
 		wallSheet = new Spritesheet(loader.loadImage("/Walls.png"));
 
@@ -148,6 +152,7 @@ public class Level1State extends GameState {
 
 				dishBullets[i] = dishBullet.getImage(i + 1, 1, 52, 52, 52, 52);
 				nickBullets[i] = nickBullet.getImage(i + 1, 1, 41, 41, 41, 41);
+				namelessBullets[i] = namelessBullet.getImage(i + 1, 1, 48, 48, 48, 48);
 
 			}
 
@@ -666,7 +671,8 @@ public class Level1State extends GameState {
 							} else {
 
 								handler.addObject(new Bullet(temp.getX() + 100, temp.getY() + 64, ID.Bullet, handler,
-										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, null, 4, Game.namelessDmg));
+										temp.getX(), temp.getY() + 5000, 20, Color.BLUE, namelessBullets, 4,
+										Game.namelessDmg));
 
 							}
 
@@ -686,7 +692,7 @@ public class Level1State extends GameState {
 
 							} else if (Game.getCharacter() == 2) {
 
-								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 100, temp.getY() - 12, ID.Bullet, handler,
 										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, nickBullets, 3, Game.nickDmg));
 
 								SFX.get("Nick Shoot").play(true);
@@ -694,7 +700,8 @@ public class Level1State extends GameState {
 							} else {
 
 								handler.addObject(new Bullet(temp.getX() + 60, temp.getY() - 12, ID.Bullet, handler,
-										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, null, 3, Game.namelessDmg));
+										temp.getX(), temp.getY() - 5000, 20, Color.BLUE, namelessBullets, 3,
+										Game.namelessDmg));
 
 							}
 
@@ -706,7 +713,7 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 12, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, dishBullets, 2,
 										Game.daanishDmg));
@@ -715,7 +722,7 @@ public class Level1State extends GameState {
 
 							} else if (Game.getCharacter() == 2) {
 
-								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 12, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, nickBullets, 2, Game.nickDmg));
 
@@ -723,9 +730,10 @@ public class Level1State extends GameState {
 
 							} else {
 
-								handler.addObject(new Bullet(temp.getX() - 12, temp.getY() + 26, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 12, temp.getY() + 26, ID.Bullet, handler,
 
-										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, null, 2, Game.namelessDmg));
+										temp.getX() - 5000, temp.getY(), 20, Color.BLUE, namelessBullets, 2,
+										Game.namelessDmg));
 
 							}
 
@@ -737,7 +745,7 @@ public class Level1State extends GameState {
 
 							if (Game.getCharacter() == 1) {
 
-								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 124, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, dishBullets, 1,
 										Game.daanishDmg));
@@ -746,7 +754,7 @@ public class Level1State extends GameState {
 
 							} else if (Game.getCharacter() == 2) {
 
-								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 124, temp.getY() + 26, ID.Bullet, handler,
 
 										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, nickBullets, 1, Game.nickDmg));
 
@@ -754,9 +762,10 @@ public class Level1State extends GameState {
 
 							} else {
 
-								handler.addObject(new Bullet(temp.getX() + 64, temp.getY() + 26, ID.Bullet, handler,
+								handler.addObject(new Bullet(temp.getX() + 124, temp.getY() + 26, ID.Bullet, handler,
 
-										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, null, 1, Game.namelessDmg));
+										temp.getX() + 5000, temp.getY(), 20, Color.BLUE, namelessBullets, 1,
+										Game.namelessDmg));
 
 							}
 
