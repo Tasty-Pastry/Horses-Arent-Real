@@ -166,13 +166,13 @@ public class Enemy extends GameObject {
 
 						if (hp > 50) {
 
-							velocityX += temp.getVelocityX() * temp.damage / 40;
-							velocityY += temp.getVelocityY() * temp.damage / 40;
+							velocityX += temp.getVelocityX() * temp.damage / 10;
+							velocityY += temp.getVelocityY() * temp.damage / 10;
 
 						} else if (hp < 50 && oldhp > 50) {
 
-							velocityX += temp.getVelocityX() * temp.damage / 40;
-							velocityY += temp.getVelocityY() * temp.damage / 40;
+							velocityX += temp.getVelocityX() * temp.damage / 10;
+							velocityY += temp.getVelocityY() * temp.damage / 10;
 
 						} else {
 
@@ -219,7 +219,7 @@ public class Enemy extends GameObject {
 
 							hitOnce = true;
 
-							hp -= 50;
+							hp -= 100;
 
 						}
 

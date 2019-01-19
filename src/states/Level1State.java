@@ -786,7 +786,7 @@ public class Level1State extends GameState {
 
 							Daanish.setSpecialMove(true);
 
-							Game.daanishEP -= 20;
+							Game.daanishEP -= 50;
 
 							if (Game.daanishEP <= 0) {
 
@@ -818,7 +818,7 @@ public class Level1State extends GameState {
 
 							}
 
-							Game.nickEP -= 20;
+							Game.nickEP -= 50;
 
 							if (Game.nickEP <= 0) {
 
