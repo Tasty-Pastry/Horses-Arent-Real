@@ -81,6 +81,12 @@ public class Enemy extends GameObject {
 	// Updates the Enemy
 	public void update() {
 
+		if (!Daanish.isSpecial()) {
+
+			hitOnce = false;
+
+		}
+
 		// Update velocity only when the camera isn't moving and the enemy is in the
 		// same room as the player
 		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos
@@ -202,15 +208,20 @@ public class Enemy extends GameObject {
 
 					}
 
-					if ((getBounds().intersects(Daanish.getBottomBox()) || getBounds().intersects(Daanish.getLeftBox())
-							|| getBounds().intersects(Daanish.getMiddleBox())
-							|| getBounds().intersects(Daanish.getRightBox())
-							|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
-							&& UI.getDishCutIn().getRanOnce()) {
+					if (Game.getCharacter() == 1 && Daanish.isInitFinish()) {
 
-						hitOnce = true;
+						if ((getBounds().intersects(Daanish.getBottomBox())
+								|| getBounds().intersects(Daanish.getLeftBox())
+								|| getBounds().intersects(Daanish.getMiddleBox())
+								|| getBounds().intersects(Daanish.getRightBox())
+								|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
+								&& UI.getDishCutIn().getRanOnce()) {
 
-						hp -= 50;
+							hitOnce = true;
+
+							hp -= 50;
+
+						}
 
 					}
 

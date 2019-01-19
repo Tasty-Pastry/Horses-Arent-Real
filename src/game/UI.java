@@ -86,6 +86,7 @@ public class UI {
 		SFX.put("MasonStartTransition", new AudioPlayer("/Mason Start Transition.wav", 1));
 		SFX.put("MasonTransition", new AudioPlayer("/Mason Transition.wav", 1));
 		SFX.put("Cut In", new AudioPlayer("/Cut In.wav", 2));
+		SFX.put("Dish Special", new AudioPlayer("/Dish Special.wav", 1));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
@@ -362,6 +363,12 @@ public class UI {
 			}
 
 			if (getDishCutIn().getRanOnce()) {
+
+				if (!SFX.get("Dish Special").clip[0].isRunning()) {
+
+					SFX.get("Dish Special").play(false);
+
+				}
 
 				getDishCutIn().toggleAnimation(true);
 
