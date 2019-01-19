@@ -975,8 +975,16 @@ public class Daanish extends PlayerObject {
 
 	public static void setSpecialMove(boolean specials) {
 
-		special = specials;
+		setSpecial(specials);
 
+	}
+
+	public static boolean isSpecial() {
+		return special;
+	}
+
+	public static void setSpecial(boolean special) {
+		Daanish.special = special;
 	}
 
 }

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+import animation.Animation;
 import animation.BufferedImageLoader;
 import animation.Camera;
 import animation.Spritesheet;
@@ -86,6 +87,12 @@ public class Level1State extends GameState {
 
 	private Color floor;
 
+	private Spritesheet dishCutInSheet;
+
+	private BufferedImage[] dishCutIn = new BufferedImage[21];
+
+	private Animation dishCutInAni;
+
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
 
@@ -104,16 +111,19 @@ public class Level1State extends GameState {
 		BufferedImageLoader loader = new BufferedImageLoader();
 
 		// Loads in Sprite
-		spriteSheet = loader.loadImage("/PlayerSprites100X100.png");
+		spriteSheet = loader.loadImage("/PlayerSprites2.png");
 		spriteSheet2 = loader.loadImage("/Horse Gallop Black.png");
 		spriteSheet3 = loader.loadImage("/OhNo.png");
 		healthBars = loader.loadImage("/Health Bars.png");
 		dishBullet = new Spritesheet(loader.loadImage("/Fire Projectile.png"));
 		nickBullet = new Spritesheet(loader.loadImage("/Ice Projectile.png"));
+		dishCutInSheet = new Spritesheet(loader.loadImage("/Daanish Special.png"));
 
 		wallSheet = new Spritesheet(loader.loadImage("/Walls.png"));
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 21; i++) {
+
+			dishCutIn[i] = dishCutInSheet.getImage(i + 1, 1, 1024, 640, 1024, 640);
 
 			if (i < 4) {
 
@@ -122,7 +132,11 @@ public class Level1State extends GameState {
 
 			}
 
-			walls[i] = wallSheet.getImage(i + 1, 1, 64, 64, 64, 64);
+			if (i < 9) {
+
+				walls[i] = wallSheet.getImage(i + 1, 1, 64, 64, 64, 64);
+
+			}
 
 		}
 
@@ -131,7 +145,9 @@ public class Level1State extends GameState {
 		sheet3 = new Spritesheet(spriteSheet3);
 		health = new Spritesheet(healthBars);
 
-		ui = new UI(health, handler);
+		dishCutInAni = new Animation(2, dishCutIn);
+
+		ui = new UI(health, handler, dishCutInAni);
 
 		SFX = new HashMap<String, AudioPlayer>();
 
@@ -719,7 +735,7 @@ public class Level1State extends GameState {
 						// 1 = Daanish 2 = Nicc 3 = Nameless
 						int character = Game.getCharacter();
 
-						if (character == 1) {
+						if (character == 1 && !Daanish.isSpecial()) {
 
 							Daanish.setSpecialMove(true);
 

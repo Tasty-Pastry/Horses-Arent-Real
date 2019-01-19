@@ -43,14 +43,14 @@ public class Nicc extends PlayerObject {
 
 			playerRight[i] = sheet.getImage(i + 1, 5, 100, 64, 100, 64);
 			playerDown[i] = sheet.getImage(i + 1, 6, 100, 64, 100, 64);
-			playerUp[i] = sheet.getImage(i + 1, 7,  100, 64, 100, 64);
-			playerLeft[i] = sheet.getImage(i + 1, 8,  100, 64, 100, 64);
+			playerUp[i] = sheet.getImage(i + 1, 7, 100, 64, 100, 64);
+			playerLeft[i] = sheet.getImage(i + 1, 8, 100, 64, 100, 64);
 
 			if (i == 0 || i == 1) {
 
 				playerRightAttack[i] = sheet.getImage(i + 5, 5, 100, 64, 100, 64);
-				playerLeftAttack[i] = sheet.getImage(i + 5, 8,  100, 64, 100, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 6,  100, 64, 100, 64);
+				playerLeftAttack[i] = sheet.getImage(i + 5, 8, 100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 6, 100, 64, 100, 64);
 				playerUpAttack[i] = sheet.getImage(i + 5, 7, 100, 64, 100, 64);
 
 			}
@@ -77,8 +77,8 @@ public class Nicc extends PlayerObject {
 
 		// Updates movement
 		x += velocityX;
-		y += velocityY;		
-		
+		y += velocityY;
+
 		// Movement of Player Character
 		if (handler.isUp()) {
 
@@ -330,7 +330,7 @@ public class Nicc extends PlayerObject {
 			Game.setShoot(false, 0);
 
 		}
-		
+
 		// ------------------------------------------------------------------------------------------------------------
 
 	}

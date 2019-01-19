@@ -117,6 +117,9 @@ public class MenuState extends GameState {
 
 	// help menu
 	private BufferedImage hellpMenu;
+	private BufferedImage helpScreen;
+	private boolean helpUp;
+	private Font charFont3;
 
 	public MenuState(StateHandler sh, Handler h) {
 
@@ -131,6 +134,7 @@ public class MenuState extends GameState {
 		start = loader.loadImage("/Start.png");
 		hellp = loader.loadImage("/Hellp.png");
 		title = loader.loadImage("/Title.png");
+		helpScreen = loader.loadImage("/Help Screen.png");
 
 		bg = new Background("/bg.png", 1);
 		bg.setVector(-0.99, 0);
@@ -200,6 +204,7 @@ public class MenuState extends GameState {
 		introFont = new Font("Pixeled English Font", Font.PLAIN, 35);
 		charFont = new Font("Alkhemikal", Font.PLAIN, 90);
 		charFont2 = new Font("Alkhemikal", Font.PLAIN, 80);
+		charFont3 = new Font("Alkhemikal", Font.PLAIN, 70);
 		dialogueFont = new Font("Determination Mono", Font.PLAIN, 30);
 
 		introMusic = new AudioPlayer("/Intro Music.wav", 1);
@@ -459,6 +464,102 @@ public class MenuState extends GameState {
 
 				}
 
+			} else if (helpUp) {
+
+				if (characterSelect == 1) {
+
+					daanishWalkAni.toggleAnimation(true);
+					nickWalkAni.toggleAnimation(false);
+					namelessWalkAni.toggleAnimation(false);
+
+					daanishCheerAni.toggleAnimation(false);
+					nickCheerAni.toggleAnimation(true);
+					namelessCheerAni.toggleAnimation(true);
+
+					daanishCheerAni.runAnimation();
+
+					nickWalkAni.runAnimation();
+					namelessWalkAni.runAnimation();
+
+				} else if (characterSelect == 2) {
+
+					daanishWalkAni.toggleAnimation(false);
+					nickWalkAni.toggleAnimation(true);
+					namelessWalkAni.toggleAnimation(false);
+
+					daanishCheerAni.toggleAnimation(true);
+					nickCheerAni.toggleAnimation(false);
+					namelessCheerAni.toggleAnimation(true);
+
+					nickCheerAni.runAnimation();
+
+					daanishWalkAni.runAnimation();
+					namelessWalkAni.runAnimation();
+
+				} else if (characterSelect == 3) {
+
+					daanishWalkAni.toggleAnimation(false);
+					nickWalkAni.toggleAnimation(false);
+					namelessWalkAni.toggleAnimation(true);
+
+					daanishCheerAni.toggleAnimation(true);
+					nickCheerAni.toggleAnimation(true);
+					namelessCheerAni.toggleAnimation(false);
+
+					namelessCheerAni.runAnimation();
+
+					daanishWalkAni.runAnimation();
+					nickWalkAni.runAnimation();
+
+				} else {
+
+					daanishWalkAni.toggleAnimation(false);
+					nickWalkAni.toggleAnimation(false);
+					namelessWalkAni.toggleAnimation(false);
+
+					daanishCheerAni.toggleAnimation(true);
+					nickCheerAni.toggleAnimation(true);
+					namelessCheerAni.toggleAnimation(true);
+
+					daanishWalkAni.runAnimation();
+					nickWalkAni.runAnimation();
+					namelessWalkAni.runAnimation();
+
+				}
+
+				if (startBox.y > 314) {
+
+					startBox.y = hellpBox.y -= 5;
+
+				}
+
+				if (characterSelect < 1 || characterSelect > 3) {
+
+					hellpAni.toggleAnimation(false);
+					startAni.toggleAnimation(true);
+					hellpAni.runAnimation();
+
+				}
+
+				if (j >= -470) {
+
+					j -= 20;
+					line.y -= 20;
+					charBox.y -= 20;
+					daanishBox.y -= 20;
+					nickBox.y -= 20;
+					namelessBox.y -= 20;
+
+				} else {
+
+					line.y = 0;
+					charBox.y = 14;
+					daanishBox.y = 64;
+					nickBox.y = 65;
+					namelessBox.y = 70;
+
+				}
+
 			} else {
 
 				if (startBox.y < 366) {
@@ -645,6 +746,30 @@ public class MenuState extends GameState {
 
 			bg.draw((Graphics2D) g);
 
+			if ((!select && !Game.isSlideIn()) || characterSelectBool) {
+
+				startAni.drawAnimation(g, startBox.x, startBox.y, 0);
+
+				g.drawImage(hellp, hellpBox.x, hellpBox.y, null);
+
+			} else if (!Game.isSlideIn()) {
+
+				hellpAni.drawAnimation(g, hellpBox.x, hellpBox.y, 0);
+
+				g.drawImage(start, startBox.x, startBox.y, null);
+
+			} else {
+
+				g.setColor(color);
+				g.drawImage(hellp, hellpBox.x, hellpBox.y, null);
+
+				g.drawImage(start, startBox.x, startBox.y, null);
+
+			}
+
+			// Title
+			g.drawImage(title, titleBox.x, titleBox.y, null);
+
 			g.drawImage(characterBox, line.x, line.y, null);
 
 			// Characters
@@ -694,7 +819,7 @@ public class MenuState extends GameState {
 
 				nickWalkAni.drawAnimation(g, nickBox.x, nickBox.y, 0);
 
-			} else {
+			} else if (!select) {
 
 				g.setFont(charFont2);
 
@@ -706,31 +831,19 @@ public class MenuState extends GameState {
 				nickWalkAni.drawAnimation(g, nickBox.x, nickBox.y, 0);
 				namelessWalkAni.drawAnimation(g, namelessBox.x, namelessBox.y, 0);
 
-			}
-
-			if ((!select && !Game.isSlideIn()) || characterSelectBool) {
-
-				startAni.drawAnimation(g, startBox.x, startBox.y, 0);
-
-				g.drawImage(hellp, hellpBox.x, hellpBox.y, null);
-
-			} else if (!Game.isSlideIn()) {
-
-				hellpAni.drawAnimation(g, hellpBox.x, hellpBox.y, 0);
-
-				g.drawImage(start, startBox.x, startBox.y, null);
-
 			} else {
 
-				g.setColor(color);
-				g.drawImage(hellp, hellpBox.x, hellpBox.y, null);
+				g.setFont(charFont);
 
-				g.drawImage(start, startBox.x, startBox.y, null);
+				g.drawString("The", 87, charBox.y + 105);
+				g.setFont(charFont3);
+				g.drawString("Characters", 734, charBox.y + 105);
+
+				daanishWalkAni.drawAnimation(g, daanishBox.x, daanishBox.y, 0);
+				nickWalkAni.drawAnimation(g, nickBox.x, nickBox.y, 0);
+				namelessWalkAni.drawAnimation(g, namelessBox.x, namelessBox.y, 0);
 
 			}
-
-			// Title
-			g.drawImage(title, titleBox.x, titleBox.y, null);
 
 			if (loadingCheck) {
 
@@ -800,8 +913,8 @@ public class MenuState extends GameState {
 
 			}
 
-			if ((k == KeyEvent.VK_LEFT || k == KeyEvent.VK_RIGHT) && !charUp && Game.getIntroDone()
-					&& !Game.isSlideIn()) {
+			if ((k == KeyEvent.VK_LEFT || k == KeyEvent.VK_RIGHT) && !charUp && Game.getIntroDone() && !Game.isSlideIn()
+					&& !helpUp) {
 
 				select = !select;
 
@@ -826,6 +939,10 @@ public class MenuState extends GameState {
 
 			} else if (k == KeyEvent.VK_ENTER && Game.getIntroDone() && !Game.isSlideIn() && select) {
 
+				helpUp = !helpUp;
+
+				SFX.get("Select").play(false);
+
 			}
 
 			if (k == KeyEvent.VK_DOWN && charUp && (characterSelect < 1 || characterSelect > 3)) {
@@ -839,10 +956,14 @@ public class MenuState extends GameState {
 
 			if (k == KeyEvent.VK_UP && charUp) {
 
+				if (characterSelect != 5) {
+
+					SFX.get("Select").play(false);
+
+				}
+
 				characterSelect = 5;
 				characterSelectBool = false;
-
-				SFX.get("Select").play(false);
 
 			}
 

@@ -41,16 +41,16 @@ public class Nameless extends PlayerObject {
 		for (int i = 0; i < 3; i++) {
 
 			playerRight[i] = sheet.getImage(i + 1, 9, 100, 64, 100, 64);
-			playerDown[i] = sheet.getImage(i + 1, 10,  100, 64, 100, 64);
-			playerUp[i] = sheet.getImage(i + 1, 11,  100, 64, 100, 64);
-			playerLeft[i] = sheet.getImage(i + 1, 12,  100, 64, 100, 64);
+			playerDown[i] = sheet.getImage(i + 1, 10, 100, 64, 100, 64);
+			playerUp[i] = sheet.getImage(i + 1, 11, 100, 64, 100, 64);
+			playerLeft[i] = sheet.getImage(i + 1, 12, 100, 64, 100, 64);
 
 			if (i == 0 || i == 1) {
 
 				playerRightAttack[i] = sheet.getImage(i + 5, 9, 100, 64, 100, 64);
-				playerLeftAttack[i] = sheet.getImage(i + 5, 12,  100, 64, 100, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 10,  100, 64, 100, 64);
-				playerUpAttack[i] = sheet.getImage(i + 5, 11,  100, 64, 100, 64);
+				playerLeftAttack[i] = sheet.getImage(i + 5, 12, 100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 10, 100, 64, 100, 64);
+				playerUpAttack[i] = sheet.getImage(i + 5, 11, 100, 64, 100, 64);
 
 			}
 
