@@ -63,6 +63,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static int nickDmg = 35;
 	public static int namelessDmg = 10;
 
+	public static int daanishEXP;
+	public static int nickEXP;
+	public static int namelessEXP;
+
+	public static int daanishLevel = 1;
+	public static int nickLevel = 1;
+	public static int namelessLevel = 1;
+
 	private static int character = 1;
 
 	public static items.HorseEye horseEye;

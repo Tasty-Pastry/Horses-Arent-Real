@@ -15,6 +15,7 @@ import game.Game;
 import game.Handler;
 import game.ID;
 import game.Inventory;
+import game.UI;
 import items.MothmanUse;
 import items.TimothyUse;
 
@@ -27,9 +28,21 @@ public class Daanish extends PlayerObject {
 	private HashMap<String, AudioPlayer> SFX;
 	private static boolean special;
 
+	private static Rectangle middleBox;
+	private static Rectangle[] sideMiddleBoxes;
+	private static Rectangle[] sideTopBoxes;
+	private static Rectangle topBox;
+	private static Rectangle bottomBox;
+	private static Rectangle leftBox;
+	private static Rectangle rightBox;
+
+	private static int numberOfBoxes;
+
+	private Animation dishMiddleAni;
+
 	// Constructor
 	public Daanish(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
-			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX) {
+			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX, Animation dishMiddleAni) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
 
@@ -37,6 +50,17 @@ public class Daanish extends PlayerObject {
 
 		this.mothmanSheet = mothmanSheet;
 		this.timothySheet = timothySheet;
+
+		this.dishMiddleAni = dishMiddleAni;
+
+		setMiddleBox(new Rectangle(0, 0, 64, 64));
+		setBottomBox(new Rectangle(0, 0, 64, 64));
+		setTopBox(new Rectangle(0, 0, 64, 64));
+		setLeftBox(new Rectangle(0, 0, 64, 64));
+		setRightBox(new Rectangle(0, 0, 64, 64));
+
+		setSideMiddleBoxes(new Rectangle[5]);
+		setSideTopBoxes(new Rectangle[5]);
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -46,16 +70,16 @@ public class Daanish extends PlayerObject {
 				playerRight[i] = sheet.getImage(i + 1, 1, 100, 64, 100, 64);
 				playerDown[i] = sheet.getImage(i + 1, 2, 100, 64, 100, 64);
 				playerUp[i] = sheet.getImage(i + 1, 3, 100, 64, 100, 64);
-				playerLeft[i] = sheet.getImage(i + 1, 4,  100, 64, 100, 64);
+				playerLeft[i] = sheet.getImage(i + 1, 4, 100, 64, 100, 64);
 
 			}
 
 			if (i == 0 || i == 1) {
 
-				playerRightAttack[i] = sheet.getImage(i + 5, 1,100, 64, 100, 64);
+				playerRightAttack[i] = sheet.getImage(i + 5, 1, 100, 64, 100, 64);
 				playerLeftAttack[i] = sheet.getImage(i + 5, 4, 100, 64, 100, 64);
-				playerDownAttack[i] = sheet.getImage(i + 5, 2,  100, 64, 100, 64);
-				playerUpAttack[i] = sheet.getImage(i + 5, 3,  100, 64, 100, 64);
+				playerDownAttack[i] = sheet.getImage(i + 5, 2, 100, 64, 100, 64);
+				playerUpAttack[i] = sheet.getImage(i + 5, 3, 100, 64, 100, 64);
 
 			}
 
@@ -79,149 +103,223 @@ public class Daanish extends PlayerObject {
 		// Check if the player is colliding with an object
 		collision();
 
-		// Updates movement
-		x += velocityX;
-		y += velocityY;
+		if (!special) {
 
-		// Movement of Player Character
-		if (handler.isUp()) {
+			// Updates movement
+			x += velocityX;
+			y += velocityY;
 
-			// Set animation
-			isUp = true;
-			isDown = false;
-			isRight = false;
-			isLeft = false;
+			// Movement of Player Character
+			if (handler.isUp()) {
 
-			// Decreases Y velocity
-			velocityY += -vel;
+				// Set animation
+				isUp = true;
+				isDown = false;
+				isRight = false;
+				isLeft = false;
 
-			// Caps Y velocity
-			if (velocityY < -maxVel) {
+				// Decreases Y velocity
+				velocityY += -vel;
 
-				velocityY = -maxVel;
-			}
+				// Caps Y velocity
+				if (velocityY < -maxVel) {
 
-			// Facing up
-			setLastDir(1);
+					velocityY = -maxVel;
+				}
 
-		} else if (!handler.isDown()) {
+				// Facing up
+				setLastDir(1);
 
-			// Increases Y velocity
-			velocityY -= -vel;
+			} else if (!handler.isDown()) {
 
-			// Caps Y velocity
-			if (velocityY > minVel) {
+				// Increases Y velocity
+				velocityY -= -vel;
 
-				velocityY = minVel;
+				// Caps Y velocity
+				if (velocityY > minVel) {
 
-			}
+					velocityY = minVel;
 
-		}
-
-		// Moving down
-		if (handler.isDown()) {
-
-			// Sets animation
-			isUp = false;
-			isDown = true;
-			isRight = false;
-			isLeft = false;
-
-			// Increases Y velocity
-			velocityY -= -vel;
-
-			// Caps Y velocity
-			if (velocityY > maxVel) {
-
-				velocityY = maxVel;
+				}
 
 			}
 
-			// Sprite facing down
-			setLastDir(3);
+			// Moving down
+			if (handler.isDown()) {
 
-		} else if (!handler.isUp()) { // Slows down y vel when not moving down
+				// Sets animation
+				isUp = false;
+				isDown = true;
+				isRight = false;
+				isLeft = false;
 
-			// Decreases y vel
-			velocityY -= vel;
+				// Increases Y velocity
+				velocityY -= -vel;
 
-			// Caps vel
-			if (velocityY < minVel) {
+				// Caps Y velocity
+				if (velocityY > maxVel) {
 
-				velocityY = minVel;
+					velocityY = maxVel;
 
-			}
+				}
 
-		}
+				// Sprite facing down
+				setLastDir(3);
 
-		// Moving to the right
-		if (handler.isRight()) {
+			} else if (!handler.isUp()) { // Slows down y vel when not moving down
 
-			// Sets animation
-			isLeft = false;
-			isRight = true;
-			isUp = false;
-			isDown = false;
+				// Decreases y vel
+				velocityY -= vel;
 
-			// Increase x vel
-			velocityX -= -vel;
+				// Caps vel
+				if (velocityY < minVel) {
 
-			// Caps max vel
-			if (velocityX > maxVel) {
+					velocityY = minVel;
 
-				velocityX = maxVel;
-
-			}
-
-			// Sprite facing the right
-			setLastDir(2);
-
-		} else if (!handler.isLeft()) { // Decrease vel when the player is moving right but the right key isn't being
-										// pressed
-
-			// Decrease x vel
-			velocityX -= vel;
-
-			// Caps x vel
-			if (velocityX < minVel) {
-
-				velocityX = minVel;
+				}
 
 			}
 
-		}
+			// Moving to the right
+			if (handler.isRight()) {
 
-		// Moving left
-		if (handler.isLeft()) {
+				// Sets animation
+				isLeft = false;
+				isRight = true;
+				isUp = false;
+				isDown = false;
 
-			// Sets animation direction
-			isRight = false;
-			isLeft = true;
-			isDown = false;
-			isUp = false;
+				// Increase x vel
+				velocityX -= -vel;
 
-			// Decrease x vel
-			velocityX += -vel;
+				// Caps max vel
+				if (velocityX > maxVel) {
 
-			// Caps x vel
-			if (velocityX < -maxVel) {
+					velocityX = maxVel;
 
-				velocityX = -maxVel;
+				}
+
+				// Sprite facing the right
+				setLastDir(2);
+
+			} else if (!handler.isLeft()) { // Decrease vel when the player is moving right but the right key isn't
+											// being
+											// pressed
+
+				// Decrease x vel
+				velocityX -= vel;
+
+				// Caps x vel
+				if (velocityX < minVel) {
+
+					velocityX = minVel;
+
+				}
 
 			}
 
-			// Player sprite is facing left
-			setLastDir(4);
+			// Moving left
+			if (handler.isLeft()) {
 
-		} else if (!handler.isRight()) { // Slows down
+				// Sets animation direction
+				isRight = false;
+				isLeft = true;
+				isDown = false;
+				isUp = false;
 
-			// Increases vel
-			velocityX -= -vel;
+				// Decrease x vel
+				velocityX += -vel;
 
-			// Caps vel
-			if (velocityX > minVel) {
+				// Caps x vel
+				if (velocityX < -maxVel) {
 
-				velocityX = minVel;
+					velocityX = -maxVel;
+
+				}
+
+				// Player sprite is facing left
+				setLastDir(4);
+
+			} else if (!handler.isRight()) { // Slows down
+
+				// Increases vel
+				velocityX -= -vel;
+
+				// Caps vel
+				if (velocityX > minVel) {
+
+					velocityX = minVel;
+
+				}
+
+			}
+
+		} else {
+
+			velocityX = 0;
+			velocityY = 0;
+
+			if (Game.daanishLevel % 2 == 0) {
+
+				setNumberOfBoxes(Game.daanishLevel);
+
+			} else {
+
+				setNumberOfBoxes(Game.daanishLevel - 1);
+
+			}
+
+			setSideMiddleBoxes(new Rectangle[getNumberOfBoxes() * 2]);
+			setSideTopBoxes(new Rectangle[getNumberOfBoxes() * 2]);
+
+			if (getNumberOfBoxes() > 1) {
+
+				for (int i = 0; i < getNumberOfBoxes(); i++) {
+
+					if (i <= (getNumberOfBoxes() / 2) - 1) {
+
+						getSideMiddleBoxes()[i] = new Rectangle((x + 15) - (64 * i) - 64, y, 64, 64);
+
+						getSideTopBoxes()[i] = new Rectangle(x + 15, y - (64 * i) - 64, 64, 64);
+
+					} else {
+
+						getSideMiddleBoxes()[i] = new Rectangle((x + 15) + (64 * i) - (32 * getNumberOfBoxes() - 64), y,
+								64, 64);
+
+						getSideTopBoxes()[i] = new Rectangle(x + 15, y + (64 * i) - (32 * getNumberOfBoxes() - 64), 64,
+								64);
+
+					}
+
+				}
+
+			}
+
+			getMiddleBox().x = x + 15;
+			getMiddleBox().y = y;
+
+			getTopBox().x = x + 15;
+			getTopBox().y = y - (64 * (getNumberOfBoxes() - ((getNumberOfBoxes() / 2) - 1)));
+
+			getBottomBox().x = x + 15;
+			getBottomBox().y = y + (64 * (getNumberOfBoxes() - ((getNumberOfBoxes() / 2) - 1)));
+
+			getLeftBox().x = (x + 15) - (64 * (getNumberOfBoxes() - ((getNumberOfBoxes() / 2) - 1)));
+			getLeftBox().y = y;
+
+			getRightBox().x = (x + 15) + (64 * (getNumberOfBoxes() - ((getNumberOfBoxes() / 2) - 1)));
+			getRightBox().y = y;
+
+			if (UI.getDishCutIn().getRanOnce()) {
+
+				dishMiddleAni.runAnimation();
+
+				if (dishMiddleAni.getRanOnce()) {
+
+					dishMiddleAni.reset();
+
+				}
 
 			}
 
@@ -873,6 +971,16 @@ public class Daanish extends PlayerObject {
 
 	public void draw(Graphics g) {
 
+		if (special) {
+
+			if (UI.getDishCutIn().getRanOnce()) {
+
+				dishMiddleAni.drawAnimation(g, Daanish.getMiddleBox().x, Daanish.getMiddleBox().y, 0);
+
+			}
+
+		}
+
 		// Checks if the player is shooting
 		if (Game.getShoot()) {
 
@@ -985,6 +1093,70 @@ public class Daanish extends PlayerObject {
 
 	public static void setSpecial(boolean special) {
 		Daanish.special = special;
+	}
+
+	public static Rectangle getTopBox() {
+		return topBox;
+	}
+
+	public void setTopBox(Rectangle topBox) {
+		this.topBox = topBox;
+	}
+
+	public static int getNumberOfBoxes() {
+		return numberOfBoxes;
+	}
+
+	public void setNumberOfBoxes(int numberOfBoxes) {
+		this.numberOfBoxes = numberOfBoxes;
+	}
+
+	public static Rectangle getBottomBox() {
+		return bottomBox;
+	}
+
+	public void setBottomBox(Rectangle bottomBox) {
+		this.bottomBox = bottomBox;
+	}
+
+	public static Rectangle getLeftBox() {
+		return leftBox;
+	}
+
+	public void setLeftBox(Rectangle leftBox) {
+		this.leftBox = leftBox;
+	}
+
+	public static Rectangle getRightBox() {
+		return rightBox;
+	}
+
+	public void setRightBox(Rectangle rightBox) {
+		this.rightBox = rightBox;
+	}
+
+	public static Rectangle[] getSideTopBoxes() {
+		return sideTopBoxes;
+	}
+
+	public void setSideTopBoxes(Rectangle[] sideTopBoxes) {
+		this.sideTopBoxes = sideTopBoxes;
+	}
+
+	public static Rectangle[] getSideMiddleBoxes() {
+		return sideMiddleBoxes;
+	}
+
+	public void setSideMiddleBoxes(Rectangle[] sideMiddleBoxes) {
+		this.sideMiddleBoxes = sideMiddleBoxes;
+	}
+
+	public static Rectangle getMiddleBox() {
+		return middleBox;
+	}
+
+	public void setMiddleBox(Rectangle middleBox) {
+		this.middleBox = middleBox;
 	}
 
 }

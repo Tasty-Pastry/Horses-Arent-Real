@@ -80,6 +80,8 @@ public class Level1State extends GameState {
 	private Spritesheet dishBullet;
 	private Spritesheet nickBullet;
 
+	private Spritesheet dishSpecialAttackSheet;
+
 	private BufferedImage[] dishBullets = new BufferedImage[4];
 	private BufferedImage[] nickBullets = new BufferedImage[4];
 
@@ -92,6 +94,22 @@ public class Level1State extends GameState {
 	private BufferedImage[] dishCutIn = new BufferedImage[21];
 
 	private Animation dishCutInAni;
+
+	private BufferedImage[] middle = new BufferedImage[10];
+
+	private BufferedImage[] sideTop = new BufferedImage[10];
+
+	private BufferedImage[] sideMiddle = new BufferedImage[10];
+
+	private BufferedImage[] left = new BufferedImage[10];
+
+	private BufferedImage[] right = new BufferedImage[10];
+
+	private BufferedImage[] bottom = new BufferedImage[10];
+
+	private BufferedImage[] top = new BufferedImage[10];
+
+	private Animation[] dishSpecialAni;
 
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
@@ -118,6 +136,7 @@ public class Level1State extends GameState {
 		dishBullet = new Spritesheet(loader.loadImage("/Fire Projectile.png"));
 		nickBullet = new Spritesheet(loader.loadImage("/Ice Projectile.png"));
 		dishCutInSheet = new Spritesheet(loader.loadImage("/Daanish Special.png"));
+		dishSpecialAttackSheet = new Spritesheet(loader.loadImage("/Daanish Special Attack Animation.png"));
 
 		wallSheet = new Spritesheet(loader.loadImage("/Walls.png"));
 
@@ -138,7 +157,26 @@ public class Level1State extends GameState {
 
 			}
 
+			if (i < 10) {
+
+				middle[i] = dishSpecialAttackSheet.getImage(i + 1, 1, 64, 64, 64, 64);
+				sideTop[i] = dishSpecialAttackSheet.getImage(i + 1, 2, 64, 64, 64, 64);
+				sideMiddle[i] = dishSpecialAttackSheet.getImage(i + 1, 3, 64, 64, 64, 64);
+				left[i] = dishSpecialAttackSheet.getImage(i + 1, 4, 64, 64, 64, 64);
+				right[i] = dishSpecialAttackSheet.getImage(i + 1, 5, 64, 64, 64, 64);
+				bottom[i] = dishSpecialAttackSheet.getImage(i + 1, 6, 64, 64, 64, 64);
+				top[i] = dishSpecialAttackSheet.getImage(i + 1, 7, 64, 64, 64, 64);
+
+			}
+
 		}
+
+		dishSpecialAni = new Animation[] {
+
+				new Animation(3, middle), new Animation(3, sideTop), new Animation(3, sideMiddle),
+				new Animation(3, left), new Animation(3, right), new Animation(3, bottom), new Animation(3, top),
+
+		};
 
 		sheet = new Spritesheet(spriteSheet);
 		sheet2 = new Spritesheet(spriteSheet2);
@@ -147,7 +185,7 @@ public class Level1State extends GameState {
 
 		dishCutInAni = new Animation(2, dishCutIn);
 
-		ui = new UI(health, handler, dishCutInAni);
+		ui = new UI(health, handler, dishCutInAni, dishSpecialAni);
 
 		SFX = new HashMap<String, AudioPlayer>();
 
@@ -185,7 +223,7 @@ public class Level1State extends GameState {
 				if (ui.isCharSwitch() && Game.getCharacter() == 1) {
 
 					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet, SFX));
+							Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
 
 					handler.removeObject(temp);
 
@@ -379,7 +417,7 @@ public class Level1State extends GameState {
 
 					if (Game.getCharacter() == 1)
 						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet, SFX));
+								Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
 					if (Game.getCharacter() == 2)
 						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
 								Game.mothmanSheet, Game.timothySheet, SFX));
@@ -735,7 +773,7 @@ public class Level1State extends GameState {
 						// 1 = Daanish 2 = Nicc 3 = Nameless
 						int character = Game.getCharacter();
 
-						if (character == 1 && !Daanish.isSpecial()) {
+						if (character == 1 && !Daanish.isSpecial() && Game.daanishEP > 1) {
 
 							Daanish.setSpecialMove(true);
 

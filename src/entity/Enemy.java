@@ -13,6 +13,7 @@ import animation.Spritesheet;
 import game.Game;
 import game.Handler;
 import game.ID;
+import game.UI;
 
 public class Enemy extends GameObject {
 
@@ -43,6 +44,8 @@ public class Enemy extends GameObject {
 	private Animation horseLeftAni;
 	private Animation horseDownAni;
 	private Animation horseUpAni;
+
+	private boolean hitOnce;
 
 	// Constructor
 	public Enemy(int x, int y, int enemyXPos, int enemyYPos, ID id, Handler handler, Spritesheet sheet) {
@@ -79,7 +82,8 @@ public class Enemy extends GameObject {
 
 		// Update velocity only when the camera isn't moving and the enemy is in the
 		// same room as the player
-		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos) {
+		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos
+				&& !Daanish.isSpecial()) {
 
 			x += velocityX;
 			y += velocityY;
@@ -165,13 +169,25 @@ public class Enemy extends GameObject {
 
 						// Checks if the camera isnt moving, if the enemy is allowed to move and can
 						// only shoot once every 25 frames
-						if (Game.getCount() % 25 == 0 && !Camera.getCamMove() && move) {
+						if (Game.getCount() % 25 == 0 && !Camera.getCamMove() && move && !Daanish.isSpecial()) {
 
 							// Adds a bullet
 							handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.EnemyBullet, handler,
 									temp.getX(), temp.getY(), 10, Color.MAGENTA, null, 0, 5));
 
 						}
+
+					}
+
+					if ((getBounds().intersects(Daanish.getBottomBox()) || getBounds().intersects(Daanish.getLeftBox())
+							|| getBounds().intersects(Daanish.getMiddleBox())
+							|| getBounds().intersects(Daanish.getRightBox())
+							|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
+							&& UI.getDishCutIn().getRanOnce()) {
+
+						hitOnce = true;
+
+						hp -= 50;
 
 					}
 
@@ -194,6 +210,44 @@ public class Enemy extends GameObject {
 		if (hp <= 0) {
 
 			Game.addKillCount();
+
+			if (Game.getCharacter() == 1) {
+
+				Game.daanishEXP += 5;
+
+				if (Game.daanishEXP >= Math.ceil(((6 / 5) * Math.pow(Game.daanishLevel + 1, 3))
+						- (15 * Math.pow(Game.daanishLevel + 1, 2)) + (100 * (Game.daanishLevel + 1)) - 140)) {
+
+					Game.daanishLevel++;
+					Game.daanishEXP = 0;
+
+				}
+
+			} else if (Game.getCharacter() == 2) {
+
+				Game.nickEXP += 5;
+
+				if (Game.nickEXP >= Math.ceil(((6 / 5) * Math.pow(Game.nickLevel + 1, 3))
+						- (15 * Math.pow(Game.nickLevel + 1, 2)) + (100 * (Game.nickLevel + 1)) - 140)) {
+
+					Game.nickLevel++;
+					Game.nickEXP = 0;
+
+				}
+
+			} else {
+
+				Game.namelessEXP += 5;
+
+				if (Game.namelessEXP >= Math.ceil(((6 / 5) * Math.pow(Game.namelessLevel + 1, 3))
+						- (15 * Math.pow(Game.namelessLevel + 1, 2)) + (100 * (Game.namelessLevel + 1)) - 140)) {
+
+					Game.namelessLevel++;
+					Game.namelessEXP = 0;
+
+				}
+
+			}
 
 			handler.removeObject(this);
 

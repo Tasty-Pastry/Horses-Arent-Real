@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -52,22 +54,28 @@ public class UI {
 	private boolean check;
 	private boolean check2;
 
-	private Animation dishCutIn;
+	private static Animation dishCutIn;
+	private Animation[] dishSpecialAni;
 	private boolean check3;
+	private Font font;
 
-	public UI(Spritesheet sheet, Handler handler, Animation dishCutIn) {
+	public UI(Spritesheet sheet, Handler handler, Animation dishCutIn, Animation[] dishSpecialAnimation) {
 
 		this.sheet = sheet;
 
 		this.handler = handler;
 
-		this.dishCutIn = dishCutIn;
+		this.setDishCutIn(dishCutIn);
+
+		this.setDishSpecialAni(dishSpecialAnimation);
 
 		BufferedImageLoader loader = new BufferedImageLoader();
 
 		hpBarSheet = new Spritesheet(loader.loadImage("/HealthFill.png"));
 
 		EPBar = loader.loadImage("/EP Fill.png");
+
+		font = new Font("Determination Mono", Font.PLAIN, 30);
 
 		SFX = new HashMap<String, AudioPlayer>();
 
@@ -77,7 +85,7 @@ public class UI {
 		SFX.put("NickTransition", new AudioPlayer("/Nick Transition.wav", 1));
 		SFX.put("MasonStartTransition", new AudioPlayer("/Mason Start Transition.wav", 1));
 		SFX.put("MasonTransition", new AudioPlayer("/Mason Transition.wav", 1));
-		SFX.put("Cut In", new AudioPlayer("/Cut In.wav", 1));
+		SFX.put("Cut In", new AudioPlayer("/Cut In.wav", 2));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
@@ -341,12 +349,11 @@ public class UI {
 
 		if (Daanish.isSpecial()) {
 
-			dishCutIn.runAnimation();
+			getDishCutIn().runAnimation();
 
 			if (!check3) {
 
 				SFX.get("Cut In").setVolume(2);
-				;
 
 				SFX.get("Cut In").play(false);
 
@@ -354,13 +361,34 @@ public class UI {
 
 			}
 
-			if (dishCutIn.getRanOnce()) {
+			if (getDishCutIn().getRanOnce()) {
 
-				Daanish.setSpecial(false);
+				getDishCutIn().toggleAnimation(true);
 
-				dishCutIn.reset();
+				getDishSpecialAni()[1].runAnimation();
+				getDishSpecialAni()[2].runAnimation();
+				getDishSpecialAni()[3].runAnimation();
+				getDishSpecialAni()[4].runAnimation();
+				getDishSpecialAni()[5].runAnimation();
+				getDishSpecialAni()[6].runAnimation();
 
-				check3 = false;
+				if (getDishSpecialAni()[1].getRanOnce()) {
+
+					for (int i = 0; i < 7; i++) {
+
+						getDishSpecialAni()[i].reset();
+
+					}
+
+					getDishCutIn().reset();
+
+					getDishCutIn().toggleAnimation(false);
+
+					Daanish.setSpecial(false);
+
+					check3 = false;
+
+				}
 
 			}
 
@@ -369,6 +397,29 @@ public class UI {
 	}
 
 	public void draw(Graphics g) {
+
+		if (Game.getCharacter() == 1) {
+
+			hpBarAni[0].drawAnimation(g, 8, 254, 0);
+			g.drawImage(hpBarFill[0].getSubimage(0, 0, 228 - (228 - Game.daanishHealth), 79), 113, 531, null);
+
+			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.daanishEP), 15), 103, 596, null);
+
+		} else if (Game.getCharacter() == 2) {
+
+			hpBarAni[1].drawAnimation(g, 15, 490, 0);
+			g.drawImage(hpBarFill[1].getSubimage(0, 0, 228 - (228 - Game.nickHealth), 79), 114, 531, null);
+
+			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.nickEP), 15), 103, 596, null);
+
+		} else if (Game.getCharacter() == 3) {
+
+			hpBarAni[2].drawAnimation(g, -27, 466, 0);
+			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
+
+			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.namelessEP), 15), 103, 596, null);
+
+		}
 
 		for (int i = 0; i < handler.getObject().size(); i++) {
 
@@ -428,34 +479,65 @@ public class UI {
 
 			}
 
-		}
+			if (temp.getId() == ID.Player) {
 
-		if (Game.getCharacter() == 1) {
+				if (Game.getCharacter() == 1) {
 
-			hpBarAni[0].drawAnimation(g, 8, 254, 0);
-			g.drawImage(hpBarFill[0].getSubimage(0, 0, 228 - (228 - Game.daanishHealth), 79), 113, 531, null);
+					g.setColor(Color.white);
+					g.setFont(font);
 
-			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.daanishEP), 15), 103, 596, null);
+					g.drawString(String.valueOf(Game.daanishLevel), 77, 575);
 
-		} else if (Game.getCharacter() == 2) {
+				} else if (Game.getCharacter() == 2) {
 
-			hpBarAni[1].drawAnimation(g, 15, 490, 0);
-			g.drawImage(hpBarFill[1].getSubimage(0, 0, 228 - (228 - Game.nickHealth), 79), 114, 531, null);
+					g.setColor(Color.white);
+					g.setFont(font);
 
-			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.nickEP), 15), 103, 596, null);
+					g.drawString(String.valueOf(Game.nickLevel), 77, 575);
 
-		} else if (Game.getCharacter() == 3) {
+				} else if (Game.getCharacter() == 3) {
 
-			hpBarAni[2].drawAnimation(g, -27, 466, 0);
-			g.drawImage(hpBarFill[2].getSubimage(0, 0, 228 - (228 - Game.namelessHealth), 79), 113, 532, null);
+					g.setColor(Color.white);
+					g.setFont(font);
 
-			g.drawImage(EPBar.getSubimage(0, 0, 234 - (234 - Game.namelessEP), 15), 103, 596, null);
+					g.drawString(String.valueOf(Game.namelessLevel), 77, 575);
+
+				}
+
+			}
 
 		}
 
 		if (Daanish.isSpecial()) {
 
-			dishCutIn.drawAnimation(g, 0, 0, 0);
+			getDishCutIn().drawAnimation(g, 0, 0, 0);
+
+			if (getDishCutIn().getRanOnce()) {
+
+				getDishSpecialAni()[3].drawAnimation(g, Daanish.getLeftBox().x - Camera.getX(),
+						Daanish.getLeftBox().y - Camera.getY(), 0);
+				getDishSpecialAni()[4].drawAnimation(g, Daanish.getRightBox().x - Camera.getX(),
+						Daanish.getRightBox().y - Camera.getY(), 0);
+				getDishSpecialAni()[6].drawAnimation(g, Daanish.getTopBox().x - Camera.getX(),
+						Daanish.getTopBox().y - Camera.getY(), 0);
+				getDishSpecialAni()[5].drawAnimation(g, Daanish.getBottomBox().x - Camera.getX(),
+						Daanish.getBottomBox().y - Camera.getY(), 0);
+
+				if (Game.daanishLevel > 1) {
+
+					for (int i = 0; i < Daanish.getNumberOfBoxes(); i++) {
+
+						getDishSpecialAni()[2].drawAnimation(g, Daanish.getSideMiddleBoxes()[i].x - Camera.getX(),
+								Daanish.getSideMiddleBoxes()[i].y - Camera.getY(), 0);
+
+						getDishSpecialAni()[1].drawAnimation(g, Daanish.getSideTopBoxes()[i].x - Camera.getX(),
+								Daanish.getSideTopBoxes()[i].y - Camera.getY(), 0);
+
+					}
+
+				}
+
+			}
 
 		}
 
@@ -475,6 +557,22 @@ public class UI {
 
 	public void setCharSwitch(boolean charSwitch) {
 		this.charSwitch = charSwitch;
+	}
+
+	public Animation[] getDishSpecialAni() {
+		return dishSpecialAni;
+	}
+
+	public void setDishSpecialAni(Animation[] dishSpecialAni) {
+		this.dishSpecialAni = dishSpecialAni;
+	}
+
+	public static Animation getDishCutIn() {
+		return dishCutIn;
+	}
+
+	public void setDishCutIn(Animation dishCutIn) {
+		this.dishCutIn = dishCutIn;
 	}
 
 }
