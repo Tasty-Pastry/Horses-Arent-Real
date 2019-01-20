@@ -33,6 +33,7 @@ public class Animation {
 
 	}
 
+	// resets animation
 	public void reset() {
 
 		index = 0;
@@ -41,7 +42,7 @@ public class Animation {
 		ranOnce = false;
 
 	}
-
+	// runs animation
 	public void runAnimation() {
 
 		// Checks if the animation was stopped
@@ -65,6 +66,7 @@ public class Animation {
 
 	}
 
+	// starts or stops the animation
 	public void toggleAnimation(boolean stop) {
 
 		// Sets stop var
@@ -110,24 +112,28 @@ public class Animation {
 
 	}
 
+	// gets which part of the animation cycle its on
 	public int getCount() {
 
 		return count;
 
 	}
 
+	// gets how fast the animation switching is 
 	public int getSpeed() {
 
 		return speed;
 
 	}
 
+	// changes the animation speed
 	public void setSpeed(int speed) {
 
 		this.speed = speed;
 
 	}
 
+	// runs the animation once
 	public boolean getRanOnce() {
 
 		return ranOnce;

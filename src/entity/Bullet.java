@@ -105,6 +105,7 @@ public class Bullet extends GameObject {
 
 	}
 
+	// gets name of enitity
 	@Override
 	public String getName() {
 
@@ -112,6 +113,7 @@ public class Bullet extends GameObject {
 
 	}
 
+	// returns actual image
 	@Override
 	public BufferedImage getSprite() {
 

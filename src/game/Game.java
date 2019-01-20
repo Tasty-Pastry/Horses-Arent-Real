@@ -1,5 +1,6 @@
 package game;
 
+// Imports
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,6 +17,7 @@ import animation.Spritesheet;
 import items.YGOUse;
 import states.StateHandler;
 
+// Main class for the game
 public class Game extends Canvas implements Runnable, KeyListener, MouseMotionListener, MouseListener {
 
 	private Spritesheet sheet;
@@ -78,6 +80,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	private static int character = 1;
 
+	// Item variables
 	public static items.HorseEye horseEye;
 	public static items.MrsK MrsK;
 	public static items.YuGiOhCard yugiohCard;
@@ -106,6 +109,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		// Create new window
 		Window window = new Window("Horses Aren't Real", this);
 
+		// loads in buffered images
 		loader = new BufferedImageLoader();
 
 		// Creates a new Handler and Camera object
@@ -113,6 +117,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		camera = new Camera(0, 0);
 		inv = new Inventory();
 
+		// laoding in sprite sheets for items
 		mothmanSheet = new Spritesheet(loader.loadImage("/Mothman Ani.png"));
 		timothySheet = new Spritesheet(loader.loadImage("/Timothy Animation.png"));
 		horseEyeAni = new Spritesheet(loader.loadImage("/OhNo.png"));
@@ -133,12 +138,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		dannysSoul = new items.DannysSoul(64, 64, ID.DannysSoul);
 		mothmanU = new items.MothmanUse(64, 64, ID.Mothman, handler, mothmanSheet);
 
+		// creating new handler
 		sh = new StateHandler(handler, camera, inv);
 
+		// starting the game
 		start();
 
 	}
 
+	// creating a new instance of the game
 	public static void main(String args[]) {
 
 		// Creates new game
@@ -163,6 +171,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		// Stops thread
 		isRunning = false;
 
+		// throws errors
 		try {
 
 			thread.join();
@@ -189,6 +198,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 
+		// timer for game
 		while (isRunning) {
 
 			// Updates timer
@@ -196,6 +206,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 
+			// updates timer
 			while (delta >= 1) {
 
 				update();
@@ -203,10 +214,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 			}
 
+			// drawing graphics
 			draw();
 			frames++;
 			count++;
 
+			// updating millisecond timer
 			if (System.currentTimeMillis() - timer > 1000) {
 
 				timer += 1000;
@@ -215,11 +228,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 			}
 
 		}
-
+		// stoping timer
 		stop();
 
 	}
 
+	// updates state handler and game
 	private void update() {
 
 		sh.update();
@@ -240,13 +254,16 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 		}
 
+		// initialing graphics
 		Graphics g = bs.getDrawGraphics();
 
+		// drawing everything
 		sh.draw(g);
 		bs.show();
 
 	}
 
+	// adding yugioh card to handler
 	public static void yuggo() {
 
 		handler.addObject(new YGOUse(100, 100, ID.YGOUse, handler));
@@ -255,6 +272,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	// Getters and setters
 
+	// geting size method
 	@Override
 	public Dimension getPreferredSize() {
 
@@ -262,119 +280,129 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// counting enemies
 	public static int getCount() {
 
 		return count;
 
 	}
-
+	// counting dead enemies
 	public static int getKillCount() {
 
 		return killCount;
 
 	}
 
+	// adding too dead enemies
 	public static void addKillCount() {
 
 		killCount++;
 
 	}
-
+	//reseting kill count
 	public static void resetKillCount() {
 
 		killCount = 0;
 
 	}
-
+	// getting enemy locations
 	public static int[][] getEnemyArray() {
 		return enemyArray;
 	}
-
+	// setting enemy locations
 	public static void setEnemyArray(int[][] enemyArray2) {
 		enemyArray = enemyArray2;
 	}
-
+	// checks to see if game is running
 	public static boolean isRunOnce() {
 		return runOnce;
 	}
-
+	// makes the game run
 	public static void setRunOnce(boolean runOnce) {
 		Game.runOnce = runOnce;
 	}
-
+	// checks for menu slide in
 	public static boolean isSlideIn() {
 		return slideIn;
 	}
-
+	// makes the menu slide in
 	public static void setSlideIn(boolean slideIn) {
 		Game.slideIn = slideIn;
 	}
-
+	// sets the intro to done
 	public static void setIntroDone(boolean done) {
 
 		introDone = done;
 
 	}
-
+	// gets whether or not the intro is done
 	public static boolean getIntroDone() {
 
 		return introDone;
 
 	}
-
+	// sets shooting
 	public static void setShoot(boolean shoot2, int shootDir2) {
 
 		shoot = shoot2;
 		shootDir = shootDir2;
 
 	}
-
+	// returns true if shooting
 	public static boolean getShoot() {
 
 		return shoot;
 
 	}
-
+	// returns 1, 2, 3, or 4, for shootin direction
 	public static int getShootDir() {
 
 		return shootDir;
 
 	}
 
+	// change nick to dead from alive
 	public static boolean setNickAlive(boolean nickAlive) {
 
 		return !nickAlive;
 	}
 
+	// checks to see if nick is alive
 	public static boolean isNickAlive() {
 
 		return nickAlive;
 	}
 
+	// changes dish to dead
 	public static boolean setDishAlive(boolean DishAlive) {
 
 		return !DishAlive;
 	}
 
+	// checks to see if dish is dead
 	public static boolean isDishAlive() {
 
 		return dishAlive;
 	}
 
+	// changes nameless to dead
 	public static boolean setNamelessAlive(boolean namelessAlive) {
 
 		return !namelessAlive;
 	}
 
+	// checks to see if nameless is dead
 	public static boolean isNamelessAlive() {
 
 		return namelessAlive;
 	}
 
+	// key typed
 	public void keyTyped(KeyEvent key) {
 
 	}
 
+	// key pressed
 	public void keyPressed(KeyEvent key) {
 
 		sh.keyPressed(key.getKeyCode()); // Calls the Organizer keyPressed Method and passes the key code of the key
@@ -382,13 +410,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// key released
 	public void keyReleased(KeyEvent key) {
 
 		sh.keyReleased(key.getKeyCode()); // Calls the Organizer keyReleased Method and passes the key code of the key
 											// released
 
 	}
-
+	
+	//mouse clicking
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
@@ -396,6 +426,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// mouse clicking
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 
@@ -403,6 +434,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// unclicking mouse
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 
@@ -410,6 +442,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// pressing mouse
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 
@@ -417,13 +450,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// releasing mouse
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 
 		sh.mouseReleased(arg0);
 
 	}
-
+	
+	// moving mouse while clicking
 	@Override
 	public void mouseDragged(MouseEvent e) {
 
@@ -431,25 +466,29 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	// moving mouse
 	@Override
 	public void mouseMoved(MouseEvent e) {
 
 		sh.mouseMoved(e);
 
 	}
-
+	
+	// gets current character
 	public static int getCharacter() {
 		return character;
 	}
 
+	// sets current characters
 	public static void setCharacter(int chara) {
 		character = chara;
 	}
-
+	// returns if its fading or not
 	public static boolean isFade() {
 		return fade;
 	}
 
+	// makes it fade
 	public static void setFade(boolean fade) {
 		Game.fade = fade;
 	}

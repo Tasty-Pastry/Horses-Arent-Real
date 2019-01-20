@@ -24,10 +24,12 @@ public class Spritesheet {
 
 	}
 
+	// returns the sprite sheet
 	public BufferedImage getSpriteSheet() {
 		return spriteSheet;
 	}
 
+	// changes the sprite sheet
 	public void setSpriteSheet(BufferedImage spriteSheet) {
 		this.spriteSheet = spriteSheet;
 	}
