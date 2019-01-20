@@ -864,7 +864,7 @@ public class Nicc extends PlayerObject {
 				Game.nickHealth = 1;
 				Game.nickAlive = false;
 				
-				Level1State.switchCharacter();
+				//Level1State.switchCharacter();
 				
 				handler.removeObject(this);
 				

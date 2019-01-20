@@ -860,7 +860,7 @@ public class Nameless extends PlayerObject {
 				Game.namelessHealth = 1;
 				Game.namelessAlive = false;
 				
-				Level1State.switchCharacter();
+				//Level1State.switchCharacter();
 				
 				handler.removeObject(this);
 

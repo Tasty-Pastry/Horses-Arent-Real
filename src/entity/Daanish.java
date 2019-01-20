@@ -966,7 +966,7 @@ public class Daanish extends PlayerObject {
 				Game.daanishHealth = 1;
 				Game.dishAlive = false;
 					
-				Level1State.switchCharacter();
+				//Level1State.switchCharacter();
 								
 				handler.removeObject(this);
 
