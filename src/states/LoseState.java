@@ -26,6 +26,8 @@ public class LoseState extends GameState {
 	private Spritesheet fadeInSheet;
 	private BufferedImage[] fadeIn = new BufferedImage[13];
 
+	private BufferedImage end;
+
 	private Typewriter type;
 	private FontLoader fl;
 
@@ -50,6 +52,8 @@ public class LoseState extends GameState {
 		type = new Typewriter("res/testLoss.txt", 500, dialogueFont, false);
 
 		loader = new BufferedImageLoader();
+
+		end = loader.loadImage("/end.png");
 
 		fadeInSheet = new Spritesheet(loader.loadImage("/Nameless Special.png"));
 
@@ -109,7 +113,7 @@ public class LoseState extends GameState {
 
 		}
 
-		if (fadeInAni.getRanOnce()) {
+		if (fadeInAni.getRanOnce() && !Game.isRunOnce()) {
 
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 1024, 640);
@@ -118,6 +122,12 @@ public class LoseState extends GameState {
 			g.setFont(dialogueFont);
 
 			type.draw(g);
+
+		}
+
+		if (Game.isRunOnce()) {
+
+			g.drawImage(end, 0, 0, 1024, 640, null);
 
 		}
 
@@ -131,6 +141,12 @@ public class LoseState extends GameState {
 			if (k == KeyEvent.VK_SPACE) {
 
 				typeNext = true;
+
+			}
+
+			if (k == KeyEvent.VK_SPACE && Game.isRunOnce()) {
+
+				System.exit(0);
 
 			}
 

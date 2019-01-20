@@ -125,6 +125,8 @@ public class Level1State extends GameState {
 
 	private boolean lastChar;
 
+	private int horseCount;
+
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
 
@@ -222,7 +224,7 @@ public class Level1State extends GameState {
 		floor = new Color(145, 176, 154);
 
 		// Loads in Level
-		level = loader.loadImage("/TestMap.png");
+		level = loader.loadImage("/Map1.png");
 
 		loadLevel(level);
 

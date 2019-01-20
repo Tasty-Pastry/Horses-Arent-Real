@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	public static int daanishEP = 1;
 	public static int nickEP = 1;
-	public static int namelessEP = 234;
+	public static int namelessEP = 1;
 
 	public static int daanishDmg = 25;
 	public static int nickDmg = 35;
@@ -286,6 +286,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		return count;
 
 	}
+
 	// counting dead enemies
 	public static int getKillCount() {
 
@@ -299,48 +300,58 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		killCount++;
 
 	}
-	//reseting kill count
+
+	// reseting kill count
 	public static void resetKillCount() {
 
 		killCount = 0;
 
 	}
+
 	// getting enemy locations
 	public static int[][] getEnemyArray() {
 		return enemyArray;
 	}
+
 	// setting enemy locations
 	public static void setEnemyArray(int[][] enemyArray2) {
 		enemyArray = enemyArray2;
 	}
+
 	// checks to see if game is running
 	public static boolean isRunOnce() {
 		return runOnce;
 	}
+
 	// makes the game run
 	public static void setRunOnce(boolean runOnce) {
 		Game.runOnce = runOnce;
 	}
+
 	// checks for menu slide in
 	public static boolean isSlideIn() {
 		return slideIn;
 	}
+
 	// makes the menu slide in
 	public static void setSlideIn(boolean slideIn) {
 		Game.slideIn = slideIn;
 	}
+
 	// sets the intro to done
 	public static void setIntroDone(boolean done) {
 
 		introDone = done;
 
 	}
+
 	// gets whether or not the intro is done
 	public static boolean getIntroDone() {
 
 		return introDone;
 
 	}
+
 	// sets shooting
 	public static void setShoot(boolean shoot2, int shootDir2) {
 
@@ -348,12 +359,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		shootDir = shootDir2;
 
 	}
+
 	// returns true if shooting
 	public static boolean getShoot() {
 
 		return shoot;
 
 	}
+
 	// returns 1, 2, 3, or 4, for shootin direction
 	public static int getShootDir() {
 
@@ -417,8 +430,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 											// released
 
 	}
-	
-	//mouse clicking
+
+	// mouse clicking
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
@@ -457,7 +470,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		sh.mouseReleased(arg0);
 
 	}
-	
+
 	// moving mouse while clicking
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -473,7 +486,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		sh.mouseMoved(e);
 
 	}
-	
+
 	// gets current character
 	public static int getCharacter() {
 		return character;
@@ -483,6 +496,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static void setCharacter(int chara) {
 		character = chara;
 	}
+
 	// returns if its fading or not
 	public static boolean isFade() {
 		return fade;
