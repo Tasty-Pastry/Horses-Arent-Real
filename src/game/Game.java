@@ -47,6 +47,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	// Player Vars
 	private static int killCount;
 
+	private static int overallKillCount;
+
 	public static int playerXPos; // Keeps track of which
 	public static int playerYPos; // room the player is in
 
@@ -505,6 +507,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	// makes it fade
 	public static void setFade(boolean fade) {
 		Game.fade = fade;
+	}
+
+	public static int getOverallKillCount() {
+		return overallKillCount;
+	}
+
+	public static void setOverallKillCount(int overallKillCount) {
+		Game.overallKillCount = overallKillCount;
 	}
 
 }

@@ -17,10 +17,11 @@ public class StateHandler {
 	private Camera camera;
 	private Inventory inv;
 
-	private static final int NUMOFSTATES = 3;
+	private static final int NUMOFSTATES = 4;
 	private static final int MENU = 0;
 	private static final int LEVEL1 = 1;
 	private static final int LOSE = 2;
+	private static final int WIN = 3;
 
 	public StateHandler(Handler handler, Camera camera, Inventory inv) {
 
@@ -55,6 +56,12 @@ public class StateHandler {
 		if (state == LOSE) {
 
 			states[currentState] = new LoseState(this, handler);
+
+		}
+
+		if (state == WIN) {
+
+			states[currentState] = new WinState(this, handler);
 
 		}
 

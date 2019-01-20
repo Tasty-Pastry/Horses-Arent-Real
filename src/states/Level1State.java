@@ -238,6 +238,12 @@ public class Level1State extends GameState {
 
 		}
 
+		if (Game.getOverallKillCount() >= horseCount) {
+
+			sh.setState(3);
+
+		}
+
 		handler.update();
 
 		ui.update();
@@ -524,6 +530,8 @@ public class Level1State extends GameState {
 								// Add the enemy to the handler
 								handler.addObject(new Enemy((x2 + x3) * 64, (y2 + y3) * 64, x2 / 16, y2 / 10, ID.Enemy,
 										handler, sheet2));
+
+								horseCount++;
 
 							}
 

@@ -334,6 +334,8 @@ public class Enemy extends GameObject {
 
 			Game.addKillCount();
 
+			Game.setOverallKillCount(Game.getOverallKillCount() + 1);
+
 			if (Game.getCharacter() == 1) {
 
 				Game.daanishEXP += 5;
@@ -470,7 +472,7 @@ public class Enemy extends GameObject {
 		// Change the velocity if it's going to intersect with a block
 		if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {
 
-		//	x += velocityX * -0.7;
+			// x += velocityX * -0.7;
 			velocityX *= -0.7;
 
 		}
@@ -478,7 +480,7 @@ public class Enemy extends GameObject {
 		// Change the velocity if it's going to intersect with a block
 		if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
 
-			//y += velocityY * -0.7;
+			// y += velocityY * -0.7;
 			velocityY *= -0.7;
 
 		}
