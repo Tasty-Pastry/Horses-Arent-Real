@@ -107,7 +107,7 @@ public class MenuState extends GameState {
 	private Color color2;
 	private float alpha2;
 
-	private AudioPlayer introMusic;
+	private static AudioPlayer introMusic;
 	private AudioPlayer typeTextMusic;
 
 	private HashMap<String, AudioPlayer> SFX;
@@ -207,7 +207,7 @@ public class MenuState extends GameState {
 		charFont3 = new Font("Alkhemikal", Font.PLAIN, 70);
 		dialogueFont = new Font("Determination Mono", Font.PLAIN, 30);
 
-		introMusic = new AudioPlayer("/Intro Music.wav", 1);
+		setIntroMusic(new AudioPlayer("/Intro Music.wav", 1));
 		typeTextMusic = new AudioPlayer("/TypeText Music.wav", 1);
 
 		SFX = new HashMap<String, AudioPlayer>();
@@ -223,7 +223,7 @@ public class MenuState extends GameState {
 		hellpBox = new Rectangle(638, 500, 170, 124); // Char up, 638, 314
 		titleBox = new Rectangle(170, -59, 684, 209);
 
-		type = new Typewriter("res/test.txt", 500, dialogueFont);
+		type = new Typewriter("res/test.txt", 500, dialogueFont, true);
 
 	}
 
@@ -267,11 +267,11 @@ public class MenuState extends GameState {
 
 			}
 
-			if (!introMusic.clip[0].isRunning()) {
+			if (!getIntroMusic().clip[0].isRunning()) {
 
-				introMusic.play(false);
+				getIntroMusic().play(false);
 
-				introMusic.setVolume(0.8);
+				getIntroMusic().setVolume(0.8);
 
 			}
 
@@ -906,8 +906,8 @@ public class MenuState extends GameState {
 				Game.setSlideIn(false);
 				Game.setFade(true);
 
-				introMusic.play(false);
-				introMusic.setVolume(0.8);
+				getIntroMusic().play(false);
+				getIntroMusic().setVolume(0.8);
 
 				alpha = 0f;
 				countDown = false;
@@ -934,7 +934,7 @@ public class MenuState extends GameState {
 
 				loadingCheck = true;
 
-				introMusic.shiftVolumeTo(0.5);
+				getIntroMusic().shiftVolumeTo(0.5);
 
 				SFX.get("Character Select").play(false);
 
@@ -1047,6 +1047,14 @@ public class MenuState extends GameState {
 	protected void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static AudioPlayer getIntroMusic() {
+		return introMusic;
+	}
+
+	public static void setIntroMusic(AudioPlayer introMusic) {
+		MenuState.introMusic = introMusic;
 	}
 
 }

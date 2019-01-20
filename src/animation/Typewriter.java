@@ -37,15 +37,19 @@ public class Typewriter implements ActionListener {
 	private int stringCount;
 	private int stringTraverse;
 
+	private boolean check;
+
 	private HashMap<String, AudioPlayer> SFX;
 
-	public Typewriter(String file, int y, Font font) {
+	public Typewriter(String file, int y, Font font, boolean check) {
 
 		stringArray = new ArrayList<String>();
 
 		string = "";
 
 		this.y = y;
+
+		this.check = check;
 
 		this.font = font;
 

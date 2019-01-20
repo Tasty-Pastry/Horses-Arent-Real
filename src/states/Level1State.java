@@ -230,6 +230,12 @@ public class Level1State extends GameState {
 
 	public void update() {
 
+		if (!Game.isDishAlive() && !Game.isNamelessAlive() && !Game.isNickAlive()) {
+
+			sh.setState(2);
+
+		}
+
 		handler.update();
 
 		ui.update();
@@ -939,7 +945,7 @@ public class Level1State extends GameState {
 						// 1 = Daanish 2 = Nicc 3 = Nameless
 						int character = Game.getCharacter();
 
-						if (character == 1 && !Daanish.isSpecial() && Game.daanishEP >= 234) {
+						if (character == 1 && !Daanish.isSpecial() && Game.daanishEP >= 234 && Game.isDishAlive()) {
 
 							Daanish.setSpecialMove(true);
 
@@ -951,7 +957,7 @@ public class Level1State extends GameState {
 
 							}
 
-						} else if (character == 2 && !Nicc.isSpecial() && Game.nickEP >= 234) {
+						} else if (character == 2 && !Nicc.isSpecial() && Game.nickEP >= 234 && Game.isNickAlive()) {
 
 							if (handler.isUp()) {
 
@@ -983,7 +989,8 @@ public class Level1State extends GameState {
 
 							}
 
-						} else if (character == 3 && !Nameless.isSpecial() && Game.namelessEP >= 234) {
+						} else if (character == 3 && !Nameless.isSpecial() && Game.namelessEP >= 234
+								&& Game.isNamelessAlive()) {
 
 							Nameless.setSpecial(true);
 

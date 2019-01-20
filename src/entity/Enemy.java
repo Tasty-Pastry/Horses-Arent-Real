@@ -349,7 +349,7 @@ public class Enemy extends GameObject {
 
 				Game.nickEXP += 5;
 
-				if (Nicc.isSpecial())
+				if (!Nicc.isSpecial())
 					Game.nickEP += 50;
 
 				if (Game.nickEP > 234) {
@@ -458,7 +458,7 @@ public class Enemy extends GameObject {
 	private void dont(GameObject temp) {
 
 		// Change the velocity if it's going to intersect with a block
-		if (!slide((int) (x + velocityY), y, getBounds(), temp.getBounds())) {
+		if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {
 
 			x += velocityX * -0.7;
 			velocityX *= -0.7;
@@ -467,6 +467,17 @@ public class Enemy extends GameObject {
 
 		// Change the velocity if it's going to intersect with a block
 		if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
+
+			y += velocityY * -0.7;
+			velocityY *= -0.7;
+
+		}
+
+		// Change the velocity if it's going to intersect with a block
+		if (!slide((int) (x + velocityX), (int) (y + velocityY), getBounds(), temp.getBounds())) {
+
+			x += velocityX * -0.7;
+			velocityX *= -0.7;
 
 			y += velocityY * -0.7;
 			velocityY *= -0.7;
