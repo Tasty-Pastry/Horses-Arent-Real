@@ -29,6 +29,8 @@ public class Enemy extends GameObject {
 	// Enemy Vars
 	private int hp = 100;
 	private int oldhp = hp;
+	private double oldVelocityX = 4;
+	private double oldVelocityY = 4;
 	private boolean hit;
 
 	private int enemyXPos; 
@@ -120,24 +122,28 @@ public class Enemy extends GameObject {
 
 						velocityX = 4 * (float) Math.cos(angle);
 						velocityY = 4 * (float) Math.sin(angle);
-
+					
+						oldVelocityX = velocityX;
+						oldVelocityY = velocityY;
 					} else {
 
-						if (velocityX > 4) {
 
-							velocityX -= 0.1;
+						if (oldVelocityX > 0 && velocityX > oldVelocityX) {
+							
+							velocityX-= 0.1;
+							
+						} else if (velocityX < oldVelocityX) {
+							
+							velocityX+= 0.1;
 						}
-						if (velocityX < -4) {
-
-							velocityX += 0.1;
-						}
-						if (velocityY > 4) {
-
-							velocityY -= 0.1;
-						}
-						if (velocityY < -4) {
-
-							velocityY += 0.1;
+						
+						if (oldVelocityY > 0 && velocityY > oldVelocityY) {
+		
+							velocityY-= 0.1;
+							
+						} else if (velocityY < oldVelocityY) {
+							
+							velocityY+= 0.1;
 						}
 
 					}
@@ -166,16 +172,22 @@ public class Enemy extends GameObject {
 
 						if (hp > 50) {
 
+							oldVelocityX = velocityX;
+							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 30;
 							velocityY += temp.getVelocityY() * temp.damage / 30;
 
 						} else if (hp < 50 && oldhp > 50) {
-
+							
+							oldVelocityX = velocityX;
+							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 30;
 							velocityY += temp.getVelocityY() * temp.damage / 30;
 
 						} else {
 
+							oldVelocityX = velocityX;
+							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 35;
 							velocityY += temp.getVelocityY() * temp.damage / 35;
 
