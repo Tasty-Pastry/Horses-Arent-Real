@@ -72,6 +72,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static int nickLevel = 1;
 	public static int namelessLevel = 1;
 
+	public static boolean dishAlive = true;
+	public static boolean nickAlive = true;
+	public static boolean namelessAlive = true;
+	
 	private static int character = 1;
 
 	public static items.HorseEye horseEye;
@@ -337,6 +341,36 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
+	public static boolean setNickAlive(boolean nickAlive){
+		
+		return !nickAlive;
+	}
+	
+	public static boolean getNickAlive() {
+		
+		return nickAlive;	
+	}
+	
+	public static boolean setDishAlive(boolean DishAlive){
+		
+		return !DishAlive;
+	}	
+	
+	public static boolean getDishAlive() {
+		
+		return dishAlive;	
+	}
+	
+	public static boolean setNamelessAlive(boolean namelessAlive){
+		
+		return !namelessAlive;
+	}
+	
+	public static boolean getNamelessAlive() {
+		
+		return namelessAlive;	
+	}
+	
 	public void keyTyped(KeyEvent key) {
 
 	}

@@ -861,9 +861,11 @@ public class Nicc extends PlayerObject {
 			if (Game.nickHealth <= 0) {
 
 				Game.nickHealth = 1;
-
+				Game.nickAlive = false;
+				Game.setCharacter(3);
+				
 				handler.removeObject(this);
-
+				
 			}
 
 		}

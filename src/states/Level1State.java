@@ -82,7 +82,7 @@ public class Level1State extends GameState {
 	private Spritesheet dishBullet;
 	private Spritesheet nickBullet;
 	private Spritesheet namelessBullet;
-
+	
 	private Spritesheet dishSpecialAttackSheet;
 
 	private BufferedImage[] dishBullets = new BufferedImage[4];
@@ -114,7 +114,7 @@ public class Level1State extends GameState {
 	private BufferedImage[] top = new BufferedImage[10];
 
 	private Animation[] dishSpecialAni;
-
+	
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
 
@@ -229,7 +229,7 @@ public class Level1State extends GameState {
 
 			if (temp.getId() == ID.Player) {
 
-				if (ui.isCharSwitch() && Game.getCharacter() == 1) {
+				if (ui.isCharSwitch() && Game.getCharacter() == 1 && Game.dishAlive) {
 
 					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
 							Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
@@ -243,7 +243,7 @@ public class Level1State extends GameState {
 
 					}
 
-				} else if (ui.isCharSwitch() && Game.getCharacter() == 2) {
+				} else if (ui.isCharSwitch() && Game.getCharacter() == 2 && Game.nickAlive) {
 
 					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
 							Game.mothmanSheet, Game.timothySheet, SFX));
@@ -257,7 +257,7 @@ public class Level1State extends GameState {
 
 					}
 
-				} else if (ui.isCharSwitch() && Game.getCharacter() == 3) {
+				} else if (ui.isCharSwitch() && Game.getCharacter() == 3 && Game.namelessAlive) {
 
 					handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
 							Game.mothmanSheet, Game.timothySheet, SFX));

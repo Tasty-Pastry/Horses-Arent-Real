@@ -857,7 +857,9 @@ public class Nameless extends PlayerObject {
 			if (Game.namelessHealth <= 0) {
 
 				Game.namelessHealth = 1;
-
+				Game.namelessAlive = false;
+				Game.setCharacter(1);
+				
 				handler.removeObject(this);
 
 			}

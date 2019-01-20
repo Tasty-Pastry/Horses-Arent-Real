@@ -963,7 +963,9 @@ public class Daanish extends PlayerObject {
 			if (Game.daanishHealth <= 0) {
 
 				Game.daanishHealth = 1;
-
+				Game.dishAlive = false;
+				Game.setCharacter(2);
+				
 				handler.removeObject(this);
 
 			}
