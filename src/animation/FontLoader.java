@@ -1,17 +1,21 @@
 package animation;
 
+/// imports
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+// class jeader
 public class FontLoader {
 
+	// loads in requested font
 	public void loadFont(String font) {
 
 		try {
 
+			// sets font to custom font
 			Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(font));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 

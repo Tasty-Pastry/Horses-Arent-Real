@@ -24,6 +24,7 @@ public class Background {
 	// Load image
 	public Background(String s, double ms) {
 
+		// loads in the background image
 		try {
 
 			image = ImageIO.read(getClass().getResourceAsStream(s));

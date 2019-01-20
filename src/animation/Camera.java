@@ -13,6 +13,7 @@ public class Camera {
 	private float maxVelX = (float) 41.5;
 	private float minVel = 1;
 
+	// position and velocity variables
 	private float baseX;
 	private float baseY;
 
@@ -236,24 +237,28 @@ public class Camera {
 
 	}
 
+	// gets if the camera is moving
 	public static boolean getCamMove() {
 
 		return camMove;
 
 	}
 
+	// changes where the character is horizontally
 	public void setX(float x) {
 
 		this.x = x;
 
 	}
 
+	// gets where the character is vertically
 	public static float getY() {
 
 		return y;
 
 	}
 
+	// sets where the character is vertically
 	public void setY(float y) {
 
 		this.y = y;

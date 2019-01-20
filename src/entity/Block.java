@@ -1,5 +1,6 @@
 package entity;
 
+// imports
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -9,6 +10,7 @@ import game.ID;
 
 public class Block extends GameObject {
 
+	// loads im images
 	private BufferedImage[] walls;
 
 	// Constructor
@@ -65,6 +67,7 @@ public class Block extends GameObject {
 
 		} else {
 
+			// if there is nothing to draw draws a place holder black square
 			g.setColor(Color.BLACK);
 			g.fillRect(x, y, 64, 64);
 
@@ -72,7 +75,7 @@ public class Block extends GameObject {
 
 	}
 
-	// Hitbox
+	// Hitbox of 1 block entity
 	public Rectangle getBounds() {
 		
 		if (getId() == ID.Block) {
@@ -85,6 +88,7 @@ public class Block extends GameObject {
 
 	}
 
+	// gets the name of the black
 	@Override
 	public String getName() {
 
@@ -92,6 +96,7 @@ public class Block extends GameObject {
 
 	}
 
+	// returns the actual sprite
 	@Override
 	public BufferedImage getSprite() {
 

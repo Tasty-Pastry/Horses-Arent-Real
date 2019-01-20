@@ -11,6 +11,7 @@ import game.ID;
 
 public class Crate extends GameObject {
 
+	// crate image
 	private BufferedImage[] crates;
 	
 	// Constructor
@@ -39,6 +40,7 @@ public class Crate extends GameObject {
 
 	}
 	
+	// returns sprite name
 	@Override
 	public String getName() {
 
@@ -46,6 +48,7 @@ public class Crate extends GameObject {
 
 	}
 
+	// returns sprite
 	@Override
 	public BufferedImage getSprite() {
 

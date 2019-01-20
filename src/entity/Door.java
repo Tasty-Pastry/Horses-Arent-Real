@@ -34,13 +34,14 @@ public class Door extends GameObject {
 
 	}
 
-	// Gets the middle of the door
+	// Gets the middle of the door x
 	public double centroidX() {
 
 		return (getBounds().x + getBounds().getWidth()) / 2;
 
 	}
 
+	// gets middle of door y
 	public double centroidY() {
 
 		return (getBounds().y + getBounds().getHeight()) / 2;
@@ -54,6 +55,7 @@ public class Door extends GameObject {
 
 	}
 	
+	// door name
 	@Override
 	public String getName() {
 
@@ -61,6 +63,7 @@ public class Door extends GameObject {
 
 	}
 
+	// door sprite
 	@Override
 	public BufferedImage getSprite() {
 

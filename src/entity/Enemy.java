@@ -115,6 +115,7 @@ public class Enemy extends GameObject {
 
 				if (temp.getId() == ID.Player) {
 
+					// sets the AI velocity to move direct towards the player
 					if (hp > 50) {
 
 						int diffX = temp.getX() - x;
@@ -129,6 +130,7 @@ public class Enemy extends GameObject {
 						oldVelocityY = velocityY;
 					} else {
 
+						// lowers velocity if it is too high
 						if (oldVelocityX > 0 && velocityX > oldVelocityX) {
 
 							velocityX -= 0.1;
@@ -150,6 +152,7 @@ public class Enemy extends GameObject {
 					}
 				}
 
+				// checks to see if the object is coliding with anything
 				if (temp.getId() == ID.Block || temp.getId() == ID.BottomBlock
 						|| temp.getId() == ID.BottomLeftCornerBlock || temp.getId() == ID.BottomRightCornerBlock
 						|| temp.getId() == ID.TopBlock || temp.getId() == ID.TopLeftCornerBlock
@@ -173,6 +176,7 @@ public class Enemy extends GameObject {
 
 						if (hp > 50) {
 
+							// knock back
 							oldVelocityX = velocityX;
 							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 30;
@@ -180,6 +184,7 @@ public class Enemy extends GameObject {
 
 						} else if (hp < 50 && oldhp > 50) {
 
+							// knock back
 							oldVelocityX = velocityX;
 							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 30;
@@ -187,6 +192,7 @@ public class Enemy extends GameObject {
 
 						} else {
 
+							// knock back
 							oldVelocityX = velocityX;
 							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 35;
@@ -222,8 +228,10 @@ public class Enemy extends GameObject {
 
 					}
 
+					// daanishes special move
 					if (Game.getCharacter() == 1 && Daanish.isInitFinish()) {
 
+						// checks to see if enemy is in damage range
 						if ((getBounds().intersects(Daanish.getBottomBox())
 								|| getBounds().intersects(Daanish.getLeftBox())
 								|| getBounds().intersects(Daanish.getMiddleBox())
@@ -235,24 +243,26 @@ public class Enemy extends GameObject {
 									|| getBounds().intersects(Daanish.getMiddleBox())) && !hitOnce
 									&& Daanish.isSpecial() && UI.getDishCutIn().getRanOnce()) {
 
+								// knockback
 								velocityY += 25;
 
 							}
 
+							// knock back other direction
 							if (getBounds().intersects(Daanish.getLeftBox()) && !hitOnce && Daanish.isSpecial()
 									&& UI.getDishCutIn().getRanOnce()) {
 
 								velocityX -= 25;
 
 							}
-
+							// knock back other direction
 							if (getBounds().intersects(Daanish.getRightBox()) && !hitOnce && Daanish.isSpecial()
 									&& UI.getDishCutIn().getRanOnce()) {
 
 								velocityX += 25;
 
 							}
-
+							// knock back other direction
 							if (getBounds().intersects(Daanish.getTopBox()) && !hitOnce && Daanish.isSpecial()
 									&& UI.getDishCutIn().getRanOnce()) {
 
@@ -260,12 +270,14 @@ public class Enemy extends GameObject {
 
 							}
 
+							// setting to used
 							hitOnce = true;
 
-							hp -= 100;
+							hp -= 100; // damage
 
 						}
 
+						//
 					} else if (Game.getCharacter() == 2 && Nicc.isInitFinish()) {
 
 						if (getBounds().intersects(Nicc.getSpecialBox()) && Nicc.isSpecial() && !hitOnce
@@ -314,9 +326,7 @@ public class Enemy extends GameObject {
 		// Removes enemy if it is outside of the player room and moving
 		if (move == true && (enemyXPos != Game.playerXPos || enemyYPos != Game.playerYPos)) {
 
-			Game.addKillCount();
-			handler.removeObject(this);
-
+			hp = 0;
 		}
 
 		// Removes the enemy from the handler if it dies
@@ -460,7 +470,7 @@ public class Enemy extends GameObject {
 		// Change the velocity if it's going to intersect with a block
 		if (!slide((int) (x + velocityX), y, getBounds(), temp.getBounds())) {
 
-			x += velocityX * -0.7;
+		//	x += velocityX * -0.7;
 			velocityX *= -0.7;
 
 		}
@@ -468,7 +478,7 @@ public class Enemy extends GameObject {
 		// Change the velocity if it's going to intersect with a block
 		if (!slide(x, (int) (y + velocityY), getBounds(), temp.getBounds())) {
 
-			y += velocityY * -0.7;
+			//y += velocityY * -0.7;
 			velocityY *= -0.7;
 
 		}

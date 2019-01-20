@@ -1,5 +1,6 @@
 package animation;
 
+// imports
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,13 @@ import javax.swing.Timer;
 import game.AudioPlayer;
 import game.Game;
 
+// class header
 public class Typewriter implements ActionListener {
 
+	// array of typed variables
 	private List<String> stringArray;
 
+	// variables
 	private String string;
 
 	private Scanner scanner;
@@ -70,6 +74,7 @@ public class Typewriter implements ActionListener {
 
 		}
 
+		// continues typing until null
 		while (scanner.hasNext()) {
 
 			stringArray.add(scanner.nextLine());
@@ -78,12 +83,15 @@ public class Typewriter implements ActionListener {
 
 		scanner.close();
 
+		// gets timer
 		t = new Timer(60, this);
 
 	}
 
+	// moves to next line to type
 	public void nextLine() {
 
+		// outputs a line
 		if (!Game.isRunOnce() && endString) {
 
 			setStringCount(0);
@@ -93,6 +101,7 @@ public class Typewriter implements ActionListener {
 			endString = false;
 			t.start();
 
+			// stops if there are no more lines
 		} else if (!endString) {
 
 			setStringCount(stringArray.get(getStringTraverse()).length());
@@ -101,8 +110,10 @@ public class Typewriter implements ActionListener {
 
 	}
 
+	// outputs sound for typing
 	public void actionPerformed(ActionEvent arg0) {
 
+		// If the timer is counting
 		if (timerStart) {
 
 			if (getStringTraverse() < stringArray.size() - 1) {
@@ -116,6 +127,7 @@ public class Typewriter implements ActionListener {
 
 				} else {
 
+					// if not outputing string and button pressed make sound
 					SFX.get("Blip").play(true);
 					string = stringArray.get(getStringTraverse()).substring(0, getStringCount());
 
@@ -125,11 +137,13 @@ public class Typewriter implements ActionListener {
 
 			} else {
 
+				// if not start the game
 				Game.setRunOnce(true);
 				Game.setIntroDone(true);
 				Game.setSlideIn(false);
 				Game.setFade(true);
 
+				// stops timer
 				setStringCount(0);
 				timerStart = false;
 				t.stop();
@@ -140,13 +154,16 @@ public class Typewriter implements ActionListener {
 
 	}
 
+	// draws string
 	public void draw(Graphics g) {
 
 		if (!Game.isRunOnce()) {
 
+			// find place to draw current letter
 			g.drawString(string, 512 - ((g.getFontMetrics(font).stringWidth(stringArray.get(getStringTraverse())) / 2)),
 					y);
 
+			// if done drawing tell them to press space to continue
 			if (Game.getIntroDone()) {
 
 				g.drawString("(Press Space)", 700, 600);
@@ -155,30 +172,36 @@ public class Typewriter implements ActionListener {
 		}
 	}
 
+	// gets string
 	public String getArrayContent(int s) {
 
 		return stringArray.get(s);
 
 	}
 
+	// gets string as a as a list
 	public List<String> getArray() {
 
 		return stringArray;
 
 	}
 
+	// gets string size
 	public int getStringCount() {
 		return stringCount;
 	}
 
+	// sets the string count
 	public void setStringCount(int stringCount) {
 		this.stringCount = stringCount;
 	}
 
+	// gets current spot in string
 	public int getStringTraverse() {
 		return stringTraverse;
 	}
 
+	// transveres string
 	public void setStringTraverse(int stringTraverse) {
 		this.stringTraverse = stringTraverse;
 	}
