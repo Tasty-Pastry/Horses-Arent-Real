@@ -12,6 +12,7 @@ import animation.Camera;
 import animation.Spritesheet;
 import entity.Daanish;
 import entity.GameObject;
+import entity.Nameless;
 import entity.Nicc;
 
 public class UI {
@@ -42,10 +43,19 @@ public class UI {
 	private Spritesheet namelessTransitionSheet;
 	private Spritesheet nickSpecialSheet;
 
+	private Spritesheet namelessSpecialStartSheet;
+	private Spritesheet namelessSpecialEndSheet;
+
+	private Spritesheet namelessSpecialSheet;
+
 	private BufferedImage[] nickTop = new BufferedImage[6];
 	private BufferedImage[] nickBottom = new BufferedImage[6];
 	private BufferedImage[] nickLeft = new BufferedImage[6];
 	private BufferedImage[] nickRight = new BufferedImage[6];
+
+	private BufferedImage[] namelessStartSpecial = new BufferedImage[13];
+	private BufferedImage[] namelessEndSpecial = new BufferedImage[13];
+	private BufferedImage[] namelessSpecial = new BufferedImage[7];
 
 	private BufferedImage EPBar;
 
@@ -63,14 +73,21 @@ public class UI {
 
 	private static Animation dishCutIn;
 	private static Animation nickCutIn;
+	private static Animation namelessCutIn;
+
+	private static Animation namelessSpecialStartAni;
+	private Animation namelessSpecialEndAni;
+	private Animation namelessSpecialAni;
+
 	private Animation[] dishSpecialAni;
 	private Animation[] nickSpecialAni;
 	private boolean check3;
 	private Font font;
 	private boolean check4;
+	private boolean check5;
 
 	public UI(Spritesheet sheet, Handler handler, Animation dishCutIn, Animation[] dishSpecialAnimation,
-			Animation nickCutIn) {
+			Animation nickCutIn, Animation namelessCutIn) {
 
 		this.sheet = sheet;
 
@@ -79,6 +96,8 @@ public class UI {
 		this.setDishCutIn(dishCutIn);
 
 		this.setNickCutIn(nickCutIn);
+
+		this.namelessCutIn = namelessCutIn;
 
 		this.setDishSpecialAni(dishSpecialAnimation);
 
@@ -101,12 +120,18 @@ public class UI {
 		SFX.put("Cut In", new AudioPlayer("/Cut In.wav", 2));
 		SFX.put("Dish Special", new AudioPlayer("/Dish Special.wav", 1));
 		SFX.put("Nick Special", new AudioPlayer("/Nick Special.wav", 1));
+		SFX.put("Nameless Special", new AudioPlayer("/Swing.wav", 1));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
 		namelessTransitionSheet = new Spritesheet(loader.loadImage("/Nameless Transition.png"));
 
 		nickSpecialSheet = new Spritesheet(loader.loadImage("/Nick Special Attack Animation.png"));
+
+		namelessSpecialStartSheet = new Spritesheet(loader.loadImage("/Nameless Special.png"));
+		namelessSpecialEndSheet = new Spritesheet(loader.loadImage("/Nameless Special End.png"));
+
+		namelessSpecialSheet = new Spritesheet(loader.loadImage("/Nameless Special Attack.png"));
 
 		for (int i = 0; i < 33; i++) {
 
@@ -119,9 +144,18 @@ public class UI {
 
 			}
 
+			if (i < 7) {
+
+				namelessSpecial[i] = namelessSpecialSheet.getImage(i + 1, 1, 900, 900, 900, 900);
+
+			}
+
 			if (i < 13) {
 
 				namelessStartTransition[i] = namelessTransitionSheet.getImage(i + 1, 1, 225, 225, 225, 225);
+
+				namelessStartSpecial[i] = namelessSpecialStartSheet.getImage(i + 1, 1, 1024, 640, 1024, 640);
+				namelessEndSpecial[i] = namelessSpecialEndSheet.getImage(i + 1, 1, 1024, 640, 1024, 640);
 
 			} else {
 
@@ -178,6 +212,10 @@ public class UI {
 			}
 
 		}
+
+		setNamelessSpecialStartAni(new Animation(2, namelessStartSpecial));
+		namelessSpecialEndAni = new Animation(2, namelessEndSpecial);
+		setNamelessSpecialAni(new Animation(6, namelessSpecial));
 
 		hpBarAni = new Animation[] {
 
@@ -377,6 +415,75 @@ public class UI {
 		} else if (Game.getCharacter() == 3) {
 
 			hpBarAni[2].runAnimation();
+
+		}
+
+		if (Nameless.isSpecial()) {
+
+			namelessCutIn.runAnimation();
+
+			if (!check3) {
+
+				SFX.get("Cut In").setVolume(2);
+
+				SFX.get("Cut In").play(false);
+
+				check3 = true;
+
+			}
+
+			if (namelessCutIn.getRanOnce()) {
+
+				getNamelessSpecialStartAni().runAnimation();
+
+				if (getNamelessSpecialStartAni().getRanOnce()) {
+
+					getNamelessSpecialStartAni().toggleAnimation(true);
+
+					if (!SFX.get("Nameless Special").clip[0].isRunning() && !check4) {
+
+						SFX.get("Nameless Special").play(false);
+
+						check4 = true;
+
+					}
+
+					getNamelessSpecialAni().runAnimation();
+
+					if (getNamelessSpecialAni().getRanOnce()) {
+
+						getNamelessSpecialAni().toggleAnimation(true);
+
+						check5 = true;
+
+						namelessSpecialEndAni.runAnimation();
+
+						if (namelessSpecialEndAni.getRanOnce()) {
+
+							namelessCutIn.reset();
+
+							getNamelessSpecialStartAni().reset();
+							getNamelessSpecialAni().reset();
+							namelessSpecialEndAni.reset();
+
+							getNamelessSpecialStartAni().toggleAnimation(false);
+							getNamelessSpecialAni().toggleAnimation(false);
+
+							namelessCutIn.toggleAnimation(false);
+
+							Nameless.setSpecial(false);
+
+							check3 = false;
+							check4 = false;
+							check5 = false;
+
+						}
+
+					}
+
+				}
+
+			}
 
 		}
 
@@ -615,6 +722,38 @@ public class UI {
 
 		}
 
+		if (Nameless.isSpecial()) {
+
+			if (!namelessCutIn.getRanOnce()) {
+
+				namelessCutIn.drawAnimation(g, 0, 0, 0);
+
+			}
+
+			if (namelessCutIn.getRanOnce()) {
+
+				getNamelessSpecialStartAni().drawAnimation(g, 0, 0, 0);
+
+				if (getNamelessSpecialStartAni().getRanOnce() && !check5) {
+
+					g.setColor(Color.black);
+
+					g.fillRect(0, 0, 1024, 640);
+
+					getNamelessSpecialAni().drawAnimation(g, 130, 0, 0);
+
+				}
+
+				if (getNamelessSpecialAni().getRanOnce()) {
+
+					namelessSpecialEndAni.drawAnimation(g, 0, 0, 0);
+
+				}
+
+			}
+
+		}
+
 		if (Nicc.isSpecial()) {
 
 			if (!getNickCutIn().getRanOnce()) {
@@ -731,6 +870,22 @@ public class UI {
 
 	public void setNickCutIn(Animation nickCutIn) {
 		this.nickCutIn = nickCutIn;
+	}
+
+	public Animation getNamelessSpecialAni() {
+		return namelessSpecialAni;
+	}
+
+	public void setNamelessSpecialAni(Animation namelessSpecialAni) {
+		this.namelessSpecialAni = namelessSpecialAni;
+	}
+
+	public static Animation getNamelessSpecialStartAni() {
+		return namelessSpecialStartAni;
+	}
+
+	public void setNamelessSpecialStartAni(Animation namelessSpecialStartAni) {
+		this.namelessSpecialStartAni = namelessSpecialStartAni;
 	}
 
 }

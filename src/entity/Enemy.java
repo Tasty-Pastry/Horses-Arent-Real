@@ -33,7 +33,7 @@ public class Enemy extends GameObject {
 	private double oldVelocityY = 4;
 	private boolean hit;
 
-	private int enemyXPos; 
+	private int enemyXPos;
 	private int enemyYPos;
 
 	// Sprite Vars
@@ -49,6 +49,8 @@ public class Enemy extends GameObject {
 	private Animation horseUpAni;
 
 	private boolean hitOnce;
+
+	private boolean check;
 
 	// Constructor
 	public Enemy(int x, int y, int enemyXPos, int enemyYPos, ID id, Handler handler, Spritesheet sheet) {
@@ -92,7 +94,7 @@ public class Enemy extends GameObject {
 		// Update velocity only when the camera isn't moving and the enemy is in the
 		// same room as the player
 		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos && !Daanish.isSpecial()
-				&& !Nicc.isSpecial()) {
+				&& !Nicc.isSpecial() && !Nameless.isSpecial()) {
 
 			x += velocityX;
 			y += velocityY;
@@ -122,28 +124,27 @@ public class Enemy extends GameObject {
 
 						velocityX = 4 * (float) Math.cos(angle);
 						velocityY = 4 * (float) Math.sin(angle);
-					
+
 						oldVelocityX = velocityX;
 						oldVelocityY = velocityY;
 					} else {
 
-
 						if (oldVelocityX > 0 && velocityX > oldVelocityX) {
-							
-							velocityX-= 0.1;
-							
+
+							velocityX -= 0.1;
+
 						} else if (velocityX < oldVelocityX) {
-							
-							velocityX+= 0.1;
+
+							velocityX += 0.1;
 						}
-						
+
 						if (oldVelocityY > 0 && velocityY > oldVelocityY) {
-		
-							velocityY-= 0.1;
-							
+
+							velocityY -= 0.1;
+
 						} else if (velocityY < oldVelocityY) {
-							
-							velocityY+= 0.1;
+
+							velocityY += 0.1;
 						}
 
 					}
@@ -178,7 +179,7 @@ public class Enemy extends GameObject {
 							velocityY += temp.getVelocityY() * temp.damage / 30;
 
 						} else if (hp < 50 && oldhp > 50) {
-							
+
 							oldVelocityX = velocityX;
 							oldVelocityY = velocityY;
 							velocityX += temp.getVelocityX() * temp.damage / 30;
@@ -211,7 +212,7 @@ public class Enemy extends GameObject {
 						// Checks if the camera isnt moving, if the enemy is allowed to move and can
 						// only shoot once every 25 frames
 						if (Game.getCount() % 25 == 0 && !Camera.getCamMove() && move && !Daanish.isSpecial()
-								&& !Nicc.isSpecial()) {
+								&& !Nicc.isSpecial() && !Nameless.isSpecial()) {
 
 							// Adds a bullet
 							handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.EnemyBullet, handler,
@@ -278,6 +279,25 @@ public class Enemy extends GameObject {
 
 					}
 
+					if (Nameless.isSpecial() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos
+							&& UI.getNamelessSpecialStartAni().getRanOnce() && !check) {
+
+						int random = (int) Math.floor(Math.random() * 6);
+
+						if (random == 5) {
+
+							hp = 0;
+
+						}
+
+						check = true;
+
+					} else if (!Nameless.isSpecial()) {
+
+						check = false;
+
+					}
+
 				}
 
 			}
@@ -308,7 +328,14 @@ public class Enemy extends GameObject {
 
 				Game.daanishEXP += 5;
 
-				Game.daanishEP += 50;
+				if (!Daanish.isSpecial())
+					Game.daanishEP += 50;
+
+				if (Game.daanishEP > 234) {
+
+					Game.daanishEP = 234;
+
+				}
 
 				if (Game.daanishEXP >= Math.ceil(((6 / 5) * Math.pow(Game.daanishLevel + 1, 3))
 						- (15 * Math.pow(Game.daanishLevel + 1, 2)) + (100 * (Game.daanishLevel + 1)) - 140)) {
@@ -322,7 +349,14 @@ public class Enemy extends GameObject {
 
 				Game.nickEXP += 5;
 
-				Game.nickEP += 50;
+				if (Nicc.isSpecial())
+					Game.nickEP += 50;
+
+				if (Game.nickEP > 234) {
+
+					Game.nickEP = 234;
+
+				}
 
 				if (Game.nickEXP >= Math.ceil(((6 / 5) * Math.pow(Game.nickLevel + 1, 3))
 						- (15 * Math.pow(Game.nickLevel + 1, 2)) + (100 * (Game.nickLevel + 1)) - 140)) {
@@ -337,6 +371,12 @@ public class Enemy extends GameObject {
 				Game.namelessEXP += 5;
 
 				Game.namelessEP += 50;
+
+				if (Game.namelessEP > 234) {
+
+					Game.namelessEP = 234;
+
+				}
 
 				if (Game.namelessEXP >= Math.ceil(((6 / 5) * Math.pow(Game.namelessLevel + 1, 3))
 						- (15 * Math.pow(Game.namelessLevel + 1, 2)) + (100 * (Game.namelessLevel + 1)) - 140)) {
