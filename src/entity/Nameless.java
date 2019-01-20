@@ -27,9 +27,11 @@ public class Nameless extends PlayerObject {
 	private HashMap<String, AudioPlayer> SFX;
 	private boolean special;
 
+	private Level1State l1s;
+
 	// Constructor
 	public Nameless(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
-			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX) {
+			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX, Level1State l1s) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
 
@@ -37,6 +39,8 @@ public class Nameless extends PlayerObject {
 		this.timothySheet = timothySheet;
 
 		this.SFX = SFX;
+
+		this.l1s = l1s;
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -859,9 +863,9 @@ public class Nameless extends PlayerObject {
 
 				Game.namelessHealth = 1;
 				Game.namelessAlive = false;
-				
-				//Level1State.switchCharacter();
-				
+
+				l1s.switchCharacter();
+
 				handler.removeObject(this);
 
 			}

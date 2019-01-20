@@ -61,7 +61,7 @@ public class Level1State extends GameState {
 
 	private BufferedImage[] walls = new BufferedImage[9];
 	private BufferedImage[] crates = new BufferedImage[1];
-	
+
 	private Spritesheet wallSheet;
 	private Spritesheet crateSheet;
 
@@ -82,7 +82,7 @@ public class Level1State extends GameState {
 	private Spritesheet dishBullet;
 	private Spritesheet nickBullet;
 	private Spritesheet namelessBullet;
-	
+
 	private Spritesheet dishSpecialAttackSheet;
 
 	private BufferedImage[] dishBullets = new BufferedImage[4];
@@ -114,7 +114,11 @@ public class Level1State extends GameState {
 	private BufferedImage[] top = new BufferedImage[10];
 
 	private Animation[] dishSpecialAni;
-	
+
+	private boolean found;
+
+	private boolean lastChar;
+
 	// Constructor
 	public Level1State(StateHandler sh, Handler handler, Camera camera, Inventory inv) {
 
@@ -164,7 +168,8 @@ public class Level1State extends GameState {
 				walls[i] = wallSheet.getImage(i + 1, 1, 64, 64, 64, 64);
 
 			}
-			if (i == 0) crates[i] = crateSheet.getImage(1, 1, 29, 32, 29, 32);
+			if (i == 0)
+				crates[i] = crateSheet.getImage(1, 1, 29, 32, 29, 32);
 
 			if (i < 10) {
 
@@ -227,12 +232,12 @@ public class Level1State extends GameState {
 
 			GameObject temp = handler.getObject().get(i);
 
-			if (temp.getId() == ID.Player) { 
-				
+			if (temp.getId() == ID.Player) {
+
 				if (ui.isCharSwitch() && Game.getCharacter() == 1 && Game.dishAlive) {
 
 					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
+							Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0], this));
 
 					handler.removeObject(temp);
 
@@ -246,7 +251,7 @@ public class Level1State extends GameState {
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 2 && Game.nickAlive) {
 
 					handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet, SFX));
+							Game.mothmanSheet, Game.timothySheet, SFX, this));
 
 					handler.removeObject(temp);
 
@@ -260,7 +265,7 @@ public class Level1State extends GameState {
 				} else if (ui.isCharSwitch() && Game.getCharacter() == 3 && Game.namelessAlive) {
 
 					handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-							Game.mothmanSheet, Game.timothySheet, SFX));
+							Game.mothmanSheet, Game.timothySheet, SFX, this));
 
 					handler.removeObject(temp);
 
@@ -280,43 +285,95 @@ public class Level1State extends GameState {
 	}
 
 	public void switchCharacter() {
-		
-		// dish -> nick -> nameless -> dish
-		
-		handler.update();
 
-		ui.update();
-		
+		// dish -> nick -> nameless -> dish
 
 		for (int i = 0; i < handler.getObject().size(); i++) {
 
 			GameObject temp = handler.getObject().get(i);
 
-			if (temp.getId() == ID.Player) { 
-		
-				
-		if (Game.dishAlive == false && Game.nickAlive == true) {
-			
-			handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
-					Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
+			if (temp.getId() == ID.Player) {
 
-			handler.removeObject(temp);
+				if (!found) {
 
-			if (!ui.isTransition()) {
+					if (Game.getCharacter() == 1) {
 
-				ui.setCharSwitch(false);
-				charSwitch = false;
+						if (Game.nickAlive) {
+
+							Game.setCharacter(2);
+
+							handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
+									Game.mothmanSheet, Game.timothySheet, SFX, this));
+
+							found = true;
+
+						} else if (Game.namelessAlive) {
+
+							Game.setCharacter(3);
+
+							handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health,
+									inv, Game.mothmanSheet, Game.timothySheet, SFX, this));
+
+							found = true;
+
+						}
+
+					} else if (Game.getCharacter() == 2) {
+
+						if (Game.namelessAlive) {
+
+							Game.setCharacter(3);
+
+							handler.addObject(new Nameless(temp.getX(), temp.getY(), ID.Player, handler, sheet, health,
+									inv, Game.mothmanSheet, Game.timothySheet, SFX, this));
+
+							found = true;
+
+						} else if (Game.dishAlive) {
+
+							Game.setCharacter(1);
+
+							handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health,
+									inv, Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0], this));
+
+							found = true;
+
+						}
+
+					} else if (Game.getCharacter() == 3) {
+
+						if (Game.dishAlive) {
+
+							Game.setCharacter(1);
+
+							handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health,
+									inv, Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0], this));
+
+							found = true;
+
+						} else if (Game.nickAlive) {
+
+							Game.setCharacter(2);
+
+							handler.addObject(new Nicc(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
+									Game.mothmanSheet, Game.timothySheet, SFX, this));
+
+							found = true;
+
+						}
+
+					}
+
+				}
 
 			}
+
 		}
-		
-		
-			}
-			
-		}
-		
+
+		found = false;
+
 	}
-	
+
 	public void draw(Graphics g) {
 
 		// Create Graphics
@@ -464,13 +521,13 @@ public class Level1State extends GameState {
 
 					if (Game.getCharacter() == 1)
 						handler.addObject(new Daanish(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
+								Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0], this));
 					if (Game.getCharacter() == 2)
 						handler.addObject(new Nicc(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet, SFX));
+								Game.mothmanSheet, Game.timothySheet, SFX, this));
 					if (Game.getCharacter() == 3)
 						handler.addObject(new Nameless(x2 * 64, y2 * 64, ID.Player, handler, sheet, health, inv,
-								Game.mothmanSheet, Game.timothySheet, SFX));
+								Game.mothmanSheet, Game.timothySheet, SFX, this));
 
 					// Update player pos to the room its in
 					Game.playerXPos = x2 / 16;
@@ -630,59 +687,103 @@ public class Level1State extends GameState {
 
 					if (k == KeyEvent.VK_E) {
 
-						Game.setCharacter(Game.getCharacter() + 1);
+						if ((Game.getCharacter() + 1) == 2 && !Game.isNickAlive()) {
 
-						if (Game.getCharacter() > 3) {
+							if (Game.isNamelessAlive()) {
 
-							Game.setCharacter(1);
+								Game.setCharacter(3);
+
+							} else {
+
+								lastChar = true;
+
+							}
+
+						} else if ((Game.getCharacter() + 1) == 3 && !Game.isNamelessAlive()) {
+
+							if (Game.isDishAlive()) {
+
+								Game.setCharacter(1);
+
+							} else {
+
+								lastChar = true;
+
+							}
+
+						} else if ((Game.getCharacter() + 1) == 4 && !Game.isDishAlive()) {
+
+							if (Game.isNickAlive()) {
+
+								Game.setCharacter(2);
+
+							} else {
+
+								lastChar = true;
+
+							}
+
+						} else {
+
+							Game.setCharacter(Game.getCharacter() + 1);
+
+							if (Game.getCharacter() > 3) {
+
+								Game.setCharacter(1);
+
+							}
 
 						}
 
-						if (Game.getCharacter() == 1) {
+						if (!lastChar) {
 
-							temp.setVelocityX(0);
-							temp.setVelocityY(0);
+							if (Game.getCharacter() == 1) {
 
-							handler.setDown(false);
-							handler.setUp(false);
-							handler.setLeft(false);
-							handler.setRight(false);
+								temp.setVelocityX(0);
+								temp.setVelocityY(0);
 
-							ui.setTransition(true);
+								handler.setDown(false);
+								handler.setUp(false);
+								handler.setLeft(false);
+								handler.setRight(false);
 
-							charSwitch = true;
+								ui.setTransition(true);
 
-						}
+								charSwitch = true;
 
-						if (Game.getCharacter() == 2) {
+							}
 
-							temp.setVelocityX(0);
-							temp.setVelocityY(0);
+							if (Game.getCharacter() == 2) {
 
-							handler.setDown(false);
-							handler.setUp(false);
-							handler.setLeft(false);
-							handler.setRight(false);
+								temp.setVelocityX(0);
+								temp.setVelocityY(0);
 
-							ui.setTransition(true);
+								handler.setDown(false);
+								handler.setUp(false);
+								handler.setLeft(false);
+								handler.setRight(false);
 
-							charSwitch = true;
+								ui.setTransition(true);
 
-						}
+								charSwitch = true;
 
-						if (Game.getCharacter() == 3) {
+							}
 
-							temp.setVelocityX(0);
-							temp.setVelocityY(0);
+							if (Game.getCharacter() == 3) {
 
-							handler.setDown(false);
-							handler.setUp(false);
-							handler.setLeft(false);
-							handler.setRight(false);
+								temp.setVelocityX(0);
+								temp.setVelocityY(0);
 
-							ui.setTransition(true);
+								handler.setDown(false);
+								handler.setUp(false);
+								handler.setLeft(false);
+								handler.setRight(false);
 
-							charSwitch = true;
+								ui.setTransition(true);
+
+								charSwitch = true;
+
+							}
 
 						}
 
