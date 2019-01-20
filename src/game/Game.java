@@ -45,9 +45,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	private BufferedImageLoader loader;
 
 	// Player Vars
-	private static int killCount;
+	public static int killCount;
 
-	private static int overallKillCount;
+	public static int overallKillCount;
 
 	public static int playerXPos; // Keeps track of which
 	public static int playerYPos; // room the player is in

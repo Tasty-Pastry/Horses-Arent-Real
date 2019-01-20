@@ -135,6 +135,40 @@ public class Level1State extends GameState {
 		this.handler = handler;
 		this.inv = inv;
 
+		Game.killCount = 0;
+		Game.overallKillCount = 0;
+
+		Game.ammo = 150;
+
+		Game.daanishHealth = 228;
+		Game.nickHealth = 228;
+		Game.namelessHealth = 228;
+
+		Game.daanishEP = 1;
+		Game.nickEP = 1;
+		Game.namelessEP = 1;
+
+		Game.daanishDmg = 25;
+		Game.nickDmg = 35;
+		Game.namelessDmg = 10;
+
+		Game.daanishEXP = 0;
+		Game.nickEXP = 0;
+		Game.namelessEXP = 0;
+
+		Game.daanishLevel = 1;
+		Game.nickLevel = 1;
+		Game.namelessLevel = 1;
+
+		Game.dishAlive = true;
+		Game.nickAlive = true;
+		Game.namelessAlive = true;
+
+		Game.setRunOnce(false);
+		Game.setSlideIn(false);
+		Game.setIntroDone(false);
+		Game.setFade(false);
+
 		// Initializes enemy array - largest possible map consists of 24 rooms
 		Game.setEnemyArray(new int[6][4]);
 
