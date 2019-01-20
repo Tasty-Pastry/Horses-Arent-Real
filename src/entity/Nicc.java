@@ -17,6 +17,7 @@ import game.ID;
 import game.Inventory;
 import items.MothmanUse;
 import items.TimothyUse;
+import states.Level1State;
 
 public class Nicc extends PlayerObject {
 
@@ -862,7 +863,8 @@ public class Nicc extends PlayerObject {
 
 				Game.nickHealth = 1;
 				Game.nickAlive = false;
-				Game.setCharacter(3);
+				
+				Level1State.switchCharacter();
 				
 				handler.removeObject(this);
 				

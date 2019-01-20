@@ -18,6 +18,7 @@ import game.Inventory;
 import game.UI;
 import items.MothmanUse;
 import items.TimothyUse;
+import states.Level1State;
 
 public class Daanish extends PlayerObject {
 
@@ -964,8 +965,9 @@ public class Daanish extends PlayerObject {
 
 				Game.daanishHealth = 1;
 				Game.dishAlive = false;
-				Game.setCharacter(2);
-				
+					
+				Level1State.switchCharacter();
+								
 				handler.removeObject(this);
 
 			}

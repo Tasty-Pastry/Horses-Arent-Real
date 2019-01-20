@@ -17,6 +17,7 @@ import game.ID;
 import game.Inventory;
 import items.MothmanUse;
 import items.TimothyUse;
+import states.Level1State;
 
 public class Nameless extends PlayerObject {
 
@@ -858,7 +859,8 @@ public class Nameless extends PlayerObject {
 
 				Game.namelessHealth = 1;
 				Game.namelessAlive = false;
-				Game.setCharacter(1);
+				
+				Level1State.switchCharacter();
 				
 				handler.removeObject(this);
 

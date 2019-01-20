@@ -227,8 +227,8 @@ public class Level1State extends GameState {
 
 			GameObject temp = handler.getObject().get(i);
 
-			if (temp.getId() == ID.Player) {
-
+			if (temp.getId() == ID.Player) { 
+				
 				if (ui.isCharSwitch() && Game.getCharacter() == 1 && Game.dishAlive) {
 
 					handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
@@ -279,6 +279,44 @@ public class Level1State extends GameState {
 
 	}
 
+	public void switchCharacter() {
+		
+		// dish -> nick -> nameless -> dish
+		
+		handler.update();
+
+		ui.update();
+		
+
+		for (int i = 0; i < handler.getObject().size(); i++) {
+
+			GameObject temp = handler.getObject().get(i);
+
+			if (temp.getId() == ID.Player) { 
+		
+				
+		if (Game.dishAlive == false && Game.nickAlive == true) {
+			
+			handler.addObject(new Daanish(temp.getX(), temp.getY(), ID.Player, handler, sheet, health, inv,
+					Game.mothmanSheet, Game.timothySheet, SFX, dishSpecialAni[0]));
+
+			handler.removeObject(temp);
+
+			if (!ui.isTransition()) {
+
+				ui.setCharSwitch(false);
+				charSwitch = false;
+
+			}
+		}
+		
+		
+			}
+			
+		}
+		
+	}
+	
 	public void draw(Graphics g) {
 
 		// Create Graphics

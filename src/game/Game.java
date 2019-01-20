@@ -346,7 +346,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		return !nickAlive;
 	}
 	
-	public static boolean getNickAlive() {
+	public static boolean isNickAlive() {
 		
 		return nickAlive;	
 	}
@@ -356,7 +356,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		return !DishAlive;
 	}	
 	
-	public static boolean getDishAlive() {
+	public static boolean isDishAlive() {
 		
 		return dishAlive;	
 	}
@@ -366,7 +366,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		return !namelessAlive;
 	}
 	
-	public static boolean getNamelessAlive() {
+	public static boolean isNamelessAlive() {
 		
 		return namelessAlive;	
 	}
