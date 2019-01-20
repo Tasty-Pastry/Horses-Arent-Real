@@ -31,7 +31,7 @@ public class Enemy extends GameObject {
 	private int oldhp = hp;
 	private boolean hit;
 
-	private int enemyXPos;
+	private int enemyXPos; 
 	private int enemyYPos;
 
 	// Sprite Vars
@@ -166,18 +166,18 @@ public class Enemy extends GameObject {
 
 						if (hp > 50) {
 
-							velocityX += temp.getVelocityX() * temp.damage / 10;
-							velocityY += temp.getVelocityY() * temp.damage / 10;
+							velocityX += temp.getVelocityX() * temp.damage / 30;
+							velocityY += temp.getVelocityY() * temp.damage / 30;
 
 						} else if (hp < 50 && oldhp > 50) {
 
-							velocityX += temp.getVelocityX() * temp.damage / 10;
-							velocityY += temp.getVelocityY() * temp.damage / 10;
+							velocityX += temp.getVelocityX() * temp.damage / 30;
+							velocityY += temp.getVelocityY() * temp.damage / 30;
 
 						} else {
 
-							velocityX += temp.getVelocityX() * temp.damage / 25;
-							velocityY += temp.getVelocityY() * temp.damage / 25;
+							velocityX += temp.getVelocityX() * temp.damage / 35;
+							velocityY += temp.getVelocityY() * temp.damage / 35;
 
 						}
 
