@@ -12,6 +12,7 @@ import animation.Camera;
 import animation.Spritesheet;
 import entity.Daanish;
 import entity.GameObject;
+import entity.Nicc;
 
 public class UI {
 
@@ -39,6 +40,12 @@ public class UI {
 	private Spritesheet daanishTransitionSheet;
 	private Spritesheet nickTransitionSheet;
 	private Spritesheet namelessTransitionSheet;
+	private Spritesheet nickSpecialSheet;
+
+	private BufferedImage[] nickTop = new BufferedImage[6];
+	private BufferedImage[] nickBottom = new BufferedImage[6];
+	private BufferedImage[] nickLeft = new BufferedImage[6];
+	private BufferedImage[] nickRight = new BufferedImage[6];
 
 	private BufferedImage EPBar;
 
@@ -55,17 +62,23 @@ public class UI {
 	private boolean check2;
 
 	private static Animation dishCutIn;
+	private static Animation nickCutIn;
 	private Animation[] dishSpecialAni;
+	private Animation[] nickSpecialAni;
 	private boolean check3;
 	private Font font;
+	private boolean check4;
 
-	public UI(Spritesheet sheet, Handler handler, Animation dishCutIn, Animation[] dishSpecialAnimation) {
+	public UI(Spritesheet sheet, Handler handler, Animation dishCutIn, Animation[] dishSpecialAnimation,
+			Animation nickCutIn) {
 
 		this.sheet = sheet;
 
 		this.handler = handler;
 
 		this.setDishCutIn(dishCutIn);
+
+		this.setNickCutIn(nickCutIn);
 
 		this.setDishSpecialAni(dishSpecialAnimation);
 
@@ -87,12 +100,24 @@ public class UI {
 		SFX.put("MasonTransition", new AudioPlayer("/Mason Transition.wav", 1));
 		SFX.put("Cut In", new AudioPlayer("/Cut In.wav", 2));
 		SFX.put("Dish Special", new AudioPlayer("/Dish Special.wav", 1));
+		SFX.put("Nick Special", new AudioPlayer("/Nick Special.wav", 1));
 
 		daanishTransitionSheet = new Spritesheet(loader.loadImage("/Dish Transition.png"));
 		nickTransitionSheet = new Spritesheet(loader.loadImage("/Nick Transition.png"));
 		namelessTransitionSheet = new Spritesheet(loader.loadImage("/Nameless Transition.png"));
 
+		nickSpecialSheet = new Spritesheet(loader.loadImage("/Nick Special Attack Animation.png"));
+
 		for (int i = 0; i < 33; i++) {
+
+			if (i < 6) {
+
+				nickTop[i] = nickSpecialSheet.getImage(i + 1, 1, 337, 337, 337, 337);
+				nickBottom[i] = nickSpecialSheet.getImage(i + 1, 2, 337, 337, 337, 337);
+				nickLeft[i] = nickSpecialSheet.getImage(i + 1, 3, 337, 337, 337, 337);
+				nickRight[i] = nickSpecialSheet.getImage(i + 1, 4, 337, 337, 337, 337);
+
+			}
 
 			if (i < 13) {
 
@@ -165,6 +190,13 @@ public class UI {
 				new Animation(3, daanishStartTransition), new Animation(3, daanishTransition),
 				new Animation(3, nickStartTransition), new Animation(3, nickTransition),
 				new Animation(3, namelessStartTransition), new Animation(3, namelessTransition),
+
+		};
+
+		nickSpecialAni = new Animation[] {
+
+				new Animation(3, nickTop), new Animation(3, nickBottom), new Animation(3, nickLeft),
+				new Animation(3, nickRight),
 
 		};
 
@@ -348,6 +380,74 @@ public class UI {
 
 		}
 
+		if (Nicc.isSpecial()) {
+
+			getNickCutIn().runAnimation();
+
+			if (!check3) {
+
+				SFX.get("Cut In").setVolume(2);
+
+				SFX.get("Cut In").play(false);
+
+				check3 = true;
+
+			}
+
+			if (getNickCutIn().getRanOnce()) {
+
+				if (!SFX.get("Nick Special").clip[0].isRunning() && !check4) {
+
+					SFX.get("Nick Special").play(false);
+
+					check4 = true;
+
+				}
+
+				getNickCutIn().toggleAnimation(true);
+
+				if (Nicc.getDirection() == 1) {
+
+					nickSpecialAni[0].runAnimation();
+
+				} else if (Nicc.getDirection() == 2) {
+
+					nickSpecialAni[3].runAnimation();
+
+				} else if (Nicc.getDirection() == 3) {
+
+					nickSpecialAni[1].runAnimation();
+
+				} else if (Nicc.getDirection() == 4) {
+
+					nickSpecialAni[2].runAnimation();
+
+				}
+
+				if (nickSpecialAni[0].getRanOnce() || nickSpecialAni[1].getRanOnce() || nickSpecialAni[2].getRanOnce()
+						|| nickSpecialAni[3].getRanOnce()) {
+
+					for (int i = 0; i < 4; i++) {
+
+						nickSpecialAni[i].reset();
+
+					}
+
+					getNickCutIn().reset();
+
+					getNickCutIn().toggleAnimation(false);
+
+					Nicc.setSpecial(false);
+
+					check3 = false;
+					check4 = false;
+
+				}
+
+			}
+
+		}
+
 		if (Daanish.isSpecial()) {
 
 			getDishCutIn().runAnimation();
@@ -515,9 +615,52 @@ public class UI {
 
 		}
 
+		if (Nicc.isSpecial()) {
+
+			if (!getNickCutIn().getRanOnce()) {
+
+				getNickCutIn().drawAnimation(g, 0, 0, 0);
+
+			}
+
+			if (getNickCutIn().getRanOnce()) {
+
+				if (Nicc.getDirection() == 1) {
+
+					nickSpecialAni[0].drawAnimation(g, Nicc.getSpecialBox().x - 50 - Camera.getX(),
+							Nicc.getSpecialBox().y - 80 - Camera.getY(), 0);
+
+				} else if (Nicc.getDirection() == 2) {
+
+					nickSpecialAni[3].drawAnimation(g,
+							Nicc.getSpecialBox().x - (nickRight[0].getWidth() / 2) - 10 - Camera.getX(),
+							Nicc.getSpecialBox().y - 45 - Camera.getY(), 0);
+
+				} else if (Nicc.getDirection() == 3) {
+
+					nickSpecialAni[1].drawAnimation(g,
+							Nicc.getSpecialBox().x - (nickBottom[0].getWidth() / 2) - Camera.getX() + 60,
+							Nicc.getSpecialBox().y - (nickBottom[0].getHeight() / 2) - Camera.getY() - 30, 0);
+
+				} else if (Nicc.getDirection() == 4) {
+
+					nickSpecialAni[2].drawAnimation(g,
+							Nicc.getSpecialBox().x - (nickLeft[0].getWidth() / 2) - Camera.getX() + 60,
+							Nicc.getSpecialBox().y - (nickLeft[0].getHeight() / 2) - Camera.getY() + 60, 0);
+
+				}
+
+			}
+
+		}
+
 		if (Daanish.isSpecial()) {
 
-			getDishCutIn().drawAnimation(g, 0, 0, 0);
+			if (!getDishCutIn().getRanOnce()) {
+
+				getDishCutIn().drawAnimation(g, 0, 0, 0);
+
+			}
 
 			if (getDishCutIn().getRanOnce()) {
 
@@ -580,6 +723,14 @@ public class UI {
 
 	public void setDishCutIn(Animation dishCutIn) {
 		this.dishCutIn = dishCutIn;
+	}
+
+	public static Animation getNickCutIn() {
+		return nickCutIn;
+	}
+
+	public void setNickCutIn(Animation nickCutIn) {
+		this.nickCutIn = nickCutIn;
 	}
 
 }

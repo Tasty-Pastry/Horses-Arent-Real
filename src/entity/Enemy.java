@@ -89,8 +89,8 @@ public class Enemy extends GameObject {
 
 		// Update velocity only when the camera isn't moving and the enemy is in the
 		// same room as the player
-		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos
-				&& !Daanish.isSpecial()) {
+		if (!Camera.getCamMove() && enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos && !Daanish.isSpecial()
+				&& !Nicc.isSpecial()) {
 
 			x += velocityX;
 			y += velocityY;
@@ -198,7 +198,8 @@ public class Enemy extends GameObject {
 
 						// Checks if the camera isnt moving, if the enemy is allowed to move and can
 						// only shoot once every 25 frames
-						if (Game.getCount() % 25 == 0 && !Camera.getCamMove() && move && !Daanish.isSpecial()) {
+						if (Game.getCount() % 25 == 0 && !Camera.getCamMove() && move && !Daanish.isSpecial()
+								&& !Nicc.isSpecial()) {
 
 							// Adds a bullet
 							handler.getObject().add(new Bullet(getX() + 27, getY() + 64, ID.EnemyBullet, handler,
@@ -217,37 +218,49 @@ public class Enemy extends GameObject {
 								|| getBounds().intersects(Daanish.getTopBox())) && !hitOnce && Daanish.isSpecial()
 								&& UI.getDishCutIn().getRanOnce()) {
 
-						if ((getBounds().intersects(Daanish.getBottomBox())|| getBounds().intersects(Daanish.getMiddleBox()))&& !hitOnce && Daanish.isSpecial()
-								&& UI.getDishCutIn().getRanOnce()) {
-							
-							velocityY+=25;
-							
-						}
-						
-						if (getBounds().intersects(Daanish.getLeftBox()) && !hitOnce && Daanish.isSpecial()
-								&& UI.getDishCutIn().getRanOnce()) {
-							
-							velocityX-=25;
-							
-						}
-						
-						if (getBounds().intersects(Daanish.getRightBox()) && !hitOnce && Daanish.isSpecial()
-								&& UI.getDishCutIn().getRanOnce()) {
-							
-							velocityX+=25;
-							
-						}
-						
-						if (getBounds().intersects(Daanish.getTopBox()) && !hitOnce && Daanish.isSpecial()
-								&& UI.getDishCutIn().getRanOnce()) {
-							
-							velocityY-=25;
-							
-						}
+							if ((getBounds().intersects(Daanish.getBottomBox())
+									|| getBounds().intersects(Daanish.getMiddleBox())) && !hitOnce
+									&& Daanish.isSpecial() && UI.getDishCutIn().getRanOnce()) {
+
+								velocityY += 25;
+
+							}
+
+							if (getBounds().intersects(Daanish.getLeftBox()) && !hitOnce && Daanish.isSpecial()
+									&& UI.getDishCutIn().getRanOnce()) {
+
+								velocityX -= 25;
+
+							}
+
+							if (getBounds().intersects(Daanish.getRightBox()) && !hitOnce && Daanish.isSpecial()
+									&& UI.getDishCutIn().getRanOnce()) {
+
+								velocityX += 25;
+
+							}
+
+							if (getBounds().intersects(Daanish.getTopBox()) && !hitOnce && Daanish.isSpecial()
+									&& UI.getDishCutIn().getRanOnce()) {
+
+								velocityY -= 25;
+
+							}
 
 							hitOnce = true;
 
 							hp -= 100;
+
+						}
+
+					} else if (Game.getCharacter() == 2 && Nicc.isInitFinish()) {
+
+						if (getBounds().intersects(Nicc.getSpecialBox()) && Nicc.isSpecial() && !hitOnce
+								&& UI.getNickCutIn().getRanOnce()) {
+
+							hp -= 100;
+
+							hitOnce = true;
 
 						}
 
@@ -260,9 +273,7 @@ public class Enemy extends GameObject {
 		}
 
 		// Checks if the enemy is in the same room as the player
-		if (enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos)
-
-		{
+		if (enemyXPos == Game.playerXPos && enemyYPos == Game.playerYPos) {
 
 			move = true;
 
@@ -285,6 +296,8 @@ public class Enemy extends GameObject {
 
 				Game.daanishEXP += 5;
 
+				Game.daanishEP += 50;
+
 				if (Game.daanishEXP >= Math.ceil(((6 / 5) * Math.pow(Game.daanishLevel + 1, 3))
 						- (15 * Math.pow(Game.daanishLevel + 1, 2)) + (100 * (Game.daanishLevel + 1)) - 140)) {
 
@@ -297,6 +310,8 @@ public class Enemy extends GameObject {
 
 				Game.nickEXP += 5;
 
+				Game.nickEP += 50;
+
 				if (Game.nickEXP >= Math.ceil(((6 / 5) * Math.pow(Game.nickLevel + 1, 3))
 						- (15 * Math.pow(Game.nickLevel + 1, 2)) + (100 * (Game.nickLevel + 1)) - 140)) {
 
@@ -308,6 +323,8 @@ public class Enemy extends GameObject {
 			} else {
 
 				Game.namelessEXP += 5;
+
+				Game.namelessEP += 50;
 
 				if (Game.namelessEXP >= Math.ceil(((6 / 5) * Math.pow(Game.namelessLevel + 1, 3))
 						- (15 * Math.pow(Game.namelessLevel + 1, 2)) + (100 * (Game.namelessLevel + 1)) - 140)) {

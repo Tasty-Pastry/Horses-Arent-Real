@@ -95,9 +95,13 @@ public class Level1State extends GameState {
 
 	private Spritesheet dishCutInSheet;
 
+	private Spritesheet nickCutInSheet;
+
 	private BufferedImage[] dishCutIn = new BufferedImage[21];
+	private BufferedImage[] nickCutIn = new BufferedImage[21];
 
 	private Animation dishCutInAni;
+	private Animation nickCutInAni;
 
 	private BufferedImage[] middle = new BufferedImage[10];
 
@@ -145,6 +149,7 @@ public class Level1State extends GameState {
 		nickBullet = new Spritesheet(loader.loadImage("/Ice Projectile.png"));
 
 		dishCutInSheet = new Spritesheet(loader.loadImage("/Daanish Special.png"));
+		nickCutInSheet = new Spritesheet(loader.loadImage("/Nick Cut In.png"));
 		dishSpecialAttackSheet = new Spritesheet(loader.loadImage("/Daanish Special Attack Animation.png"));
 		namelessBullet = new Spritesheet(loader.loadImage("/Dark Projectile (48 X 48).png"));
 
@@ -154,6 +159,7 @@ public class Level1State extends GameState {
 		for (int i = 0; i < 21; i++) {
 
 			dishCutIn[i] = dishCutInSheet.getImage(i + 1, 1, 1024, 640, 1024, 640);
+			nickCutIn[i] = nickCutInSheet.getImage(i + 1, 1, 1024, 640, 1024, 640);
 
 			if (i < 4) {
 
@@ -198,8 +204,9 @@ public class Level1State extends GameState {
 		health = new Spritesheet(healthBars);
 
 		dishCutInAni = new Animation(2, dishCutIn);
+		nickCutInAni = new Animation(2, nickCutIn);
 
-		ui = new UI(health, handler, dishCutInAni, dishSpecialAni);
+		ui = new UI(health, handler, dishCutInAni, dishSpecialAni, nickCutInAni);
 
 		SFX = new HashMap<String, AudioPlayer>();
 
@@ -667,7 +674,8 @@ public class Level1State extends GameState {
 				// If the object is a player, and the camera isn't moving, check if any of the
 				// WASD keys are being pressed
 
-				if (temp.getId() == ID.Player && !Camera.getCamMove() && !charSwitch && !Daanish.isSpecial()) {
+				if (temp.getId() == ID.Player && !Camera.getCamMove() && !charSwitch && !Daanish.isSpecial()
+						&& !Nicc.isSpecial()) {
 
 					// Set movement based on the key pressed
 					if (k == KeyEvent.VK_W)
@@ -791,7 +799,8 @@ public class Level1State extends GameState {
 
 					// If the current count is 25 frames more than the baseFrame, and the player
 					// still has ammo left, add a bullet to the handler
-					if (baseFrame <= Game.getCount() - 15 && Game.ammo >= 1 && !Daanish.isSpecial()) {
+					if (baseFrame <= Game.getCount() - 25 && Game.ammo >= 1 && !Daanish.isSpecial()
+							&& !Nicc.isSpecial()) {
 
 						// Adds a bullet to the handler, direction depends on the arrow keypress
 						if (k == KeyEvent.VK_DOWN) {
@@ -925,7 +934,7 @@ public class Level1State extends GameState {
 						// 1 = Daanish 2 = Nicc 3 = Nameless
 						int character = Game.getCharacter();
 
-						if (character == 1 && !Daanish.isSpecial() && Game.daanishEP > 1) {
+						if (character == 1 && !Daanish.isSpecial() && Game.daanishEP >= 234) {
 
 							Daanish.setSpecialMove(true);
 
@@ -937,7 +946,7 @@ public class Level1State extends GameState {
 
 							}
 
-						} else if (character == 2) {
+						} else if (character == 2 && !Nicc.isSpecial() && Game.nickEP >= 234) {
 
 							if (handler.isUp()) {
 
@@ -961,7 +970,7 @@ public class Level1State extends GameState {
 
 							}
 
-							Game.nickEP -= 50;
+							Game.nickEP -= 234;
 
 							if (Game.nickEP <= 0) {
 

@@ -15,6 +15,7 @@ import game.Game;
 import game.Handler;
 import game.ID;
 import game.Inventory;
+import game.UI;
 import items.MothmanUse;
 import items.TimothyUse;
 import states.Level1State;
@@ -28,7 +29,11 @@ public class Nicc extends PlayerObject {
 	private static boolean special;
 	private static int direction;
 
+	private static Rectangle specialBox;
+
 	private Level1State l1s;
+
+	private static boolean initFinish;
 
 	// Constructor
 	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
@@ -42,6 +47,8 @@ public class Nicc extends PlayerObject {
 		this.SFX = SFX;
 
 		this.l1s = l1s;
+
+		setSpecialBox(new Rectangle(0, 0, 64, 192));
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -73,6 +80,8 @@ public class Nicc extends PlayerObject {
 		playerUpAttackAni = new Animation(4, playerUpAttack);
 		playerDownAttackAni = new Animation(4, playerDownAttack);
 
+		setInitFinish(true);
+
 	}
 
 	public void update() {
@@ -80,259 +89,307 @@ public class Nicc extends PlayerObject {
 		// Check if the player is colliding with an object
 		collision();
 
-		// Updates movement
-		x += velocityX;
-		y += velocityY;
+		if (!isSpecial()) {
 
-		// Movement of Player Character
-		if (handler.isUp()) {
+			// Updates movement
+			x += velocityX;
+			y += velocityY;
 
-			// Set animation
-			isUp = true;
-			isDown = false;
-			isRight = false;
-			isLeft = false;
+			// Movement of Player Character
+			if (handler.isUp()) {
 
-			// Decreases Y velocity
-			velocityY += -vel;
+				// Set animation
+				isUp = true;
+				isDown = false;
+				isRight = false;
+				isLeft = false;
 
-			// Caps Y velocity
-			if (velocityY < -maxVel) {
+				// Decreases Y velocity
+				velocityY += -vel;
 
-				velocityY = -maxVel;
-			}
+				// Caps Y velocity
+				if (velocityY < -maxVel) {
 
-			// Facing up
-			setLastDir(1);
+					velocityY = -maxVel;
+				}
 
-		} else if (!handler.isDown()) {
-
-			// Increases Y velocity
-			velocityY -= -vel;
-
-			// Caps Y velocity
-			if (velocityY > minVel) {
-
-				velocityY = minVel;
-
-			}
-
-		}
-
-		// Moving down
-		if (handler.isDown()) {
-
-			// Sets animation
-			isUp = false;
-			isDown = true;
-			isRight = false;
-			isLeft = false;
-
-			// Increases Y velocity
-			velocityY -= -vel;
-
-			// Caps Y velocity
-			if (velocityY > maxVel) {
-
-				velocityY = maxVel;
-
-			}
-
-			// Sprite facing down
-			setLastDir(3);
-
-		} else if (!handler.isUp()) { // Slows down y vel when not moving down
-
-			// Decreases y vel
-			velocityY -= vel;
-
-			// Caps vel
-			if (velocityY < minVel) {
-
-				velocityY = minVel;
-
-			}
-
-		}
-
-		// Moving to the right
-		if (handler.isRight()) {
-
-			// Sets animation
-			isLeft = false;
-			isRight = true;
-			isUp = false;
-			isDown = false;
-
-			// Increase x vel
-			velocityX -= -vel;
-
-			// Caps max vel
-			if (velocityX > maxVel) {
-
-				velocityX = maxVel;
-
-			}
-
-			// Sprite facing the right
-			setLastDir(2);
-
-		} else if (!handler.isLeft()) { // Decrease vel when the player is moving right but the right key isn't being
-										// pressed
-
-			// Decrease x vel
-			velocityX -= vel;
-
-			// Caps x vel
-			if (velocityX < minVel) {
-
-				velocityX = minVel;
-
-			}
-
-		}
-
-		// Moving left
-		if (handler.isLeft()) {
-
-			// Sets animation direction
-			isRight = false;
-			isLeft = true;
-			isDown = false;
-			isUp = false;
-
-			// Decrease x vel
-			velocityX += -vel;
-
-			// Caps x vel
-			if (velocityX < -maxVel) {
-
-				velocityX = -maxVel;
-
-			}
-
-			// Player sprite is facing left
-			setLastDir(4);
-
-		} else if (!handler.isRight()) { // Slows down
-
-			// Increases vel
-			velocityX -= -vel;
-
-			// Caps vel
-			if (velocityX > minVel) {
-
-				velocityX = minVel;
-
-			}
-
-		}
-
-		// Sets acceleration to 0 if the camera is transitioning
-		if (Camera.getCamMove()) {
-
-			velocityX = 0;
-			velocityY = 0;
-
-		}
-
-		// Run the animations based on direction
-		if (isRight && !isLeft) {
-
-			playerRightAni.runAnimation();
-
-		} else if (isLeft && !isRight) {
-
-			playerLeftAni.runAnimation();
-
-		}
-
-		if (isUp && !isDown) {
-
-			playerUpAni.runAnimation();
-
-		} else if (isDown && !isUp) {
-
-			playerDownAni.runAnimation();
-
-		}
-
-		// -------------------------------------------------------------------------------------------------------------------------------------
-
-		// Animation for shooting
-		if (Game.getShoot() && Game.getShootDir() == 1) {
-
-			// Starts animation
-			playerUpAttackAni.toggleAnimation(false);
-
-			playerUpAttackAni.runAnimation();
-
-			// Stops if it runs once
-			if (playerUpAttackAni.getRanOnce()) {
-
-				Game.setShoot(false, 0);
-
+				// Facing up
 				setLastDir(1);
 
-			}
+			} else if (!handler.isDown()) {
 
-		} else if (Game.getShoot() & Game.getShootDir() == 2) {
+				// Increases Y velocity
+				velocityY -= -vel;
 
-			// Starts animation
-			playerRightAttackAni.toggleAnimation(false);
+				// Caps Y velocity
+				if (velocityY > minVel) {
 
-			playerRightAttackAni.runAnimation();
+					velocityY = minVel;
 
-			// Stops if run once
-			if (playerRightAttackAni.getRanOnce()) {
-
-				Game.setShoot(false, 0);
-
-				setLastDir(2);
+				}
 
 			}
 
-		} else if (Game.getShoot() && Game.getShootDir() == 3) {
+			// Moving down
+			if (handler.isDown()) {
 
-			// Starts animation
-			playerDownAttackAni.toggleAnimation(false);
+				// Sets animation
+				isUp = false;
+				isDown = true;
+				isRight = false;
+				isLeft = false;
 
-			playerDownAttackAni.runAnimation();
+				// Increases Y velocity
+				velocityY -= -vel;
 
-			// Stops if run once
-			if (playerDownAttackAni.getRanOnce()) {
+				// Caps Y velocity
+				if (velocityY > maxVel) {
 
-				Game.setShoot(false, 0);
+					velocityY = maxVel;
 
+				}
+
+				// Sprite facing down
 				setLastDir(3);
 
+			} else if (!handler.isUp()) { // Slows down y vel when not moving down
+
+				// Decreases y vel
+				velocityY -= vel;
+
+				// Caps vel
+				if (velocityY < minVel) {
+
+					velocityY = minVel;
+
+				}
+
 			}
 
-		} else if (Game.getShoot() && Game.getShootDir() == 4) {
+			// Moving to the right
+			if (handler.isRight()) {
 
-			// Starts animation
-			playerLeftAttackAni.toggleAnimation(false);
+				// Sets animation
+				isLeft = false;
+				isRight = true;
+				isUp = false;
+				isDown = false;
 
-			playerLeftAttackAni.runAnimation();
+				// Increase x vel
+				velocityX -= -vel;
 
-			// Stops if run once
-			if (playerLeftAttackAni.getRanOnce()) {
+				// Caps max vel
+				if (velocityX > maxVel) {
+
+					velocityX = maxVel;
+
+				}
+
+				// Sprite facing the right
+				setLastDir(2);
+
+			} else if (!handler.isLeft()) { // Decrease vel when the player is moving right but the right key isn't
+											// being
+											// pressed
+
+				// Decrease x vel
+				velocityX -= vel;
+
+				// Caps x vel
+				if (velocityX < minVel) {
+
+					velocityX = minVel;
+
+				}
+
+			}
+
+			// Moving left
+			if (handler.isLeft()) {
+
+				// Sets animation direction
+				isRight = false;
+				isLeft = true;
+				isDown = false;
+				isUp = false;
+
+				// Decrease x vel
+				velocityX += -vel;
+
+				// Caps x vel
+				if (velocityX < -maxVel) {
+
+					velocityX = -maxVel;
+
+				}
+
+				// Player sprite is facing left
+				setLastDir(4);
+
+			} else if (!handler.isRight()) { // Slows down
+
+				// Increases vel
+				velocityX -= -vel;
+
+				// Caps vel
+				if (velocityX > minVel) {
+
+					velocityX = minVel;
+
+				}
+
+			}
+
+			// Sets acceleration to 0 if the camera is transitioning
+			if (Camera.getCamMove()) {
+
+				velocityX = 0;
+				velocityY = 0;
+
+			}
+
+			// Run the animations based on direction
+			if (isRight && !isLeft) {
+
+				playerRightAni.runAnimation();
+
+			} else if (isLeft && !isRight) {
+
+				playerLeftAni.runAnimation();
+
+			}
+
+			if (isUp && !isDown) {
+
+				playerUpAni.runAnimation();
+
+			} else if (isDown && !isUp) {
+
+				playerDownAni.runAnimation();
+
+			}
+
+			// -------------------------------------------------------------------------------------------------------------------------------------
+
+			// Animation for shooting
+			if (Game.getShoot() && Game.getShootDir() == 1) {
+
+				// Starts animation
+				playerUpAttackAni.toggleAnimation(false);
+
+				playerUpAttackAni.runAnimation();
+
+				// Stops if it runs once
+				if (playerUpAttackAni.getRanOnce()) {
+
+					Game.setShoot(false, 0);
+
+					setLastDir(1);
+
+				}
+
+			} else if (Game.getShoot() & Game.getShootDir() == 2) {
+
+				// Starts animation
+				playerRightAttackAni.toggleAnimation(false);
+
+				playerRightAttackAni.runAnimation();
+
+				// Stops if run once
+				if (playerRightAttackAni.getRanOnce()) {
+
+					Game.setShoot(false, 0);
+
+					setLastDir(2);
+
+				}
+
+			} else if (Game.getShoot() && Game.getShootDir() == 3) {
+
+				// Starts animation
+				playerDownAttackAni.toggleAnimation(false);
+
+				playerDownAttackAni.runAnimation();
+
+				// Stops if run once
+				if (playerDownAttackAni.getRanOnce()) {
+
+					Game.setShoot(false, 0);
+
+					setLastDir(3);
+
+				}
+
+			} else if (Game.getShoot() && Game.getShootDir() == 4) {
+
+				// Starts animation
+				playerLeftAttackAni.toggleAnimation(false);
+
+				playerLeftAttackAni.runAnimation();
+
+				// Stops if run once
+				if (playerLeftAttackAni.getRanOnce()) {
+
+					Game.setShoot(false, 0);
+
+					setLastDir(4);
+
+				}
+
+			} else {
+
+				// Stops all animations if not shooting
+				playerDownAttackAni.toggleAnimation(true);
+				playerUpAttackAni.toggleAnimation(true);
+				playerLeftAttackAni.toggleAnimation(true);
+				playerRightAttackAni.toggleAnimation(true);
 
 				Game.setShoot(false, 0);
-
-				setLastDir(4);
 
 			}
 
 		} else {
 
-			// Stops all animations if not shooting
-			playerDownAttackAni.toggleAnimation(true);
-			playerUpAttackAni.toggleAnimation(true);
-			playerLeftAttackAni.toggleAnimation(true);
-			playerRightAttackAni.toggleAnimation(true);
+			if (UI.getNickCutIn().getRanOnce()) {
 
-			Game.setShoot(false, 0);
+				if (getDirection() == 2) {
+
+					getSpecialBox().x = x + 79;
+					getSpecialBox().y = y - 64;
+					getSpecialBox().width = 64;
+					getSpecialBox().height = 192;
+
+				} else if (getDirection() == 1) {
+
+					getSpecialBox().x = x - 49;
+					getSpecialBox().y = y - 64;
+					getSpecialBox().width = 192;
+					getSpecialBox().height = 64;
+
+				} else if (getDirection() == 3) {
+
+					getSpecialBox().x = x - 49;
+					getSpecialBox().y = y + 64;
+					getSpecialBox().width = 192;
+					getSpecialBox().height = 64;
+
+				} else if (getDirection() == 4) {
+
+					getSpecialBox().x = x - 49;
+					getSpecialBox().y = y - 64;
+					getSpecialBox().width = 64;
+					getSpecialBox().height = 192;
+
+				}
+
+			} else {
+
+				getSpecialBox().x = 0;
+				getSpecialBox().y = 0;
+				getSpecialBox().width = 0;
+				getSpecialBox().height = 0;
+
+			}
 
 		}
 
@@ -927,6 +984,28 @@ public class Nicc extends PlayerObject {
 
 			}
 
+		} else if (special) {
+
+			// Checks the last direction the player was in
+			if (direction == 1) {
+
+				// Draws a static image of the player facing a direction
+				g.drawImage(playerUp[0], x, y, null);
+
+			} else if (direction == 2) {
+
+				g.drawImage(playerRight[0], x, y, null);
+
+			} else if (direction == 3) {
+
+				g.drawImage(playerDown[0], x, y, null);
+
+			} else if (direction == 4) {
+
+				g.drawImage(playerLeft[0], x, y, null);
+
+			}
+
 		} else {
 
 			// Checks if the player is moving in a certain direction
@@ -982,9 +1061,41 @@ public class Nicc extends PlayerObject {
 
 	public static void setSpecialMove(boolean specials, int dir) {
 
-		special = specials;
-		direction = dir;
+		setSpecial(specials);
+		setDirection(dir);
 
+	}
+
+	public static boolean isSpecial() {
+		return special;
+	}
+
+	public static void setSpecial(boolean special) {
+		Nicc.special = special;
+	}
+
+	public static int getDirection() {
+		return direction;
+	}
+
+	public static void setDirection(int direction) {
+		Nicc.direction = direction;
+	}
+
+	public static Rectangle getSpecialBox() {
+		return specialBox;
+	}
+
+	public void setSpecialBox(Rectangle specialBox) {
+		this.specialBox = specialBox;
+	}
+
+	public static boolean isInitFinish() {
+		return initFinish;
+	}
+
+	public void setInitFinish(boolean initFinish) {
+		this.initFinish = initFinish;
 	}
 
 }

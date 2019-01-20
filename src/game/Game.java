@@ -56,9 +56,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static int nickHealth = 228;
 	public static int namelessHealth = 228;
 
-	public static int daanishEP = 234;
-	public static int nickEP = 234;
-	public static int namelessEP = 234;
+	public static int daanishEP = 1;
+	public static int nickEP = 1;
+	public static int namelessEP = 1;
 
 	public static int daanishDmg = 25;
 	public static int nickDmg = 35;
@@ -75,7 +75,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 	public static boolean dishAlive = true;
 	public static boolean nickAlive = true;
 	public static boolean namelessAlive = true;
-	
+
 	private static int character = 1;
 
 	public static items.HorseEye horseEye;
@@ -246,11 +246,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 		bs.show();
 
 	}
-	
+
 	public static void yuggo() {
-		
+
 		handler.addObject(new YGOUse(100, 100, ID.YGOUse, handler));
-		
+
 	}
 
 	// Getters and setters
@@ -341,36 +341,36 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseMotionLi
 
 	}
 
-	public static boolean setNickAlive(boolean nickAlive){
-		
+	public static boolean setNickAlive(boolean nickAlive) {
+
 		return !nickAlive;
 	}
-	
+
 	public static boolean isNickAlive() {
-		
-		return nickAlive;	
+
+		return nickAlive;
 	}
-	
-	public static boolean setDishAlive(boolean DishAlive){
-		
+
+	public static boolean setDishAlive(boolean DishAlive) {
+
 		return !DishAlive;
-	}	
-	
-	public static boolean isDishAlive() {
-		
-		return dishAlive;	
 	}
-	
-	public static boolean setNamelessAlive(boolean namelessAlive){
-		
+
+	public static boolean isDishAlive() {
+
+		return dishAlive;
+	}
+
+	public static boolean setNamelessAlive(boolean namelessAlive) {
+
 		return !namelessAlive;
 	}
-	
+
 	public static boolean isNamelessAlive() {
-		
-		return namelessAlive;	
+
+		return namelessAlive;
 	}
-	
+
 	public void keyTyped(KeyEvent key) {
 
 	}
