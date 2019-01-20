@@ -28,9 +28,11 @@ public class Nicc extends PlayerObject {
 	private static boolean special;
 	private static int direction;
 
+	private Level1State l1s;
+
 	// Constructor
 	public Nicc(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
-			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX) {
+			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX, Level1State l1s) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
 
@@ -38,6 +40,8 @@ public class Nicc extends PlayerObject {
 		this.timothySheet = timothySheet;
 
 		this.SFX = SFX;
+
+		this.l1s = l1s;
 
 		// Initializing Sprite Sheets
 		for (int i = 0; i < 3; i++) {
@@ -863,11 +867,11 @@ public class Nicc extends PlayerObject {
 
 				Game.nickHealth = 1;
 				Game.nickAlive = false;
-				
-				//Level1State.switchCharacter();
-				
+
+				l1s.switchCharacter();
+
 				handler.removeObject(this);
-				
+
 			}
 
 		}

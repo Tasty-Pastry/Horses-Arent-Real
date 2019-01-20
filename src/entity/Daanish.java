@@ -42,9 +42,11 @@ public class Daanish extends PlayerObject {
 	private Animation dishMiddleAni;
 	private static boolean initFinish;
 
+	private Level1State l1s;
+
 	// Constructor
 	public Daanish(int x, int y, ID id, Handler handler, Spritesheet sheet, Spritesheet healthBar, Inventory inv,
-			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX, Animation dishMiddleAni) {
+			Spritesheet mothmanSheet, Spritesheet timothySheet, HashMap SFX, Animation dishMiddleAni, Level1State l1s) {
 
 		super(x, y, id, handler, sheet, healthBar, inv);
 
@@ -54,6 +56,8 @@ public class Daanish extends PlayerObject {
 		this.timothySheet = timothySheet;
 
 		this.dishMiddleAni = dishMiddleAni;
+
+		this.l1s = l1s;
 
 		setMiddleBox(new Rectangle(0, 0, 64, 64));
 		setBottomBox(new Rectangle(0, 0, 64, 64));
@@ -965,9 +969,9 @@ public class Daanish extends PlayerObject {
 
 				Game.daanishHealth = 1;
 				Game.dishAlive = false;
-					
-				//Level1State.switchCharacter();
-								
+
+				l1s.switchCharacter();
+
 				handler.removeObject(this);
 
 			}
