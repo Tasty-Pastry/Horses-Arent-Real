@@ -324,10 +324,12 @@ public class Enemy extends GameObject {
 		}
 
 		// Removes enemy if it is outside of the player room and moving
-		if (move == true && (enemyXPos != Game.playerXPos || enemyYPos != Game.playerYPos)) {
-
-			hp = 0;
-		}
+		/*
+		 * if (move == true && (enemyXPos != Game.playerXPos || enemyYPos !=
+		 * Game.playerYPos)) {
+		 * 
+		 * hp = 0; }
+		 */
 
 		// Removes the enemy from the handler if it dies
 		if (hp <= 0) {

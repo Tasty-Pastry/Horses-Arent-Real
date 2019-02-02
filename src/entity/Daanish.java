@@ -502,7 +502,8 @@ public class Daanish extends PlayerObject {
 			if (temp.getId() == ID.DoorBottom) {
 
 				// Checks if all the enemies in the room have been killed
-				if (enemyArray[Game.playerYPos][Game.playerXPos] == Game.getKillCount()) {
+				if (enemyArray[Game.playerYPos][Game.playerXPos] != Game.getKillCount()
+						|| enemyArray[Game.playerYPos][Game.playerXPos] == Game.getKillCount()) {
 
 					// Set the enemy room count to 0
 					enemyArray[Game.playerYPos][Game.playerXPos] = 0;
@@ -564,7 +565,8 @@ public class Daanish extends PlayerObject {
 
 			if (temp.getId() == ID.DoorSide) {
 
-				if (enemyArray[Game.playerYPos][Game.playerXPos] == Game.getKillCount()) {
+				if (enemyArray[Game.playerYPos][Game.playerXPos] != Game.getKillCount()
+						|| enemyArray[Game.playerYPos][Game.playerXPos] == Game.getKillCount()) {
 
 					// Sets the number of enemies in the room to 0
 					enemyArray[Game.playerYPos][Game.playerXPos] = 0;

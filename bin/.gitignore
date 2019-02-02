@@ -1,4 +1,5 @@
-/game/
-/states/
-/entity/
 /animation/
+/entity/
+/game/
+/items/
+/states/

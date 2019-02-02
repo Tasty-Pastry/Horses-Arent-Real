@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import animation.Spritesheet;
 import game.Handler;
 import game.ID;
 
@@ -30,7 +29,6 @@ public class Door extends GameObject {
 	public void draw(Graphics g) {
 
 		g.setColor(Color.pink);
-		g.fillRect(x, y, 64, 64);
 
 	}
 
@@ -54,7 +52,7 @@ public class Door extends GameObject {
 		return new Rectangle(x, y, 64, 64);
 
 	}
-	
+
 	// door name
 	@Override
 	public String getName() {
