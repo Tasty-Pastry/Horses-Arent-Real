@@ -1,0 +1,19 @@
+<<Enter text after this line>>
+...
+No...
+No.
+This can't be happening.
+They're... gone.
+Is that... hay on the ground?
+...
+It has to be them. 
+There's no other way someone could take them.
+With such... swiftness, at that.
+I swear on my life, I'll get them back. 
+No matter what it takes,
+I'll kill every single one of them. 
+If they're extinct, they don't exist, right?
+They can't kidnap them again if they're not real.
+They'll be gone forever.
+And so...
+<<End of Text>>
